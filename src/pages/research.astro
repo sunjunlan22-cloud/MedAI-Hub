@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import researchData from '../data/auto/research.json';
+import type { ResearchNews } from '../types/news';
+
+// 按发布时间倒序
+const news = (researchData as ResearchNews[]).sort(
+  (a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime(),
+);
+
+const studyTypes = [...new Set(news.map((n) => n.studyType))];
+
+const studyTypeLabel: Record<string, string> = {
+  'RCT': 'RCT / 临床研究',
+  'cohort': '队列研究',
+  'real-world': '真实世界研究',
+  'meta-analysis': 'Meta 分析',
+  'review': '综述',
+  'preprint': '预印本',
+  'other': '其他',
+};
+
+// 证据等级徽章颜色（按等级代码/说明）
+function evidenceClass(level: string) {
+  if (level.startsWith('1') || level.includes('专家共识') || level.includes('指南')) {
+    return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+  }
+  if (level.startsWith('2')) {
+    return 'bg-blue-50 text-blue-700 border-blue-200';
+  }
+  return 'bg-neutral-100 text-neutral-600 border-neutral-200';
+}
+
+// 研究设计 / 临床试验状态（新增字段）
+const studyDesignLabel: Record<string, string> = {
+  rct: 'RCT',
+  cohort: '队列研究',
+  caseControl: '病例对照研究',
+  metaAnalysis: 'Meta 分析',
+  systematicReview: '系统综述',
+  realWorld: '真实世界研究',
+  preprint: '预印本',
+  other: '其他',
+};
+const trialStatusLabel: Record<string, string> = {
+  registered: '已注册',
+  recruiting: '招募中',
+  completed: '已完成',
+  terminated: '已终止',
+  unknown: '状态未知',
+};
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+}
+---
+
+<BaseLayout title="科研前沿" description="临床研究、课题线索与科研方法">
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold">科研前沿</h1>
+    <p class="mt-2 text-neutral-600">
+      追踪医学领域重要研究进展，关注临床试验、系统评价、指南共识及高质量原始研究，帮助医生和科研人员快速了解最新证据。
+    </p>
+  </header>
+
+  <!-- 顶部搜索框 -->
+  <div class="mb-5">
+    <div class="relative">
+      <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        id="research-search"
+        type="search"
+        placeholder="搜索病原体或关键字，如：曲霉、TDM、CRAB…"
+        class="w-full rounded-xl border border-neutral-300 bg-white py-2.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+      />
+    </div>
+  </div>
+
+  <!-- 证据类型快速筛选（单行） -->
+  <div class="mb-6 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+    <div class="mb-2 flex items-center justify-between">
+      <span class="text-xs font-semibold uppercase tracking-wide text-neutral-500">证据类型</span>
+      <button id="research-reset" type="button" class="text-xs text-blue-600 hover:text-blue-700 hover:underline">
+        清除筛选
+      </button>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {
+        studyTypes.map((t) => (
+          <button
+            type="button"
+            data-type={t}
+            class="type-tag rounded-full border border-neutral-300 bg-white px-3 py-1 text-xs text-neutral-600 transition hover:border-blue-500 hover:text-blue-600"
+          >
+            {studyTypeLabel[t] ?? t}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- 结果计数 -->
+  <p id="research-count" class="mb-4 text-sm text-neutral-500"></p>
+
+  {
+    news.length === 0 && (
+      <div class="rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+        暂无资讯数据
+      </div>
+    )
+  }
+
+  <ul id="research-list" class="space-y-5">
+    {
+      news.map((item) => (
+        <li
+          class="news-card rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md"
+          data-type={item.studyType}
+          data-tags={item.tags.join(',')}
+          data-search={`${item.title} ${item.coreFindings} ${item.inspiration} ${item.tags.join(' ')} ${item.evidenceLevel}`.toLowerCase()}
+        >
+          <div class="mb-3 flex flex-wrap items-center gap-2 text-xs">
+            {/* 证据等级（突出） */}
+            <span class={`rounded border px-2 py-0.5 font-semibold ${evidenceClass(item.evidenceLevel)}`}>
+              证据等级：{item.evidenceLevel}
+            </span>
+            <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">
+              {studyTypeLabel[item.studyType] ?? item.studyType}
+            </span>
+            {item.trialId && (
+              <span class="rounded bg-violet-50 px-2 py-0.5 font-medium text-violet-700">
+                临床试验 {item.trialId} · {trialStatusLabel[item.trialStatus ?? ''] ?? item.trialStatus ?? '状态未知'}
+              </span>
+            )}
+            {item.trialId && item.studyDesign && (
+              <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">{studyDesignLabel[item.studyDesign] ?? item.studyDesign}</span>
+            )}
+            {item.pmid && (
+              <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">PMID: {item.pmid}</span>
+            )}
+            {item.sampleSize && (
+              <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">{item.sampleSize}</span>
+            )}
+            {item.isPreprint && (
+              <span class="rounded bg-amber-50 px-2 py-0.5 font-medium text-amber-700">
+                ⚠ 预印本 · 未同行评议
+              </span>
+            )}
+            <span class="ml-auto text-neutral-400">
+              {item.sourceName} · {formatDate(item.publishTime)}
+            </span>
+          </div>
+
+          {/* 标题 → 详情页 */}
+          <a
+            href={`/research/${item.id}`}
+            class="block text-lg font-medium text-neutral-900 hover:text-blue-600 hover:underline"
+          >
+            {item.title}
+          </a>
+
+          {/* 核心发现（突出） */}
+          <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
+            <p class="text-sm leading-relaxed text-neutral-800">
+              <span class="mr-1 font-semibold text-blue-700">核心发现：</span>
+              {item.coreFindings}
+            </p>
+          </div>
+
+          {/* 临床启发 */}
+          <p class="mt-3 text-sm leading-relaxed text-neutral-700">
+            <span class="mr-1 font-medium text-neutral-900">临床启发：</span>
+            {item.inspiration}
+          </p>
+
+          {/* 研究局限（次要信息） */}
+          {item.limitations && (
+            <p class="mt-2 text-xs leading-relaxed text-neutral-500">
+              <span class="mr-1 font-medium">研究局限：</span>
+              {item.limitations}
+            </p>
+          )}
+
+          {/* 底部 Tag（可点击联动过滤）+ 研究原文入口 */}
+          <div class="mt-3 flex flex-wrap items-center gap-1.5">
+            {item.tags.map((tag) => (
+              <button
+                type="button"
+                data-tag={tag}
+                class="tag-btn rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600 transition hover:bg-amber-100 hover:text-amber-700"
+              >
+                #{tag}
+              </button>
+            ))}
+            {item.sourceUrl && (
+              <a
+                href={item.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ml-auto inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800"
+              >
+                研究原文 →
+              </a>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div id="research-empty" class="hidden rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+    没有匹配的文献
+  </div>
+</BaseLayout>
+
+<script>
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.news-card'));
+  const typeTags = document.querySelectorAll<HTMLElement>('.type-tag');
+  const tagBtns = document.querySelectorAll<HTMLElement>('.tag-btn');
+  const searchInput = document.getElementById('research-search') as HTMLInputElement | null;
+  const resetBtn = document.getElementById('research-reset');
+  const countEl = document.getElementById('research-count');
+  const emptyEl = document.getElementById('research-empty');
+
+  const activeTypes = new Set<string>();
+  const activeTags = new Set<string>();
+  let query = '';
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach((card) => {
+      const type = card.dataset.type!;
+      const tags = card.dataset.tags!.split(',');
+      const searchText = card.dataset.search ?? '';
+
+      const matchType = activeTypes.size === 0 || activeTypes.has(type);
+      const matchTags =
+        activeTags.size === 0 ||
+        Array.from(activeTags).some((t) => tags.includes(t));
+      const matchSearch = !query || searchText.includes(query);
+
+      const show = matchType && matchTags && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    countEl!.textContent = `共 ${visible} 条文献`;
+    emptyEl!.classList.toggle('hidden', visible > 0);
+  }
+
+  function toggleType(btn: HTMLElement) {
+    const value = btn.dataset.type!;
+    const on = activeTypes.has(value);
+    if (on) {
+      activeTypes.delete(value);
+      btn.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
+      btn.classList.add('border-neutral-300', 'bg-white', 'text-neutral-600');
+    } else {
+      activeTypes.add(value);
+      btn.classList.add('border-blue-500', 'bg-blue-50', 'text-blue-600');
+      btn.classList.remove('border-neutral-300', 'bg-white', 'text-neutral-600');
+    }
+    applyFilters();
+  }
+
+  function toggleTag(btn: HTMLElement) {
+    const value = btn.dataset.tag!;
+    const on = activeTags.has(value);
+    if (on) {
+      activeTags.delete(value);
+      btn.classList.remove('bg-amber-100', 'text-amber-700');
+      btn.classList.add('bg-neutral-100', 'text-neutral-600');
+    } else {
+      activeTags.add(value);
+      btn.classList.add('bg-amber-100', 'text-amber-700');
+      btn.classList.remove('bg-neutral-100', 'text-neutral-600');
+    }
+    applyFilters();
+  }
+
+  typeTags.forEach((btn) => btn.addEventListener('click', () => toggleType(btn)));
+  tagBtns.forEach((btn) => btn.addEventListener('click', () => toggleTag(btn)));
+
+  searchInput?.addEventListener('input', () => {
+    query = searchInput.value.trim().toLowerCase();
+    applyFilters();
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    activeTypes.clear();
+    activeTags.clear();
+    query = '';
+    if (searchInput) searchInput.value = '';
+    typeTags.forEach((b) => {
+      b.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
+      b.classList.add('border-neutral-300', 'bg-white', 'text-neutral-600');
+    });
+    tagBtns.forEach((b) => {
+      b.classList.remove('bg-amber-100', 'text-amber-700');
+      b.classList.add('bg-neutral-100', 'text-neutral-600');
+    });
+    applyFilters();
+  });
+
+  applyFilters();
+</script>

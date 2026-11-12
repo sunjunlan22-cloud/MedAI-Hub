@@ -1,0 +1,38 @@
+# 【PRD 15.2 硬约束】本工作流仅允许写入 src/data/auto/，严禁触碰指南/说明书/工具等受保护内容。
+name: Fetch News (资讯自动化)
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install requests
+
+      - name: 运行资讯采集脚本
+        run: python scripts/fetch_news.py
+
+      - name: 提交自动化资讯数据
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # 隔离提交：仅暂存自动化目录，从根源上杜绝误改受保护路径
+          git add src/data/auto/
+          if git diff --cached --quiet; then
+            echo "无新增或变更，跳过提交"
+          else
+            git commit -m "chore(news): 自动更新资讯数据"
+            git push
+          fi

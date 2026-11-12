@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import data from '../../data/manual/dosing-reference.json';
+
+type DrugRow = Record<string, string | undefined> & {
+  name: string;
+  class: string;
+  normal: string;
+  hepatic: string;
+  notes?: string;
+  tdm?: string;
+};
+
+// 各肾功能区间（标签 + 候选字段），兼容历史 crd_* / crcl_* 两种前缀
+const doseRows: Array<{ label: string; keys: string[]; tone: string }> = [
+  { label: 'CrCl ≥ 130（ARC）', keys: ['crcl_ge130'], tone: 'text-red-700' },
+  { label: 'CrCl 30-44', keys: ['crcl30_44'], tone: 'text-amber-700' },
+  { label: 'CrCl 15-29', keys: ['crcl15_29'], tone: 'text-red-700' },
+  { label: 'CrCl 50-80', keys: ['crd50_80', 'crcl50_80'], tone: 'text-neutral-600' },
+  { label: 'CrCl 30-50', keys: ['crd30_50', 'crcl30_50'], tone: 'text-neutral-600' },
+  { label: 'CrCl 30-40', keys: ['crd30_40', 'crcl30_40'], tone: 'text-neutral-600' },
+  { label: 'CrCl 20-50', keys: ['crd20_50', 'crcl20_50'], tone: 'text-neutral-600' },
+  { label: 'CrCl 15-30', keys: ['crd15_30', 'crcl15_30'], tone: 'text-amber-700' },
+  { label: 'CrCl 10-30', keys: ['crd10_30', 'crcl10_30'], tone: 'text-amber-700' },
+  { label: 'CrCl 10-25', keys: ['crd10_25', 'crcl10_25'], tone: 'text-amber-700' },
+  { label: 'CrCl 10-20', keys: ['crd10_20', 'crcl10_20'], tone: 'text-amber-700' },
+  { label: 'CrCl 5-15', keys: ['crd5_15', 'crcl5_15'], tone: 'text-amber-700' },
+  { label: 'CrCl < 50', keys: ['crd_lt50', 'crcl_lt50'], tone: 'text-red-700' },
+  { label: 'CrCl < 30', keys: ['crd_lt30', 'crcl_lt30'], tone: 'text-red-700' },
+  { label: 'CrCl < 15', keys: ['crd_lt15', 'crcl_lt15'], tone: 'text-red-700' },
+  { label: 'CrCl < 10', keys: ['crd_lt10', 'crcl_lt10'], tone: 'text-red-700' },
+  { label: 'CrCl < 5', keys: ['crd_lt5', 'crcl_lt5'], tone: 'text-red-700' },
+];
+
+const drugs = data.drugs as DrugRow[];
+
+function getDose(d: DrugRow, keys: string[]): string | undefined {
+  for (const k of keys) {
+    const v = d[k];
+    if (v) return v;
+  }
+  return undefined;
+}
+---
+
+<BaseLayout title="抗感染药物剂量调整参考" description="常用抗感染药物在不同肾功能水平下的剂量调整表">
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold">抗感染药物剂量调整参考表</h1>
+    <p class="mt-2 text-sm text-neutral-600">{data.notes}</p>
+    <p class="mt-1 text-xs text-neutral-400">最后更新：{data.updated} · 仅供专业学术参考</p>
+  </header>
+
+  <!-- 筛选 -->
+  <div class="mb-5 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+    <input
+      id="dr-search"
+      type="search"
+      placeholder="搜索药物名称或分类..."
+      class="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+    />
+  </div>
+
+  <ul id="dr-list" class="grid gap-4">
+    {
+      drugs.map((d) => {
+        const searchText = `${d.name} ${d.class}`.toLowerCase();
+        return (
+          <li
+            class="dr-card rounded-xl border border-neutral-200 p-5"
+            data-search={searchText}
+          >
+            <div class="mb-3 flex flex-wrap items-center gap-2">
+              <h2 class="text-lg font-semibold text-neutral-900">{d.name}</h2>
+              <span class="rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-700">{d.class}</span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[600px] text-xs">
+                <thead class="bg-neutral-100 text-neutral-700">
+                  <tr>
+                    <th class="p-2 text-left font-medium">肾功能</th>
+                    <th class="p-2 text-left font-medium">剂量</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200">
+                  <tr><td class="p-2 font-medium text-green-700">正常</td><td class="p-2">{d.normal}</td></tr>
+                  {doseRows.map((r) => {
+                    const val = getDose(d, r.keys);
+                    return val ? (
+                      <tr><td class={`p-2 ${r.tone}`}>{r.label}</td><td class="p-2">{val}</td></tr>
+                    ) : null;
+                  })}
+                  {d.dialysis && <tr><td class="p-2 text-red-700">透析</td><td class="p-2">{d.dialysis}</td></tr>}
+                  <tr><td class="p-2 font-medium text-purple-700">肝功能</td><td class="p-2">{d.hepatic}</td></tr>
+                  {d.tdm && <tr class="bg-emerald-50/60"><td class="p-2 font-medium text-emerald-700">TDM 目标</td><td class="p-2">{d.tdm}</td></tr>}
+                </tbody>
+              </table>
+            </div>
+            {d.notes && (
+              <p class="mt-2 rounded bg-amber-50 p-2 text-xs text-amber-800">⚠ {d.notes}</p>
+            )}
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <div class="mt-8 rounded-lg border border-amber-200 bg-amber-50 p-4 text-xs text-amber-800">
+    <strong class="block text-amber-900">⚠ 安全声明</strong>
+    <p class="mt-1 leading-relaxed">
+      本表为常用抗感染药物在不同肾功能水平下的剂量调整参考，仅供专业学术参考，不能替代药品说明书和临床决策。
+      实际应用中应结合患者具体情况，必要时进行 TDM 监测。CrCl 单位 mL/min。
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById('dr-search') as HTMLInputElement;
+  const cards = document.querySelectorAll<HTMLElement>('.dr-card');
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    cards.forEach((c) => {
+      c.style.display = !q || (c.dataset.search ?? '').includes(q) ? '' : 'none';
+    });
+  });
+</script>

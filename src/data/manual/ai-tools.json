@@ -1,0 +1,344 @@
+{
+  "updated": "2026-11-10",
+  "featured": [
+    {
+      "name": "KnowS 医学 AI",
+      "badge": "6000积分福利",
+      "desc": "懂医学的 AI 助手（服务教研全场景、SCI撰写、国自然、医学绘图、PPT）",
+      "qr": "/images/knows-qr.png",
+      "channels": [
+        { "label": "福利", "value": "扫码认证领取 6000 智能体积分" }
+      ]
+    },
+    {
+      "name": "WorkBuddy 办公搭子",
+      "badge": "2000积分福利",
+      "desc": "中国最受欢迎的 AI 办公伙伴（协助搞定 PPT、数据分析、工作大小事）",
+      "qr": "/images/workbuddy-qr.png",
+      "channels": [
+        { "label": "福利", "value": "扫码注册获取 2000 积分" }
+      ]
+    },
+    {
+      "name": "感御 / AI抗感先锋",
+      "badge": "抗感染专业 AI 工具矩阵",
+      "desc": "聚焦抗感染热点与智能医学工具（小程序/公众号）",
+      "qr": "/images/ganyu-qr.png",
+      "channels": [
+        { "label": "网页端", "value": "https://ganyu.medknows.com" },
+        { "label": "微信公众号", "value": "搜索并关注「AI抗感先锋」" },
+        { "label": "微信小程序", "value": "微信搜索「感御」" }
+      ]
+    }
+  ],
+  "categories": [
+    { "key": "clinical", "label": "临床与循证辅助" },
+    { "key": "research", "label": "科研与文献检索" },
+    { "key": "teaching", "label": "医学教学与PPT" },
+    { "key": "education", "label": "医学宣教与内容创作" },
+    { "key": "office", "label": "办公协同与记录" },
+    { "key": "dev", "label": "编程与网站开发" }
+  ],
+  "tools": [
+    {
+      "name": "丁香园 Dr.Chat",
+      "icon": "💊",
+      "provider": "丁香园",
+      "type": "临床医学问答",
+      "price": "免费",
+      "recommend": [],
+      "positioning": "中文临床语境的医疗问答助手",
+      "capability": "结合国内临床实际与药品说明书知识，快速解答中文临床问题",
+      "categories": ["clinical"],
+      "tags": ["中文医疗", "药品说明书", "临床问答"],
+      "url": "https://dxy.com/chat",
+      "detail": {
+        "intro": "丁香园推出的医疗 AI 助手，结合国内临床实际场景和药品说明书知识，适合中文临床问题的快速查询。",
+        "features": ["中文医疗问答", "药品信息查询", "临床场景适配", "医学知识整合"],
+        "audience": "国内临床医生、药师、医学生",
+        "scenarios": ["中文临床问答", "药品用法查询", "临床决策参考"],
+        "limitations": "结论仍需结合临床判断与权威指南核验。"
+      }
+    },
+    {
+      "name": "Medscape",
+      "icon": "🏥",
+      "provider": "WebMD",
+      "type": "医学参考与继续教育",
+      "price": "免费",
+      "recommend": ["编辑推荐"],
+      "positioning": "国际权威临床参考与药物数据库",
+      "capability": "提供疾病诊疗、药物剂量、医学新闻与继续教育",
+      "categories": ["clinical"],
+      "tags": ["药物数据库", "疾病参考", "继续教育"],
+      "url": "https://www.medscape.com",
+      "detail": {
+        "intro": "国际权威的临床医学参考平台，提供疾病诊疗指南、药物数据库、医学新闻与继续教育，是临床医生常用工具。",
+        "features": ["疾病诊疗参考", "药物剂量查询", "医学新闻", "CME 继续教育"],
+        "audience": "临床医生、药师、医学生",
+        "scenarios": ["药物剂量查询", "疾病诊疗参考", "医学继续教育"],
+        "limitations": "英文为主，中文资料较少；剂量需结合本地说明书核验。"
+      }
+    },
+    {
+      "name": "Perplexity",
+      "icon": "🔍",
+      "provider": "Perplexity",
+      "type": "AI 搜索问答",
+      "price": "免费增值",
+      "recommend": ["科研常用"],
+      "positioning": "带引用来源的实时 AI 搜索",
+      "capability": "实时联网检索并附引用，适合循证提问与事实核查",
+      "categories": ["research"],
+      "tags": ["实时搜索", "引用来源", "事实核查"],
+      "url": "https://www.perplexity.ai",
+      "detail": {
+        "intro": "带实时互联网搜索与引用来源的 AI 问答工具，回答可追溯出处，适合需要证据支撑的医学与科研提问。",
+        "features": ["实时联网检索", "引用来源可追溯", "聚焦搜索范围", "Pro 深度研究"],
+        "audience": "医生、科研人员、学生",
+        "scenarios": ["循证医学提问", "事实核查", "快速资料检索"],
+        "limitations": "医学答案仍需专业判断与核验；免费版检索次数有限。"
+      }
+    },
+    {
+      "name": "Consensus",
+      "icon": "📊",
+      "provider": "Consensus",
+      "type": "循证文献搜索",
+      "price": "免费增值",
+      "recommend": ["科研常用"],
+      "positioning": "基于已发表研究的循证问答",
+      "capability": "从真实研究结论回答科学问题，展示证据支持/反驳比例",
+      "categories": ["research"],
+      "tags": ["循证", "已发表文献", "结论检索"],
+      "url": "https://consensus.app",
+      "detail": {
+        "intro": "基于真实已发表研究回答科学问题，直接展示有多少研究支持或反驳某结论，适合临床循证提问。",
+        "features": ["证据结论检索", "支持/反驳比例展示", "文献溯源", "研究质量标注"],
+        "audience": "临床医生、科研人员、医学学生",
+        "scenarios": ["循证临床提问", "文献证据概览", "快速掌握领域结论"],
+        "limitations": "结论受收录文献范围限制，需结合最新指南综合判断。"
+      }
+    },
+    {
+      "name": "ChatDOC",
+      "icon": "📄",
+      "provider": "ChatDOC",
+      "type": "文档阅读助手",
+      "price": "免费增值",
+      "recommend": [],
+      "positioning": "对话式文献/文档阅读与问答",
+      "capability": "上传 PDF 后按段落提问、精准定位原文出处",
+      "categories": ["research"],
+      "tags": ["PDF阅读", "原文定位", "文档问答"],
+      "url": "https://chatdoc.com",
+      "detail": {
+        "intro": "面向 PDF 文献与文档的对话式阅读助手，支持按段落提问并精准定位原文出处，减少幻觉。",
+        "features": ["PDF 段落问答", "原文出处定位", "多文档对比", "表格提取"],
+        "audience": "科研人员、研究生、医生",
+        "scenarios": ["文献精读", "论文查证", "多文档对比"],
+        "limitations": "复杂图表理解有限，关键结论仍需回看原文。"
+      }
+    },
+    {
+      "name": "Elicit",
+      "icon": "📚",
+      "provider": "Elicit",
+      "type": "文献综述自动化",
+      "price": "免费增值",
+      "recommend": ["科研常用"],
+      "positioning": "自动化系统综述与文献矩阵",
+      "capability": "自动提取文献关键发现，按研究问题组织成矩阵",
+      "categories": ["research"],
+      "tags": ["系统综述", "文献矩阵", "自动化提取"],
+      "url": "https://elicit.com",
+      "detail": {
+        "intro": "帮助系统综述自动化的 AI 工具，自动提取文献关键发现并组织成研究矩阵，大幅提升文献调研效率。",
+        "features": ["文献自动筛选", "关键发现提取", "研究矩阵组织", "参考文献追踪"],
+        "audience": "科研人员、系统综述作者、研究生",
+        "scenarios": ["系统综述", "文献调研", "研究空白识别"],
+        "limitations": "提取结果需人工复核；对非英文文献覆盖有限。"
+      }
+    },
+    {
+      "name": "Gamma",
+      "icon": "📽️",
+      "provider": "Gamma",
+      "type": "AI 演示文稿生成",
+      "price": "免费增值",
+      "recommend": ["编辑推荐"],
+      "positioning": "一句话生成专业演示文稿",
+      "capability": "输入主题自动生成结构化幻灯片，支持病例讨论与教学课件",
+      "categories": ["teaching"],
+      "tags": ["PPT生成", "幻灯片", "教学课件"],
+      "url": "https://gamma.app",
+      "detail": {
+        "intro": "输入主题即可自动生成结构化、设计感强的演示文稿，适合快速制作病例讨论与教学课件。",
+        "features": ["主题生成幻灯片", "结构化排版", "多模板", "协作分享"],
+        "audience": "医生、教师、科研人员",
+        "scenarios": ["病例讨论课件", "教学演示", "学术汇报"],
+        "limitations": "生成内容需核对专业性；高级功能需订阅。"
+      }
+    },
+    {
+      "name": "Beautiful.ai",
+      "icon": "🎨",
+      "provider": "Beautiful.ai",
+      "type": "AI 幻灯片设计",
+      "price": "付费",
+      "recommend": [],
+      "positioning": "智能排版的专业演示工具",
+      "capability": "AI 自动排版，快速产出设计感强的医学课件",
+      "categories": ["teaching"],
+      "tags": ["幻灯片设计", "智能排版", "课件"],
+      "url": "https://www.beautiful.ai",
+      "detail": {
+        "intro": "AI 驱动的智能排版演示工具，自动优化版式与配色，快速产出设计感强的专业课件。",
+        "features": ["智能排版", "自动配色", "品牌模板", "协作编辑"],
+        "audience": "教师、医生、商务人士",
+        "scenarios": ["医学课件", "学术汇报", "教学演示"],
+        "limitations": "需付费订阅；中文字体与素材支持一般。"
+      }
+    },
+    {
+      "name": "笔格 AIPPT",
+      "icon": "📑",
+      "provider": "笔格",
+      "type": "AI 课件制作",
+      "price": "免费增值",
+      "recommend": [],
+      "positioning": "中文 AI 一键生成 PPT",
+      "capability": "中文指令生成完整课件，适配国内教学场景",
+      "categories": ["teaching"],
+      "tags": ["AIPPT", "课件制作", "中文"],
+      "url": "https://bigppt.cn/",
+      "detail": {
+        "intro": "面向中文场景的 AI PPT 生成工具，用中文指令即可一键生成完整课件，适配国内教学与汇报习惯。",
+        "features": ["中文指令生成", "课件模板", "一键排版", "导出 PPT"],
+        "audience": "教师、医生、办公人群",
+        "scenarios": ["教学课件", "病例汇报", "学术演示"],
+        "limitations": "请以官方最新信息为准；生成内容需人工校对。"
+      }
+    },
+    {
+      "name": "剪映 / CapCut",
+      "icon": "🎬",
+      "provider": "字节跳动",
+      "type": "AI 视频剪辑",
+      "price": "免费增值",
+      "recommend": ["宣教常用"],
+      "positioning": "AI 自动字幕与智能剪辑",
+      "capability": "一键自动字幕、智能剪辑与模板化视频制作",
+      "categories": ["education"],
+      "tags": ["视频剪辑", "自动字幕", "医学科普视频"],
+      "url": "https://www.capcut.cn",
+      "detail": {
+        "intro": "字节跳动出品的视频剪辑工具，支持 AI 自动字幕、智能剪辑、模板套用，适合制作医学科普与教学视频。",
+        "features": ["AI 自动字幕", "智能剪辑", "模板化制作", "多端同步"],
+        "audience": "科普创作者、医生、教师",
+        "scenarios": ["医学科普视频", "教学视频", "病例分享视频"],
+        "limitations": "医学专业术语字幕需人工校对；部分素材需付费。"
+      }
+    },
+    {
+      "name": "即梦 Dreamina",
+      "icon": "✨",
+      "provider": "字节跳动",
+      "type": "AI 图文生视频/插图",
+      "price": "免费增值",
+      "recommend": ["宣教常用"],
+      "positioning": "图文生成视频与医学插图",
+      "capability": "文本/图片生成视频，支持医学插画与科普配图",
+      "categories": ["education"],
+      "tags": ["文生视频", "图生视频", "医学插图"],
+      "url": "https://dreamina.jianying.com",
+      "detail": {
+        "intro": "字节跳动的 AI 创意生成工具，支持文本/图片生成视频，可用于医学插画、科普配图与教学内容创作。",
+        "features": ["文生视频", "图生视频", "医学插图", "创意配图"],
+        "audience": "科普创作者、教师、设计师",
+        "scenarios": ["医学科普配图", "教学插图", "宣教视频素材"],
+        "limitations": "医学解剖细节可能不准确，用于专业教学需人工审核。"
+      }
+    },
+    {
+      "name": "Notion AI",
+      "icon": "📝",
+      "provider": "Notion",
+      "type": "办公知识库 AI",
+      "price": "付费",
+      "recommend": [],
+      "positioning": "知识库与写作助手",
+      "capability": "整理临床笔记、撰写病历摘要与文献综述初稿",
+      "categories": ["office"],
+      "tags": ["知识库", "写作助手", "笔记整理"],
+      "url": "https://www.notion.so/product/ai",
+      "detail": {
+        "intro": "与 Notion 深度集成的 AI 助手，适合整理笔记、撰写摘要与构建个人知识库。",
+        "features": ["笔记整理", "写作助手", "知识库管理", "内容摘要"],
+        "audience": "医生、科研人员、办公人群",
+        "scenarios": ["临床笔记整理", "文献综述初稿", "个人知识库"],
+        "limitations": "需 Notion 订阅；敏感医疗数据需注意隐私。"
+      }
+    },
+    {
+      "name": "Otter.ai",
+      "icon": "🎙️",
+      "provider": "Otter.ai",
+      "type": "语音转写与纪要",
+      "price": "免费增值",
+      "recommend": [],
+      "positioning": "会议/查房录音转文字与纪要",
+      "capability": "语音转文字 + AI 纪要，适合学术会议与查房记录",
+      "categories": ["office"],
+      "tags": ["语音转写", "会议纪要", "查房记录"],
+      "url": "https://otter.ai",
+      "detail": {
+        "intro": "语音转文字与 AI 纪要工具，适合教学查房、MDT 讨论、学术会议的录音整理。",
+        "features": ["语音转文字", "AI 纪要生成", "说话人区分", "多语言支持"],
+        "audience": "医生、科研人员、会议参与者",
+        "scenarios": ["教学查房记录", "MDT 讨论纪要", "学术会议整理"],
+        "limitations": "专业术语转写需人工校对；涉及患者隐私需脱敏。"
+      }
+    },
+    {
+      "name": "Cursor",
+      "icon": "⌨️",
+      "provider": "Anysphere",
+      "type": "AI 编程 IDE",
+      "price": "免费增值",
+      "recommend": ["编辑推荐"],
+      "positioning": "AI 原生代码编辑器",
+      "capability": "代码补全、多文件编辑与对话式编程一体化 IDE",
+      "categories": ["dev"],
+      "tags": ["AI编程", "代码补全", "多文件编辑"],
+      "url": "https://cursor.com",
+      "detail": {
+        "intro": "AI 原生的代码编辑器，内置代码补全、对话式编程与多文件协同编辑，大幅提升开发效率。",
+        "features": ["智能代码补全", "对话式编程", "多文件编辑", "代码库理解"],
+        "audience": "开发者、科研计算人员、技术爱好者",
+        "scenarios": ["网站开发", "脚本编写", "数据分析代码", "自动化工具"],
+        "limitations": "生成代码需人工审查；高级功能需付费订阅。"
+      }
+    },
+    {
+      "name": "Trae",
+      "icon": "🚀",
+      "provider": "字节跳动",
+      "type": "AI 编程 IDE",
+      "price": "免费",
+      "recommend": ["编辑推荐"],
+      "positioning": "国产 AI 编程开发工具",
+      "capability": "对话式编程、代码补全与项目管理一体化 IDE",
+      "categories": ["dev"],
+      "tags": ["AI编程", "国产", "网站制作"],
+      "url": "https://www.trae.ai",
+      "detail": {
+        "intro": "字节跳动推出的 AI 编程开发工具，提供对话式编程、代码补全、项目管理等能力，对中文开发者友好。",
+        "features": ["对话式编程", "代码补全", "项目构建", "中文友好"],
+        "audience": "开发者、创业者、自动化需求用户",
+        "scenarios": ["网站制作", "应用开发", "自动化脚本", "原型搭建"],
+        "limitations": "生态尚在完善中；复杂项目需结合人工调试。"
+      }
+    }
+  ]
+}

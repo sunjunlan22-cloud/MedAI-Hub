@@ -1,0 +1,47 @@
+# ===== 依赖 =====
+node_modules/
+.pnpm-store/
+
+# ===== 构建产物 =====
+dist/
+.astro/
+
+# ===== Python 缓存 =====
+scripts/__pycache__/
+__pycache__/
+*.py[cod]
+
+# ===== Cloudflare 本地状态 =====
+.wrangler/
+
+# ===== 日志 =====
+pnpm-debug.log*
+npm-debug.log*
+*.log
+
+# ===== 环境变量与密钥（真实密钥严禁入库）=====
+.env
+.env.*
+!.env.example
+.dev.vars
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# ===== 操作系统与编辑器 =====
+.DS_Store
+.vscode/
+.idea/
+
+# ===== 临时与备份 =====
+tmp/
+backups/
+.screenshots/
+
+# ===== 采集脚本本地缓存 =====
+scripts/.cache/
+
+# ===== 原始材料与药品说明书（已确认忽略）=====
+raw_materials/
+说明书/

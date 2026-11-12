@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allLabels = await getCollection('drug-labels', ({ data }) => !data.draft);
+
+// 按通用名字母序
+const labels = allLabels.sort((a, b) => a.data.drugName.localeCompare(b.data.drugName, 'zh-CN'));
+
+// 各维度去重
+const antibioticClasses = [...new Set(labels.map((l) => l.data.antibioticClass).filter(Boolean))].sort();
+const dosageForms = [...new Set(labels.map((l) => l.data.dosageForm))].sort();
+const indications = [...new Set(labels.flatMap((l) => l.data.indications))].sort();
+---
+
+<BaseLayout title="药品说明书" description="抗感染核心品种说明书提取库">
+  <header class="mb-8">
+    <h1 class="text-2xl font-semibold">药品说明书</h1>
+    <p class="mt-2 text-neutral-600">
+      抗感染核心品种 · 适应证、用法用量、禁忌、特殊人群、肝肾功能调整、相互作用与给药配置 · 共 {labels.length} 种
+    </p>
+  </header>
+
+  <!-- 筛选器 -->
+  <div class="mb-8 rounded-xl border border-neutral-200 bg-neutral-50 p-5">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <label for="dl-search" class="mb-1.5 block text-sm font-medium text-neutral-700">搜索</label>
+        <input
+          id="dl-search"
+          type="search"
+          placeholder="药品名、商品名、适应证..."
+          class="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        />
+      </div>
+      <div>
+        <label for="dl-class" class="mb-1.5 block text-sm font-medium text-neutral-700">抗菌药物分类</label>
+        <select id="dl-class" class="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+          <option value="">全部</option>
+          {antibioticClasses.map((c) => <option value={c}>{c}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="dl-form" class="mb-1.5 block text-sm font-medium text-neutral-700">剂型</label>
+        <select id="dl-form" class="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+          <option value="">全部</option>
+          {dosageForms.map((f) => <option value={f}>{f}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="dl-ind" class="mb-1.5 block text-sm font-medium text-neutral-700">适应证</label>
+        <select id="dl-ind" class="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none">
+          <option value="">全部</option>
+          {indications.map((i) => <option value={i}>{i}</option>)}
+        </select>
+      </div>
+    </div>
+    <div class="mt-4 flex items-center justify-between">
+      <span class="text-sm text-neutral-500">匹配 <span id="dl-count" class="font-medium text-neutral-900">{labels.length}</span> 种</span>
+      <button id="dl-reset" type="button" class="rounded-md px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-200">重置筛选</button>
+    </div>
+  </div>
+
+  <!-- 列表 -->
+  <ul id="dl-list" class="grid gap-4">
+    {
+      labels.map((label) => {
+        const searchText = `${label.data.drugName} ${label.data.brandNames.join(' ')} ${label.data.indications.join(' ')} ${label.data.description}`.toLowerCase();
+        return (
+          <li
+            class="dl-card rounded-xl border border-neutral-200 p-5 transition hover:border-blue-400 hover:shadow-md"
+            data-class={label.data.antibioticClass}
+            data-form={label.data.dosageForm}
+            data-ind={label.data.indications.join('|')}
+            data-search={searchText}
+          >
+            <div class="flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+              <span class="rounded bg-purple-50 px-2 py-0.5 font-medium text-purple-700">{label.data.antibioticClass}</span>
+              <span>{label.data.dosageForm}</span>
+              {label.data.renalAdjustment && <span class="rounded bg-amber-50 px-2 py-0.5 text-amber-700">肾功能需调整</span>}
+            </div>
+            <h2 class="mt-2">
+              <a href={`/drug-labels/${label.slug}`} class="text-lg font-semibold text-neutral-900 hover:text-blue-600">
+                {label.data.drugName}
+              </a>
+            </h2>
+            {label.data.brandNames.length > 0 && (
+              <p class="mt-1 text-sm text-neutral-500">商品名：{label.data.brandNames.join('、')}</p>
+            )}
+            <p class="mt-1 text-xs text-neutral-400">{label.data.manufacturer} · ATC {label.data.atcCode || '-'}</p>
+            {label.data.description && (
+              <p class="mt-2 text-sm text-neutral-600 line-clamp-2">{label.data.description}</p>
+            )}
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {label.data.strengths.map((s) => (
+                <span class="rounded bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">{s}</span>
+              ))}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <div id="dl-empty" class="hidden rounded-xl border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+    没有匹配的药品，请调整筛选条件。
+  </div>
+</BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('dl-search') as HTMLInputElement;
+  const classSel = document.getElementById('dl-class') as HTMLSelectElement;
+  const formSel = document.getElementById('dl-form') as HTMLSelectElement;
+  const indSel = document.getElementById('dl-ind') as HTMLSelectElement;
+  const resetBtn = document.getElementById('dl-reset');
+  const cards = document.querySelectorAll<HTMLElement>('.dl-card');
+  const countEl = document.getElementById('dl-count');
+  const emptyEl = document.getElementById('dl-empty');
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    const cls = classSel.value;
+    const form = formSel.value;
+    const ind = indSel.value;
+
+    let visible = 0;
+    cards.forEach((card) => {
+      const matchSearch = !q || card.dataset.search?.includes(q);
+      const matchClass = !cls || card.dataset.class === cls;
+      const matchForm = !form || card.dataset.form === form;
+      const matchInd = !ind || (card.dataset.ind ?? '').split('|').includes(ind);
+
+      const show = matchSearch && matchClass && matchForm && matchInd;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (countEl) countEl.textContent = String(visible);
+    if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
+  }
+
+  [searchInput, classSel, formSel, indSel].forEach((el) =>
+    el.addEventListener('input', applyFilters)
+  );
+
+  resetBtn?.addEventListener('click', () => {
+    searchInput.value = '';
+    classSel.value = '';
+    formSel.value = '';
+    indSel.value = '';
+    applyFilters();
+  });
+</script>

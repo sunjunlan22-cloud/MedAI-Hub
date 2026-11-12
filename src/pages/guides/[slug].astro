@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  return guides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await guide.render();
+const { data } = guide;
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <article class="prose prose-neutral max-w-none">
+    <!-- 返回链接 -->
+    <a href="/guides" class="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-blue-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+      </svg>
+      返回指南列表
+    </a>
+
+    <!-- 元信息徽章 -->
+    <div class="mt-4 flex flex-wrap gap-2 text-xs">
+      <span class="rounded bg-blue-50 px-2.5 py-1 font-medium text-blue-700">{data.organization}</span>
+      <span class="rounded bg-neutral-100 px-2.5 py-1 text-neutral-600">{data.year}</span>
+      <span class="rounded bg-neutral-100 px-2.5 py-1 text-neutral-600">{data.version}</span>
+      <span class="rounded bg-green-50 px-2.5 py-1 text-green-700">审核：{data.reviewDate}</span>
+      {data.docType.map((t) => (
+        <span class="rounded bg-emerald-50 px-2.5 py-1 font-medium text-emerald-700">{t}</span>
+      ))}
+      {data.evidenceQuality && (
+        <span class="rounded bg-purple-50 px-2.5 py-1 font-medium text-purple-700">证据质量：{data.evidenceQuality}</span>
+      )}
+      {data.recommendationGrade && (
+        <span class="rounded bg-amber-50 px-2.5 py-1 font-medium text-amber-700">推荐等级：{data.recommendationGrade}</span>
+      )}
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="mt-4 text-3xl font-bold text-neutral-900">{data.title}</h1>
+
+    {data.description && (
+      <p class="mt-3 text-lg text-neutral-600">{data.description}</p>
+    )}
+
+    <!-- 分类标签 -->
+    <div class="mt-5 space-y-2 border-y border-neutral-200 py-4">
+      {data.syndromes.length > 0 && (
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-medium text-neutral-500">适用综合征：</span>
+          {data.syndromes.map((s) => (
+            <span class="rounded bg-neutral-100 px-2 py-0.5 text-xs text-neutral-700">{s}</span>
+          ))}
+        </div>
+      )}
+      {data.pathogens.length > 0 && (
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-medium text-neutral-500">涉及病原体：</span>
+          {data.pathogens.map((p) => (
+            <span class="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-700">{p}</span>
+          ))}
+        </div>
+      )}
+      {data.antibioticClasses.length > 0 && (
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-medium text-neutral-500">抗菌药物分类：</span>
+          {data.antibioticClasses.map((c) => (
+            <span class="rounded bg-purple-50 px-2 py-0.5 text-xs text-purple-700">{c}</span>
+          ))}
+        </div>
+      )}
+      {data.infectionSyndromes.length > 0 && (
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-medium text-neutral-500">感染综合征：</span>
+          {data.infectionSyndromes.map((s) => (
+            <span class="rounded bg-rose-50 px-2 py-0.5 text-xs text-rose-700">{s}</span>
+          ))}
+        </div>
+      )}
+      {data.susceptibilityStandards.length > 0 && (
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-sm font-medium text-neutral-500">药敏标准 / 耐药监测：</span>
+          {data.susceptibilityStandards.map((s) => (
+            <span class="rounded bg-cyan-50 px-2 py-0.5 text-xs text-cyan-700">{s}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- 正文 -->
+    <div class="mt-6">
+      <Content />
+    </div>
+
+    <!-- 原文链接 -->
+    <div class="mt-8 flex flex-wrap items-center gap-4 border-t border-neutral-200 pt-6">
+      <a
+        href={data.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+      >
+        阅读原文指南
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 3h6v6" />
+          <path d="M10 14 21 3" />
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        </svg>
+      </a>
+      <p class="text-xs text-neutral-500">
+        本站仅存储人工整理的指南摘要，内容仅供专业学术参考，不能替代临床决策。
+      </p>
+    </div>
+  </article>
+</BaseLayout>

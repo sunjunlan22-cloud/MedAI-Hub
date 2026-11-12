@@ -1,0 +1,153 @@
+{
+  "updated": "2026-11-09",
+  "notes": "以下为常用抗感染药物在不同肾功能水平下的剂量调整参考。具体临床应用请参考药品说明书原文与权威指南，必要时进行 TDM。",
+  "drugs": [
+    {
+      "name": "哌拉西林/他唑巴坦",
+      "class": "β-内酰胺酶抑制剂复合制剂",
+      "normal": "4.5 g q6-8h",
+      "crd30_40": "4.5 g q8h",
+      "crcl15_30": "4.5 g q12h",
+      "crcl5_15": "2.25 g q12h",
+      "crcl_lt5": "2.25 g q24h",
+      "dialysis": "4.5 g q12h，透析后追加 2.25 g",
+      "hepatic": "无需调整",
+      "notes": "CrCl 以 mL/min 为单位",
+      "tdm": "不常规 TDM；重症可考虑监测 %fT>MIC"
+    },
+    {
+      "name": "美罗培南",
+      "class": "碳青霉烯类",
+      "normal": "1 g q8h（重症可 2 g q8h）",
+      "crd30_50": "常规剂量 q12h",
+      "crcl10_25": "常规剂量 q24h",
+      "crcl_lt10": "500 mg q24h 或 1 g q48h",
+      "dialysis": "透析当日 500 mg q24h，透析后追加剂量",
+      "hepatic": "无需调整",
+      "notes": "铜绿假单胞菌感染可延长至 2-3 g q6h（肾功能正常）",
+      "tdm": "不常规 TDM；重症可监测 %fT>MIC"
+    },
+    {
+      "name": "亚胺培南/西司他丁",
+      "class": "碳青霉烯类",
+      "normal": "0.5-1 g q6h",
+      "crd30_50": "0.5-1 g q8h",
+      "crcl10_30": "0.5 g q8h 或 1 g q12h",
+      "crcl_lt10": "0.5 g q12h",
+      "dialysis": "透析当日 0.5 g q12h",
+      "hepatic": "无需调整",
+      "notes": "癫痫患者慎用；中枢神经系统感染避免使用",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "头孢吡肟",
+      "class": "第四代头孢菌素",
+      "normal": "1 g q8h（重症 2 g q8h）",
+      "crd30_50": "1-2 g q12h",
+      "crcl10_30": "1-2 g q24h",
+      "crcl_lt10": "1 g q48h",
+      "dialysis": "透析后追加 1 g",
+      "hepatic": "无需调整",
+      "notes": "肾功能不全时密切监测神经系统症状",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "万古霉素",
+      "class": "糖肽类",
+      "normal": "15-20 mg/kg q12h（TDM 谷浓度 15-20 mg/L）",
+      "crd50_80": "15-20 mg/kg q24h（TDM 监测）",
+      "crcl30_50": "15 mg/kg q24-48h（TDM 监测）",
+      "crcl_lt30": "15 mg/kg q48-72h（TDM 监测）",
+      "dialysis": "透析期间清除有限，建议 15 mg/kg q48-72h；高通量透析后可追加 500 mg",
+      "hepatic": "无需调整",
+      "notes": "必须 TDM；目标谷浓度 15-20 mg/L（普通）或 20-25 mg/L（重症/MRSA）",
+      "tdm": "谷浓度 15-20 mg/L（重症/MRSA 20-25 mg/L）；AUC/MIC 400-600"
+    },
+    {
+      "name": "左氧氟沙星",
+      "class": "呼吸喹诺酮类",
+      "normal": "500-750 mg qd 口服/静滴",
+      "crd20_50": "常规剂量（CrCl 30-50 时 750 → 500 mg）",
+      "crcl10_20": "250-500 mg q48h",
+      "crcl_lt10": "250 mg q48h",
+      "dialysis": "250 mg q48h",
+      "hepatic": "无需调整",
+      "notes": "避免儿童、妊娠、哺乳期使用；QT 延长风险",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "环丙沙星",
+      "class": "喹诺酮类",
+      "normal": "400 mg q8-12h 静滴（口服 500 mg q12h）",
+      "crd30_50": "常规剂量",
+      "crcl10_30": "400 mg q12h",
+      "crcl_lt10": "400 mg q24h",
+      "dialysis": "400 mg q24h",
+      "hepatic": "肝硬化患者慎用，适当减量",
+      "notes": "避免与镁/铝/钙制剂同服，间隔 2 小时以上",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "两性霉素 B 脂质体",
+      "class": "多烯类抗真菌药",
+      "normal": "3-5 mg/kg qd 静滴（按需升至 10 mg/kg）",
+      "crd30_50": "无需调整（密切监测）",
+      "crcl_lt30": "无需调整（密切监测）",
+      "dialysis": "透析前后均无需调整剂量",
+      "hepatic": "无需调整",
+      "notes": "肾毒性较传统两性霉素 B 显著降低；仍需监测肾功能、电解质（尤其是钾和镁）",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "伏立康唑",
+      "class": "三唑类抗真菌药",
+      "normal": "口服 200 mg q12h；静滴 6 mg/kg q12h × 2 剂 → 4 mg/kg q12h",
+      "crd_lt50": "避免使用静滴剂型（赋形剂 SBECD 蓄积），改用口服",
+      "crcl_lt30": "口服剂量减至 100 mg q12h",
+      "dialysis": "透析清除有限，建议口服 100 mg q12h",
+      "hepatic": "Child-Pugh A/B：静滴维持剂量减至 1/2；口服维持剂量减至 100 mg q12h；Child-Pugh C：禁用",
+      "notes": "CYP2C9/2C19 基因型影响代谢，东方人群 PM 比例较高",
+      "tdm": "谷浓度 1.5-5.0 mg/L（治疗窗）"
+    },
+    {
+      "name": "卡泊芬净",
+      "class": "棘白菌素类抗真菌药",
+      "normal": "负荷剂量 70 mg → 维持 50 mg qd 静滴",
+      "crd_lt30": "无需调整（临床数据有限，密切监测）",
+      "crcl_lt15": "无需调整",
+      "dialysis": "无需调整，透析后无需追加",
+      "hepatic": "Child-Pugh 7-9 分：维持剂量减至 35 mg qd；> 9 分：禁用",
+      "notes": "肝功能不全调整剂量，肾功能不全通常无需调整",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "舒巴坦/度洛巴坦（双坦 / XACDURO）",
+      "class": "β-内酰胺类/β-内酰胺酶抑制剂（舒巴坦+度洛巴坦）",
+      "normal": "1 g 舒巴坦 + 1 g 度洛巴坦 q6h 静滴（每次 3 小时）",
+      "crcl_ge130": "1 g/1 g q4h（肾功能亢进）",
+      "crcl30_44": "1 g/1 g q8h",
+      "crcl15_29": "1 g/1 g q12h",
+      "crcl_lt15": "前 3 次 q12h（0、12、24h），之后 q24h",
+      "dialysis": "透析疗程结束后给药",
+      "hepatic": "无需调整",
+      "notes": "用于碳青霉烯耐药鲍曼不动杆菌（CRAB）肺炎；输注 3 小时",
+      "tdm": "不常规 TDM；舒巴坦 %fT>MIC 100% 需个体化"
+    },
+    {
+      "name": "依拉环素（依嘉 / XERAVA）",
+      "class": "四环素类（氟环素）",
+      "normal": "1 mg/kg q12h 静滴（≥60 min）；重症可 1.5 mg/kg q12h",
+      "hepatic": "Child-Pugh C：首日 1 mg/kg q12h → 之后 q24h",
+      "notes": "用于复杂性腹腔感染（cIAI）；肾功能不全（含透析/ESRD）无需调整",
+      "tdm": "不常规 TDM"
+    },
+    {
+      "name": "艾沙康唑（康新博）",
+      "class": "三唑类抗真菌药",
+      "normal": "负荷 200 mg q8h × 6 剂（48h）→ 维持 200 mg qd",
+      "hepatic": "轻中度肝损伤（Child-Pugh A/B）无需调整",
+      "notes": "口服/静滴可互换（口服生物利用度 98%）；肾功能不全（含终末期）无需调整",
+      "tdm": "可选；目标谷浓度约 1-5 mg/L"
+    }
+  ]
+}

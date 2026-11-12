@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScoreBadge from '../../components/ScoreBadge.astro';
+import researchData from '../../data/auto/research.json';
+import type { ResearchNews } from '../../types/news';
+
+export async function getStaticPaths() {
+  return (researchData as ResearchNews[]).map((item) => ({
+    params: { id: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props as { item: ResearchNews };
+
+const studyTypeLabel: Record<string, string> = {
+  'RCT': 'RCT',
+  'cohort': '队列研究',
+  'real-world': '真实世界研究',
+  'meta-analysis': 'Meta 分析',
+  'review': '综述',
+  'preprint': '预印本',
+  'other': '其他',
+};
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+// 研究设计 / 临床试验状态 / 发表状态（新增字段）
+const studyDesignLabel: Record<string, string> = {
+  rct: 'RCT',
+  cohort: '队列研究',
+  caseControl: '病例对照研究',
+  metaAnalysis: 'Meta 分析',
+  systematicReview: '系统综述',
+  realWorld: '真实世界研究',
+  preprint: '预印本',
+  other: '其他',
+};
+const trialStatusLabel: Record<string, string> = {
+  registered: '已注册',
+  recruiting: '招募中',
+  completed: '已完成',
+  terminated: '已终止',
+  unknown: '状态未知',
+};
+const publicationStatusLabel: Record<string, string> = {
+  registered: '已注册',
+  resultsPosted: '已公布结果',
+  published: '已发表',
+  preprint: '预印本',
+  inReview: '在审',
+};
+
+const axes = [
+  { label: '课题启发性', value: item.scores.topicInspiration },
+  { label: '临床可落地性', value: item.scores.clinicalApplicability },
+  { label: '证据等级', value: item.scores.evidenceLevel },
+  { label: '专科普适性', value: item.scores.specialtyUniversality },
+  { label: '科研增益价值', value: item.scores.researchValue },
+];
+---
+
+<BaseLayout title={item.title} description={item.coreFindings}>
+  <article class="mx-auto max-w-3xl">
+    <!-- 返回链接 -->
+    <a href="/research" class="mb-6 inline-block text-sm text-blue-600 hover:underline">
+      ← 返回科研前沿列表
+    </a>
+
+    <!-- 预印本强制警示（PRD 4.2） -->
+    {item.isPreprint && (
+      <div class="mb-4 rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+        ⚠️ 本文为预印本，<strong>尚未经过同行评议</strong>，结论可能存在偏差，仅供科研参考，不作为临床决策依据。
+      </div>
+    )}
+
+    <!-- 元信息 -->
+    <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
+      <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">
+        {studyTypeLabel[item.studyType] ?? item.studyType}
+      </span>
+      {item.studyDesign && (
+        <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">研究设计：{studyDesignLabel[item.studyDesign] ?? item.studyDesign}</span>
+      )}
+      {item.sampleSize && (
+        <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">{item.sampleSize}</span>
+      )}
+      <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">证据等级：{item.evidenceLevel}</span>
+      {item.pmid && (
+        <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">PMID: {item.pmid}</span>
+      )}
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="text-2xl font-semibold leading-tight">{item.title}</h1>
+
+    <!-- 来源与时间 -->
+    <div class="mt-3 text-sm text-neutral-500">
+      来源：
+      <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+        {item.sourceName}
+      </a>
+      <span class="mx-2">·</span>
+      <span>发表状态：{item.publishStatus === 'published' ? '已发表' : item.publishStatus === 'preprint' ? '预印本' : '在审'}</span>
+      <span class="mx-2">·</span>
+      <span>发布时间：{formatDate(item.publishTime)}</span>
+    </div>
+
+    <!-- 临床试验信息（有注册号时展示） -->
+    {item.trialId && (
+      <section class="mt-8">
+        <h2 class="mb-2 text-lg font-semibold">临床试验信息</h2>
+        <div class="flex flex-wrap gap-2 text-sm">
+          <span class="rounded bg-violet-50 px-3 py-1 font-medium text-violet-700">注册号：{item.trialId}</span>
+          {item.trialStatus && (
+            <span class="rounded bg-neutral-100 px-3 py-1 text-neutral-700">试验状态：{trialStatusLabel[item.trialStatus] ?? item.trialStatus}</span>
+          )}
+          {item.publicationStatus && (
+            <span class="rounded bg-neutral-100 px-3 py-1 text-neutral-700">发表状态：{publicationStatusLabel[item.publicationStatus] ?? item.publicationStatus}</span>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- 证据质量（原文分级或「原文未评估」） -->
+    {item.evidenceQuality && (
+      <section class="mt-6">
+        <h2 class="mb-2 text-lg font-semibold">证据质量</h2>
+        <p class="leading-relaxed text-neutral-700">{item.evidenceQuality}</p>
+      </section>
+    )}
+
+    <!-- 原文摘要 -->
+    {item.abstract && (
+      <section class="mt-6">
+        <h2 class="mb-2 text-lg font-semibold">原文摘要</h2>
+        <p class="whitespace-pre-line leading-relaxed text-neutral-700">{item.abstract}</p>
+      </section>
+    )}
+
+    <!-- 核心发现 -->
+    <section class="mt-8">
+      <h2 class="mb-2 text-lg font-semibold">核心发现</h2>
+      <p class="leading-relaxed text-neutral-700">{item.coreFindings}</p>
+    </section>
+
+    <!-- 研究局限 -->
+    <section class="mt-6">
+      <h2 class="mb-2 text-lg font-semibold">研究局限</h2>
+      <p class="leading-relaxed text-neutral-700">{item.limitations}</p>
+    </section>
+
+    <!-- 临床/科研启发 -->
+    <section class="mt-6">
+      <h2 class="mb-2 text-lg font-semibold">临床 / 科研启发</h2>
+      <p class="leading-relaxed text-neutral-700">{item.inspiration}</p>
+    </section>
+
+    <!-- 五轴评分 -->
+    <section class="mt-8">
+      <h2 class="mb-3 text-lg font-semibold">五轴评分</h2>
+      <ScoreBadge totalScore={item.totalScore} axes={axes} />
+      <p class="mt-2 text-xs text-neutral-400">满分 50 分，准入线 35 分（双 Agent 审核通过）</p>
+    </section>
+
+    <!-- 标签 -->
+    {item.tags.length > 0 && (
+      <section class="mt-8">
+        <h2 class="mb-2 text-lg font-semibold">标签</h2>
+        <div class="flex flex-wrap gap-2">
+          {item.tags.map((tag) => (
+            <span class="rounded-full bg-neutral-100 px-3 py-1 text-sm text-neutral-600">#{tag}</span>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- 关联记录（有值时展示，否则整块隐藏） -->
+    {item.relatedRecords && item.relatedRecords.length > 0 && (
+      <section class="mt-8">
+        <h2 class="mb-2 text-lg font-semibold">关联记录</h2>
+        <ul class="space-y-1 text-sm text-neutral-700">
+          {item.relatedRecords!.map((rid) => (
+            <li class="rounded bg-neutral-50 px-3 py-1">{rid}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- 外链 -->
+    <section class="mt-8 border-t border-neutral-200 pt-6">
+      <a
+        href={item.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1 rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700"
+      >
+        阅读原文 →
+      </a>
+      <p class="mt-2 text-xs text-neutral-400">本站仅存储结构化摘要与外链，不存储原文全文。</p>
+    </section>
+  </article>
+</BaseLayout>

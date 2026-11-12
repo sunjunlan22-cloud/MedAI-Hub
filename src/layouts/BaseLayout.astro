@@ -1,0 +1,189 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+// 七大一级导航（对应 PRD 2.1）
+const nav = [
+  { label: '首页', href: '/' },
+  { label: '行业资讯', href: '/industry' },
+  { label: '科研前沿', href: '/research' },
+  { label: '抗感染指南', href: '/guides' },
+  { label: '临床工具', href: '/tools' },
+  { label: 'AI 工具', href: '/ai-tools' },
+  { label: '关于本站', href: '/about' },
+];
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>{title} | MedAI Hub</title>
+    <meta
+      name="description"
+      content={description ?? '医药行业资讯、临床科研前沿、抗感染指南与临床工具平台'}
+    />
+    <meta name="generator" content={Astro.generator} />
+    {canonical && <link rel="canonical" href={canonical} />}
+  </head>
+  <body class="min-h-screen bg-white font-sans text-neutral-900 antialiased">
+    <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 md:h-14 md:flex-row md:items-center md:justify-between"
+      >
+        <a href="/" class="text-lg font-semibold tracking-tight">MedAI Hub</a>
+        <div class="flex items-center gap-2">
+          <ul class="flex flex-wrap items-center gap-1">
+            {
+              nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="rounded-md px-2.5 py-1.5 text-sm text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-900"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <!-- 搜索按钮 -->
+          <button
+            id="search-btn"
+            type="button"
+            aria-label="全站搜索"
+            class="ml-1 rounded-md p-1.5 text-neutral-500 transition hover:bg-neutral-100 hover:text-neutral-900"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-12">
+      <slot />
+    </main>
+
+    <!-- Pagefind 搜索弹窗 -->
+    <div
+      id="search-modal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 p-4"
+    >
+      <div class="w-full max-w-2xl rounded-xl bg-white p-4 shadow-2xl">
+        <div class="mb-3 flex items-center justify-between">
+          <span class="text-sm font-medium text-neutral-500">全站搜索</span>
+          <button id="search-close" type="button" class="rounded p-1 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div id="search" class="pagefind-ui"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const modal = document.getElementById('search-modal');
+  const openBtn = document.getElementById('search-btn');
+  const closeBtn = document.getElementById('search-close');
+  const searchContainer = document.getElementById('search');
+
+  let pagefindInited = false;
+  let pagefindUI: any = null;
+  let pendingKeyword = '';
+
+  function openSearch(keyword = '') {
+    modal!.classList.remove('hidden');
+    modal!.classList.add('flex');
+    // 首次打开时加载 Pagefind UI
+    if (!pagefindInited && searchContainer) {
+      pendingKeyword = keyword;
+      loadPagefind();
+    } else if (pagefindUI && keyword) {
+      pagefindUI.triggerSearch(keyword);
+    }
+    // 延迟聚焦输入框
+    setTimeout(() => {
+      const input = searchContainer?.querySelector('input');
+      input?.focus();
+    }, 100);
+  }
+
+  function closeSearch() {
+    modal!.classList.add('hidden');
+    modal!.classList.remove('flex');
+  }
+
+  function loadPagefind() {
+    pagefindInited = true;
+    // Pagefind 索引仅在 build 后生成；dev 模式下跳过
+    if (import.meta.env.DEV) {
+      searchContainer!.innerHTML =
+        '<p class="text-center text-sm text-neutral-500 py-8">搜索索引仅在生产构建后可用，请使用 pnpm build 后查看效果。</p>';
+      return;
+    }
+    // 动态加载 Pagefind UI
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/pagefind/pagefind-ui.css';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = '/pagefind/pagefind-ui.js';
+    script.onload = () => {
+      const w = window as unknown as { PagefindUI: any };
+      if (typeof w.PagefindUI !== 'undefined') {
+        pagefindUI = new w.PagefindUI({
+          element: '#search',
+          showSubResults: true,
+          showImages: false,
+          excerptLength: 18,
+          resetStyles: false,
+        });
+        if (pendingKeyword) {
+          pagefindUI.triggerSearch(pendingKeyword);
+          pendingKeyword = '';
+        }
+      }
+    };
+    script.onerror = () => {
+      searchContainer!.innerHTML =
+        '<p class="text-center text-sm text-neutral-500 py-8">搜索索引未生成，请先执行 pnpm build。</p>';
+    };
+    document.body.appendChild(script);
+  }
+
+  openBtn?.addEventListener('click', () => openSearch());
+  // 供首页等页面触发的全站搜索
+  window.addEventListener('open-site-search', (e) => {
+    const kw = (e as CustomEvent).detail?.keyword || '';
+    openSearch(kw);
+  });
+  closeBtn?.addEventListener('click', closeSearch);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeSearch();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSearch();
+    // Cmd/Ctrl + K 打开搜索
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
+</script>

@@ -1,0 +1,59 @@
+---
+// 五轴评分展示组件
+// 总分满分 50，准入线 35（PRD 5.2）
+
+interface AxisScore {
+  label: string;
+  value: number;
+}
+
+interface Props {
+  totalScore: number;       // 总分（0-50）
+  axes: AxisScore[];        // 五轴明细
+}
+
+const { totalScore, axes } = Astro.props;
+
+// 颜色分级：>=40 优秀（绿），>=35 达标（蓝），<35 未达标（红）
+const scoreColor =
+  totalScore >= 40
+    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+    : totalScore >= 35
+      ? 'bg-blue-50 text-blue-700 border-blue-200'
+      : 'bg-red-50 text-red-700 border-red-200';
+
+const barColor =
+  totalScore >= 40
+    ? 'bg-emerald-500'
+    : totalScore >= 35
+      ? 'bg-blue-500'
+      : 'bg-red-500';
+---
+
+<div class="flex items-start gap-4">
+  <!-- 总分大徽章 -->
+  <div
+    class={`flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-lg border ${scoreColor}`}
+  >
+    <span class="text-xl font-bold leading-none">{totalScore}</span>
+    <span class="mt-0.5 text-[10px] leading-none opacity-70">/ 50</span>
+  </div>
+
+  <!-- 五轴明细 -->
+  <div class="flex-1 space-y-1.5">
+    {
+      axes.map((axis) => (
+        <div class="flex items-center gap-2">
+          <span class="w-28 shrink-0 text-xs text-neutral-500">{axis.label}</span>
+          <div class="h-1.5 flex-1 overflow-hidden rounded-full bg-neutral-100">
+            <div
+              class={`h-full rounded-full ${barColor}`}
+              style={`width: ${(axis.value / 10) * 100}%`}
+            />
+          </div>
+          <span class="w-6 text-right text-xs font-medium text-neutral-600">{axis.value}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>

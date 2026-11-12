@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// 多维分类维度定义（对齐 Evidence Navigator 体系）
+// key: 对应 content.config.ts 中 schema 字段
+// field: 对应卡片上的 data-* 属性（kebab-case）
+const FILTER_DIMENSIONS = [
+  {
+    key: 'docType',
+    field: 'data-doc-type',
+    label: '指南共识',
+    options: ['指南', '专家共识', '推荐依据'],
+  },
+  {
+    key: 'pathogens',
+    field: 'data-pathogens',
+    label: '致病菌与耐药菌',
+    options: [
+      '曲霉', '念珠菌', '毛霉', '隐球菌',
+      'CRAB', 'CRE/CRKP', 'CRPA', '嗜麦芽窄食单胞菌', 'MRSA/VRE',
+      'CRE混合感染', 'CRAB混合感染', '多病原联合治疗',
+    ],
+  },
+  {
+    key: 'infectionSites',
+    field: 'data-infection-sites',
+    label: '感染部位与临床场景',
+    options: [
+      '肺部感染', '血流感染', '中枢神经系统感染', '腹腔感染',
+      '皮肤软组织感染', '泌尿系感染', '肝移植', '肺移植', '肾移植',
+    ],
+  },
+  {
+    key: 'specialPopulations',
+    field: 'data-special-populations',
+    label: '特殊人群与器官支持',
+    options: ['CRRT', 'ECMO', 'ARDS'],
+  },
+  {
+    key: 'imagingDiagnosis',
+    field: 'data-imaging-diagnosis',
+    label: '医学影像与诊断',
+    options: ['肺部CT影像', '真菌/耐药菌影像鉴别', 'TDM'],
+  },
+  {
+    key: 'comparisons',
+    field: 'data-comparisons',
+    label: '疗效与安全性比较',
+    options: [
+      '与多黏菌素对比', '与依拉环素对比', '与舒巴坦/度洛巴坦对比',
+      '与替加环素对比', '与伏立康唑/艾沙康唑对比',
+    ],
+  },
+];
+
+// 获取所有已发布指南（排除草稿与模板），按年份倒序排列
+const guides = (await getCollection('guides', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="抗感染指南" description="权威抗感染指南与临床证据知识库">
+  <header class="mb-8">
+    <h1 class="text-2xl font-semibold">抗感染指南</h1>
+    <p class="mt-2 text-neutral-600">
+      按发布时间由新到旧排列 · 共 {guides.length} 篇
+    </p>
+  </header>
+
+  <!-- 搜索框 -->
+  <div class="mb-4">
+    <input
+      id="guides-search"
+      type="search"
+      placeholder="搜索标题、摘要、组织、病原体..."
+      class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+    />
+  </div>
+
+  <!-- 可折叠多维筛选面板 -->
+  <div id="filter-panel" class="mb-6 rounded-xl border border-neutral-200 bg-neutral-50/60 p-4">
+    <div class="mb-3 flex items-center justify-between">
+      <h2 class="text-sm font-semibold text-neutral-700">多维分类筛选</h2>
+      <button
+        id="filter-clear"
+        type="button"
+        class="text-xs text-blue-600 hover:text-blue-700 hover:underline"
+      >
+        清除全部筛选
+      </button>
+    </div>
+    <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        FILTER_DIMENSIONS.map((dim) => (
+          <details class="group rounded-lg border border-neutral-200 bg-white">
+            <summary class="cursor-pointer select-none px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50">
+              {dim.label}
+            </summary>
+            <div class="max-h-48 overflow-y-auto border-t border-neutral-100 px-3 py-2">
+              {dim.options.map((opt) => (
+                <label class="flex items-center gap-2 py-1 text-sm text-neutral-600 hover:text-neutral-900">
+                  <input
+                    type="checkbox"
+                    class="filter-checkbox h-4 w-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+                    data-dim={dim.key}
+                    value={opt}
+                  />
+                  <span>{opt}</span>
+                </label>
+              ))}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- 指南列表 -->
+  <ul id="guides-list" class="grid gap-4">
+    {
+      guides.map((guide) => {
+        const searchText = `${guide.data.title} ${guide.data.description} ${guide.data.organization} ${guide.data.syndromes.join(' ')} ${guide.data.pathogens.join(' ')} ${guide.data.tags.join(' ')}`.toLowerCase();
+        return (
+          <li
+            class="guide-card rounded-xl border border-neutral-200 p-5 transition hover:border-blue-400 hover:shadow-md"
+            data-search={searchText}
+            data-doc-type={guide.data.docType.join(' ')}
+            data-pathogens={guide.data.pathogens.join(' ')}
+            data-infection-sites={guide.data.infectionSites.join(' ')}
+            data-special-populations={guide.data.specialPopulations.join(' ')}
+            data-imaging-diagnosis={guide.data.imagingDiagnosis.join(' ')}
+            data-comparisons={guide.data.comparisons.join(' ')}
+          >
+            <div class="flex flex-wrap items-center gap-2 text-xs text-neutral-500">
+              <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">{guide.data.organization}</span>
+              <span>{guide.data.year}</span>
+              <span>·</span>
+              <span>{guide.data.version}</span>
+              {guide.data.docType.map((t) => (
+                <span class="rounded bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">{t}</span>
+              ))}
+              {guide.data.evidenceQuality && (
+                <span class="rounded bg-purple-50 px-2 py-0.5 font-medium text-purple-700">证据质量：{guide.data.evidenceQuality}</span>
+              )}
+              {guide.data.recommendationGrade && (
+                <span class="rounded bg-amber-50 px-2 py-0.5 font-medium text-amber-700">推荐等级：{guide.data.recommendationGrade}</span>
+              )}
+            </div>
+            <h2 class="mt-2">
+              <a href={`/guides/${guide.slug}`} class="text-lg font-semibold text-neutral-900 hover:text-blue-600">
+                {guide.data.title}
+              </a>
+            </h2>
+            {guide.data.description && (
+              <p class="mt-2 text-sm text-neutral-600 line-clamp-2">{guide.data.description}</p>
+            )}
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {guide.data.infectionSites.map((s) => (
+                <span class="rounded bg-cyan-50 px-2 py-0.5 text-xs text-cyan-700">{s}</span>
+              ))}
+              {guide.data.pathogens.slice(0, 4).map((p) => (
+                <span class="rounded bg-amber-50 px-2 py-0.5 text-xs text-amber-700">{p}</span>
+              ))}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <div id="guides-empty" class="hidden rounded-xl border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+    没有匹配的指南或证据，请调整搜索关键词或筛选条件。
+  </div>
+</BaseLayout>
+
+<script define:vars={{ dimensions: FILTER_DIMENSIONS }}>
+  const searchInput = document.getElementById('guides-search');
+  const cards = document.querySelectorAll('.guide-card');
+  const emptyEl = document.getElementById('guides-empty');
+  const clearBtn = document.getElementById('filter-clear');
+  const checkboxes = document.querySelectorAll('.filter-checkbox');
+
+  // 维度 key -> 卡片字段名映射
+  const fieldMap = {};
+  dimensions.forEach((d) => {
+    fieldMap[d.key] = d.field;
+  });
+
+  function getSelected() {
+    const selected = {};
+    checkboxes.forEach((cb) => {
+      if (cb.checked) {
+        const dim = cb.dataset.dim;
+        if (!selected[dim]) selected[dim] = new Set();
+        selected[dim].add(cb.value);
+      }
+    });
+    return selected;
+  }
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    const selected = getSelected();
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const matchSearch = !q || (card.dataset.search || '').includes(q);
+
+      // 同维度内 OR，跨维度 AND
+      let matchDims = true;
+      for (const dim in selected) {
+        const field = fieldMap[dim];
+        const cardTags = (card.getAttribute(field) || '').split(' ').filter(Boolean);
+        const hit = [...selected[dim]].some((v) => cardTags.includes(v));
+        if (!hit) {
+          matchDims = false;
+          break;
+        }
+      }
+
+      const show = matchSearch && matchDims;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
+  }
+
+  searchInput.addEventListener('input', applyFilters);
+  checkboxes.forEach((cb) => cb.addEventListener('change', applyFilters));
+  clearBtn?.addEventListener('click', () => {
+    checkboxes.forEach((cb) => (cb.checked = false));
+    applyFilters();
+  });
+</script>

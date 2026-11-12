@@ -1,0 +1,364 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import industryData from '../data/auto/industry.json';
+import type { IndustryNews } from '../types/news';
+
+// 按发布时间倒序
+const news = (industryData as IndustryNews[]).sort(
+  (a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime(),
+);
+
+function formatDateKey(iso: string) {
+  const d = new Date(iso);
+  return `${d.getMonth() + 1}月${d.getDate()}日`;
+}
+function formatYear(iso: string) {
+  return new Date(iso).getFullYear();
+}
+function formatTime(iso: string) {
+  const d = new Date(iso);
+  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+}
+
+// 按日期分组（时间轴流）
+const groups: Array<{ date: string; year: number; items: IndustryNews[] }> = [];
+for (const item of news) {
+  const date = formatDateKey(item.publishTime);
+  const year = formatYear(item.publishTime);
+  let g = groups.find((x) => x.date === date);
+  if (!g) {
+    g = { date, year, items: [] };
+    groups.push(g);
+  }
+  g.items.push(item);
+}
+
+const factTypeLabel: Record<string, { text: string; class: string }> = {
+  fact: { text: '事实', class: 'bg-neutral-100 text-neutral-700' },
+  analysis: { text: '分析', class: 'bg-amber-50 text-amber-700' },
+  forecast: { text: '预测', class: 'bg-purple-50 text-purple-700' },
+};
+
+const categoryBadgeClass: Record<string, string> = {
+  '真菌与耐药': 'bg-pink-50 text-pink-700 border border-pink-200',
+  'AMR': 'bg-red-50 text-red-700 border border-red-200',
+  '感染影像': 'bg-cyan-50 text-cyan-700 border border-cyan-200',
+  'AI临床': 'bg-violet-50 text-violet-700 border border-violet-200',
+  '耐药监测': 'bg-orange-50 text-orange-700 border border-orange-200',
+};
+
+// 内容类型（B4/B5 新增）：区分政策动态 / 药品审批 / 耐药监测等
+const contentTypeLabel: Record<string, { text: string; class: string }> = {
+  policy: { text: '政策动态', class: 'bg-blue-50 text-blue-700 border border-blue-200' },
+  approval: { text: '药品审批', class: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
+  surveillance: { text: '耐药监测', class: 'bg-orange-50 text-orange-700 border border-orange-200' },
+  news: { text: '行业动态', class: 'bg-neutral-100 text-neutral-600 border border-neutral-200' },
+  resource: { text: '资源', class: 'bg-neutral-100 text-neutral-600 border border-neutral-200' },
+};
+
+// 内容类型分段筛选（顶部横向标签）
+const typeTabs = [
+  { key: 'all', label: '全部' },
+  { key: 'policy', label: '政策动态' },
+  { key: 'approval', label: '药品审批' },
+  { key: 'surveillance', label: '耐药监测' },
+  { key: 'other', label: '其他' },
+];
+
+// 将 contentType 归一化到筛选分组
+function ctypeGroup(ctype?: string): string {
+  if (ctype === 'policy' || ctype === 'approval' || ctype === 'surveillance') return ctype;
+  return 'other';
+}
+
+const approvalStatusLabel: Record<string, string> = {
+  filed: '已受理',
+  underReview: '审评中',
+  approved: '已批准',
+  rejected: '未批准',
+  withdrawn: '已撤回',
+};
+
+const marketAccessTypeLabel: Record<string, string> = {
+  nmpa: 'NMPA',
+  fda: 'FDA',
+  ema: 'EMA',
+  pmda: 'PMDA',
+  insurance: '医保',
+  hospital: '医院',
+};
+
+// 从 abstract 中提取 GLASS 原始 PDF 链接
+function extractPdfUrl(abstract?: string): string | null {
+  if (!abstract) return null;
+  const m = abstract.match(/官方 PDF:\s*(https?:\/\/\S+)/);
+  return m ? m[1] : null;
+}
+
+// 行业资讯页专属 Footer：行业优质 AI 导航矩阵与友情链接
+const aiLinks = [
+  { label: 'Toolify.ai', href: 'https://toolifyai.cn/' },
+  { label: 'Futurepedia', href: 'https://futurepedia.io/' },
+  { label: '通往 AGI 之路', href: 'https://www.waytoagi.com/zh' },
+  { label: 'AIHot News', href: 'https://aihot.news/' },
+  { label: '个人专属主页/知识库', href: 'https://lubiny0601-spec.github.io/' },
+];
+const currentYear = new Date().getFullYear();
+---
+
+<BaseLayout title="行业资讯" description="医药行业政策、医保、管线与市场格局资讯时间轴">
+  <header class="mb-6">
+    <h1 class="text-2xl font-semibold">行业资讯</h1>
+    <p class="mt-2 text-neutral-600">
+      关注医药行业政策、企业动态、药品市场与市场准入变化，为医药从业者提供及时的行业信息。
+    </p>
+  </header>
+
+  <!-- 内容类型分段筛选（横向标签） -->
+  <div class="mb-6">
+    <div class="inline-flex flex-wrap gap-1 rounded-lg border border-neutral-200 bg-neutral-50 p-1">
+      {
+        typeTabs.map((tab) => (
+          <button
+            type="button"
+            data-ctype={tab.key}
+            class={`ctype-tab rounded-md px-3 py-1.5 text-sm font-medium transition ${
+              tab.key === 'all'
+                ? 'bg-white text-blue-700 shadow-sm'
+                : 'text-neutral-600 hover:text-neutral-900'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  {
+    news.length === 0 && (
+      <div class="rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+        暂无资讯数据
+      </div>
+    )
+  }
+
+  <div id="industry-empty" class="hidden rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+    <p id="industry-empty-text">暂无匹配的资讯内容</p>
+  </div>
+
+  {
+    groups.map((group) => (
+      <section class="industry-group relative mb-10">
+        <!-- 日期标题 -->
+        <div class="mb-4 flex items-baseline gap-2">
+          <h2 class="text-lg font-semibold text-neutral-900">{group.year}年{group.date}</h2>
+          <span class="text-xs text-neutral-400">{group.items.length} 条</span>
+        </div>
+
+        <ul class="space-y-5">
+          {
+            group.items.map((item, idx) => {
+              const ft = factTypeLabel[item.factType];
+              const ct = contentTypeLabel[item.contentType ?? ''];
+              const pdfUrl = extractPdfUrl(item.abstract);
+              const isLast = idx === group.items.length - 1;
+              return (
+                <li class="industry-item relative pl-8" data-ctype={ctypeGroup(item.contentType)}>
+                  {/* 时间轴圆点 */}
+                  <span class="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-100"></span>
+                  {/* 连接线（非最后一项） */}
+                  {!isLast && (
+                    <span class="absolute left-1.5 top-7 bottom-0 w-px bg-neutral-200"></span>
+                  )}
+
+                  <div class="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+                    {/* 时间 + 来源 + 徽章 */}
+                    <div class="flex flex-wrap items-center gap-2 text-xs text-neutral-400">
+                      <time class="font-medium text-neutral-600">{formatTime(item.publishTime)}</time>
+                      <span>{item.sourceName}</span>
+                      {ct && (
+                        <span class={`rounded border px-1.5 py-0.5 ${ct.class}`}>{ct.text}</span>
+                      )}
+                      <span class={`rounded px-1.5 py-0.5 ${categoryBadgeClass[item.category] ?? 'bg-blue-50 text-blue-700'}`}>{item.category}</span>
+                      <span class={`rounded px-1.5 py-0.5 ${ft.class}`}>{ft.text}</span>
+                      {item.isCluster && (
+                        <span class="rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-700">多源聚合</span>
+                      )}
+                    </div>
+
+                    {/* 标题 */}
+                    <a
+                      href={`/industry/${item.id}`}
+                      class="mt-2 block text-lg font-medium text-neutral-900 hover:text-blue-600 hover:underline"
+                    >
+                      {item.title}
+                    </a>
+
+                    {/* AI 摘要 */}
+                    <p class="mt-2 text-sm leading-relaxed text-neutral-700">
+                      <span class="mr-1 font-medium text-neutral-900">AI 摘要：</span>
+                      {item.summary}
+                    </p>
+
+                    {/* 推荐理由 */}
+                    <p class="mt-2 text-sm leading-relaxed text-neutral-600">
+                      <span class="mr-1 font-medium text-neutral-900">推荐理由：</span>
+                      {item.impact}
+                    </p>
+
+                    {/* 耐药监测（GLASS）：结构化数据维度入口 */}
+                    {item.contentType === 'surveillance' && ((item.pathogens?.length ?? 0) > 0 || (item.drugs?.length ?? 0) > 0 || pdfUrl) && (
+                      <div class="mt-3 rounded-lg border border-orange-100 bg-orange-50/40 p-3">
+                        <p class="text-xs font-semibold text-orange-700">耐药监测 · 结构化数据</p>
+                        {(item.pathogens?.length ?? 0) > 0 && (
+                          <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                            <span class="text-xs text-neutral-500">病原体：</span>
+                            {item.pathogens!.map((p) => (
+                              <span class="rounded border border-orange-100 bg-white px-2 py-0.5 text-xs text-neutral-700">{p}</span>
+                            ))}
+                          </div>
+                        )}
+                        {(item.drugs?.length ?? 0) > 0 && (
+                          <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                            <span class="text-xs text-neutral-500">药物：</span>
+                            {item.drugs!.map((d) => (
+                              <span class="rounded border border-orange-100 bg-white px-2 py-0.5 text-xs text-neutral-700">{d}</span>
+                            ))}
+                          </div>
+                        )}
+                        {pdfUrl && (
+                          <a href={pdfUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800">
+                            原始 PDF →
+                          </a>
+                        )}
+                      </div>
+                    )}
+
+                    {/* 药品审批：状态 + 准入类型 + 文号 */}
+                    {item.contentType === 'approval' && (
+                      <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-neutral-600">
+                        {item.approvalStatus && (
+                          <span class="rounded bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                            审批状态：{approvalStatusLabel[item.approvalStatus] ?? item.approvalStatus}
+                          </span>
+                        )}
+                        {item.marketAccessType && (
+                          <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">
+                            {marketAccessTypeLabel[item.marketAccessType] ?? item.marketAccessType}
+                          </span>
+                        )}
+                        {item.externalId && (
+                          <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">文号：{item.externalId}</span>
+                        )}
+                      </div>
+                    )}
+
+                    {/* 标签 */}
+                    {item.tags.length > 0 && (
+                      <div class="mt-3 flex flex-wrap gap-1.5">
+                        {item.tags.map((tag) => (
+                          <span class="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </section>
+    ))
+  }
+
+  <!-- 行业资讯页专属 Footer：行业优质 AI 导航矩阵与友情链接 -->
+  <footer class="mt-12 border-t border-neutral-200 bg-neutral-50">
+    <div class="py-10">
+      <div class="mb-5">
+        <h3 class="text-sm font-semibold text-neutral-900">行业优质 AI 导航矩阵与友情链接</h3>
+        <p class="mt-1 text-xs text-neutral-400">以下为外部资源链接，点击一键跳转</p>
+      </div>
+      <ul class="flex flex-wrap gap-3">
+        {
+          aiLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3.5 py-2 text-sm text-neutral-700 transition hover:border-blue-300 hover:text-blue-600"
+              >
+                {link.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"></path>
+                  <path d="M10 14 21 3"></path>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                </svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-8 border-t border-neutral-200 pt-6 text-xs leading-relaxed text-neutral-400">
+        <p>© {currentYear} MedAI Hub · 医疗 AI 知识与工具平台</p>
+        <p class="mt-1">本站内容仅供医学专业人士参考，不构成诊疗建议；AI 工具信息请以各官网为准。</p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLElement>('.ctype-tab'));
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.industry-item'));
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('.industry-group'));
+  const emptyEl = document.getElementById('industry-empty');
+  const emptyText = document.getElementById('industry-empty-text');
+  let activeCtype = 'all';
+
+  const emptyMessages: Record<string, string> = {
+    policy: '暂无政策动态类资讯，后续采集政策与监管文件后将在此展示。',
+    approval: '暂无药品审批类资讯。',
+    surveillance: '暂无耐药监测类资讯。',
+    other: '暂无匹配的资讯内容。',
+  };
+
+  function applyFilter() {
+    let visible = 0;
+    items.forEach((li) => {
+      const ctype = li.dataset.ctype || 'other';
+      const show = activeCtype === 'all' || ctype === activeCtype;
+      li.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    groups.forEach((g) => {
+      const hasVisible = Array.from(g.querySelectorAll('.industry-item')).some(
+        (li) => (li as HTMLElement).style.display !== 'none',
+      );
+      g.style.display = hasVisible ? '' : 'none';
+    });
+    if (emptyEl) {
+      emptyEl.classList.toggle('hidden', visible > 0);
+      if (emptyText) emptyText.textContent = emptyMessages[activeCtype] ?? '暂无匹配的资讯内容';
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      activeCtype = tab.dataset.ctype || 'all';
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('bg-white', active);
+        t.classList.toggle('text-blue-700', active);
+        t.classList.toggle('shadow-sm', active);
+        t.classList.toggle('text-neutral-600', !active);
+        t.classList.toggle('hover:text-neutral-900', !active);
+      });
+      applyFilter();
+    });
+  });
+
+  applyFilter();
+</script>

@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const labels = await getCollection('drug-labels', ({ data }) => !data.draft);
+  return labels.map((label) => ({
+    params: { slug: label.slug },
+    props: { label },
+  }));
+}
+
+const { label } = Astro.props;
+const { Content } = await label.render();
+const { data } = label;
+---
+
+<BaseLayout title={data.drugName} description={data.description}>
+  <article class="prose prose-neutral max-w-none">
+    <!-- 返回链接 -->
+    <a href="/drug-labels" class="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-blue-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7" />
+        <path d="M19 12H5" />
+      </svg>
+      返回药品说明书列表
+    </a>
+
+    <!-- 元信息徽章 -->
+    <div class="mt-4 flex flex-wrap gap-2 text-xs">
+      <span class="rounded bg-purple-50 px-2.5 py-1 font-medium text-purple-700">{data.antibioticClass || '—'}</span>
+      <span class="rounded bg-neutral-100 px-2.5 py-1 text-neutral-600">{data.dosageForm}</span>
+      {data.renalAdjustment && <span class="rounded bg-amber-50 px-2.5 py-1 text-amber-700">需肾功能调整</span>}
+      {data.hepaticAdjustment && <span class="rounded bg-amber-50 px-2.5 py-1 text-amber-700">需肝功能调整</span>}
+      <span class="rounded bg-green-50 px-2.5 py-1 text-green-700">审核：{data.reviewDate}</span>
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="mt-4 text-3xl font-bold text-neutral-900">{data.drugName}</h1>
+
+    {data.brandNames.length > 0 && (
+      <p class="mt-2 text-sm text-neutral-500">商品名：{data.brandNames.join('、')}</p>
+    )}
+    <p class="mt-1 text-sm text-neutral-500">{data.manufacturer} · ATC {data.atcCode || '-'}</p>
+
+    {data.description && (
+      <p class="mt-3 text-lg text-neutral-600">{data.description}</p>
+    )}
+
+    <!-- 规格 -->
+    <div class="mt-4 flex flex-wrap gap-1.5">
+      {data.strengths.map((s) => (
+        <span class="rounded-lg bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">{s}</span>
+      ))}
+    </div>
+
+    <!-- 结构化信息 -->
+    <div class="mt-5 grid gap-4 border-y border-neutral-200 py-5 md:grid-cols-2">
+      <div>
+        <h3 class="mb-2 text-sm font-semibold text-neutral-700">适应证</h3>
+        <ul class="list-disc space-y-1 pl-5 text-sm text-neutral-600">
+          {data.indications.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+      {data.contraindications.length > 0 && (
+        <div>
+          <h3 class="mb-2 text-sm font-semibold text-neutral-700">禁忌</h3>
+          <ul class="list-disc space-y-1 pl-5 text-sm text-neutral-600">
+            {data.contraindications.map((c) => <li>{c}</li>)}
+          </ul>
+        </div>
+      )}
+      {data.specialPopulations.length > 0 && (
+        <div>
+          <h3 class="mb-2 text-sm font-semibold text-neutral-700">特殊人群</h3>
+          <ul class="list-disc space-y-1 pl-5 text-sm text-neutral-600">
+            {data.specialPopulations.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      )}
+      {data.drugInteractions.length > 0 && (
+        <div>
+          <h3 class="mb-2 text-sm font-semibold text-neutral-700">药物相互作用</h3>
+          <ul class="list-disc space-y-1 pl-5 text-sm text-neutral-600">
+            {data.drugInteractions.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+
+    {data.preparation && (
+      <div class="mt-4 rounded-lg bg-blue-50 p-4">
+        <h3 class="mb-2 text-sm font-semibold text-blue-800">给药配置</h3>
+        <p class="text-sm text-blue-700">{data.preparation}</p>
+      </div>
+    )}
+
+    <!-- 正文 -->
+    <div class="mt-6">
+      <Content />
+    </div>
+
+    <!-- 原文链接 -->
+    <div class="mt-8 flex flex-wrap items-center gap-4 border-t border-neutral-200 pt-6">
+      {data.sourceUrl && (
+        <a
+          href={data.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        >
+          查看原文说明书
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h6v6" />
+            <path d="M10 14 21 3" />
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          </svg>
+        </a>
+      )}
+      <p class="text-xs text-neutral-500">
+        本内容为人工整理的药品说明书摘要，仅供专业学术参考，不能替代临床决策与药品说明书原文。
+      </p>
+    </div>
+  </article>
+</BaseLayout>

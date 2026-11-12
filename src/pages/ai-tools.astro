@@ -1,0 +1,432 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/manual/ai-tools.json';
+
+const categories = data.categories;
+const tools = data.tools;
+const featured = data.featured;
+const catMap = Object.fromEntries(categories.map((c) => [c.key, c.label]));
+
+const priceClass: Record<string, string> = {
+  '免费': 'bg-green-50 text-green-700',
+  '付费': 'bg-amber-50 text-amber-700',
+  '免费增值': 'bg-blue-50 text-blue-700',
+};
+
+const recClass: Record<string, string> = {
+  '编辑推荐': 'bg-red-50 text-red-600',
+  '科研常用': 'bg-purple-50 text-purple-600',
+  '宣教常用': 'bg-cyan-50 text-cyan-600',
+};
+
+// AI 工具页专属 Footer：仅 4 个行业导航链接
+const aiLinks = [
+  { label: 'Toolify.ai', href: 'https://toolifyai.cn/' },
+  { label: 'Futurepedia', href: 'https://futurepedia.io/' },
+  { label: '通往 AGI 之路', href: 'https://www.waytoagi.com/zh' },
+  { label: 'AIHot News', href: 'https://aihot.news/' },
+];
+const currentYear = new Date().getFullYear();
+---
+
+<BaseLayout title="AI 工具" description="发现适合医学临床、科研学习、医学教学及日常办公的 AI 工具">
+  <header class="mb-8">
+    <h1 class="text-2xl font-semibold">AI 工具</h1>
+    <p class="mt-2 max-w-3xl text-neutral-600">
+      发现适合医学临床、科研学习、医学教学及日常办公的 AI 工具，为医疗工作者提供实用参考。
+    </p>
+    <p class="mt-2 text-xs text-neutral-400">
+      共收录 <span class="font-medium text-neutral-700">{tools.length}</span> 款工具 · 最后更新：{data.updated}
+    </p>
+  </header>
+
+  <!-- 顶部精选推荐区（3 列卡片 + 浮窗二维码） -->
+  <section class="mb-10">
+    <h2 class="mb-4 text-lg font-semibold text-neutral-900">精选推荐</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      {
+        featured.map((f) => (
+          <div
+            class="qr-card group cursor-pointer rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:border-blue-300 hover:shadow-md"
+            data-qr={f.qr}
+            data-name={f.name}
+            data-badge={f.badge}
+            data-desc={f.desc}
+          >
+            <span class="inline-block rounded-full bg-blue-600 px-2.5 py-0.5 text-xs font-medium text-white">{f.badge}</span>
+            <h3 class="mt-3 text-base font-semibold text-neutral-900">{f.name}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">{f.desc}</p>
+            {
+              f.channels && f.channels.length > 0 && (
+                <ul class="mt-3 space-y-1.5 border-t border-neutral-100 pt-3">
+                  {
+                    f.channels.map((c: { label: string; value: string }) => (
+                      <li class="text-xs leading-relaxed text-neutral-500">
+                        {
+                          c.value.startsWith('http') ? (
+                            <a href={c.value} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline" onclick="event.stopPropagation()">
+                              {c.label}：{c.value}
+                            </a>
+                          ) : (
+                            <span><span class="font-medium text-neutral-700">{c.label}：</span>{c.value}</span>
+                          )
+                        }
+                      </li>
+                    ))
+                  }
+                </ul>
+              )
+            }
+            <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600 group-hover:underline">
+              查看专属二维码 / 扫码领积分 →
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 场景分类导航 -->
+  <section class="mb-6">
+    <div class="mb-2 flex items-center justify-between">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">场景分类</h2>
+      <button id="ai-reset" type="button" class="text-xs text-blue-600 hover:text-blue-700 hover:underline">清除筛选</button>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {
+        categories.map((c) => (
+          <button
+            type="button"
+            data-cat={c.key}
+            class="cat-btn rounded-full border border-neutral-300 bg-white px-3.5 py-1.5 text-sm text-neutral-600 transition hover:border-blue-500 hover:text-blue-600"
+          >
+            {c.label}
+          </button>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 搜索 -->
+  <div class="mb-6">
+    <div class="relative">
+      <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input
+        id="ai-search"
+        type="search"
+        placeholder="搜索工具名称、功能描述或场景标签，如：文献、PPT、剪辑、编程…"
+        class="w-full rounded-xl border border-neutral-300 bg-white py-2.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+      />
+    </div>
+  </div>
+
+  <!-- 结果计数 -->
+  <p id="ai-count" class="mb-4 text-sm text-neutral-500"></p>
+
+  <!-- 工具卡片 3 列 -->
+  <ul id="ai-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {
+      tools.map((t, idx) => {
+        const searchText = `${t.name} ${t.provider} ${t.type} ${t.tags.join(' ')} ${t.capability} ${t.positioning} ${t.categories.map((c) => catMap[c] ?? c).join(' ')}`.toLowerCase();
+        return (
+          <li
+            class="ai-card group cursor-pointer rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:border-blue-300 hover:shadow-md"
+            data-idx={idx}
+            data-cats={t.categories.join(',')}
+            data-search={searchText}
+          >
+            <div class="flex items-start gap-3">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-2xl">{t.icon}</span>
+              <div class="min-w-0">
+                <h3 class="truncate text-base font-semibold text-neutral-900">{t.name}</h3>
+                <p class="mt-0.5 truncate text-xs text-neutral-400">{t.provider}</p>
+              </div>
+            </div>
+
+            <div class="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
+              <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">{t.type}</span>
+              <span class={`rounded px-2 py-0.5 font-medium ${priceClass[t.price] ?? 'bg-neutral-100 text-neutral-600'}`}>{t.price}</span>
+              {t.recommend.map((r) => (
+                <span class={`rounded px-2 py-0.5 font-medium ${recClass[r] ?? 'bg-neutral-100 text-neutral-600'}`}>{r}</span>
+              ))}
+            </div>
+
+            <p class="mt-3 text-xs font-medium text-neutral-500">{t.positioning}</p>
+            <p class="mt-1 text-sm leading-relaxed text-neutral-700">{t.capability}</p>
+
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {t.tags.map((tag) => (
+                <span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700">#{tag}</span>
+              ))}
+            </div>
+
+            <span class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-blue-600 opacity-0 transition group-hover:opacity-100">
+              查看详情 →
+            </span>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <div id="ai-empty" class="hidden rounded-xl border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
+    没有匹配的工具，请调整筛选条件。
+  </div>
+
+  <!-- 免责声明 -->
+  <div class="mt-10 rounded-lg border border-neutral-200 bg-neutral-50 p-4 text-xs text-neutral-500">
+    <p class="leading-relaxed">
+      本页仅为第三方 AI 工具导航目录，所有工具均为外部链接跳转，MedAI Hub 不开发、不维护、不运营任何站内 AI 对话服务。
+      工具内容、服务质量、隐私条款和数据安全由各自的第三方平台负责。专业医疗相关决策请谨慎评估 AI 输出结果，结合临床实际与权威指南核验。
+    </p>
+  </div>
+
+  <!-- AI 工具页专属 Footer：行业导航矩阵 -->
+  <footer class="mt-10 border-t border-neutral-200 bg-neutral-50">
+    <div class="py-10">
+      <div class="mb-5">
+        <h3 class="text-sm font-semibold text-neutral-900">行业优质 AI 导航矩阵与友情链接</h3>
+        <p class="mt-1 text-xs text-neutral-400">以下为外部资源链接，点击一键跳转</p>
+      </div>
+      <ul class="flex flex-wrap gap-3">
+        {
+          aiLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-3.5 py-2 text-sm text-neutral-700 transition hover:border-blue-300 hover:text-blue-600"
+              >
+                {link.label}
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"></path>
+                  <path d="M10 14 21 3"></path>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                </svg>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-8 border-t border-neutral-200 pt-6 text-xs leading-relaxed text-neutral-400">
+        <p>© {currentYear} MedAI Hub · 医疗 AI 知识与工具平台</p>
+        <p class="mt-1">本站内容仅供医学专业人士参考，不构成诊疗建议；AI 工具信息请以各官网为准。</p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<!-- 二维码浮窗 -->
+<div id="qr-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/50 p-4">
+  <div class="w-full max-w-sm rounded-xl bg-white p-6 text-center shadow-2xl">
+    <div class="flex justify-end">
+      <button id="qr-close" type="button" class="rounded p-1 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700" aria-label="关闭">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <img id="qr-img" src="" alt="二维码海报" class="mx-auto h-56 w-56 rounded-lg border border-neutral-200 object-contain" />
+    <h3 id="qr-name" class="mt-4 text-lg font-semibold text-neutral-900"></h3>
+    <p id="qr-badge" class="mt-1 inline-block rounded-full bg-blue-600 px-2.5 py-0.5 text-xs font-medium text-white"></p>
+    <p id="qr-desc" class="mt-3 text-sm leading-relaxed text-neutral-600"></p>
+    <p class="mt-3 text-xs text-neutral-400">扫描上方二维码领取福利 / 访问服务</p>
+  </div>
+</div>
+
+<!-- 轻量详情弹窗 -->
+<div
+  id="ai-modal"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 p-4"
+>
+  <div class="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-6 shadow-2xl">
+    <div class="mb-4 flex items-start justify-between">
+      <div class="flex items-center gap-3">
+        <span id="ai-m-icon" class="flex h-12 w-12 items-center justify-center rounded-lg bg-neutral-100 text-2xl"></span>
+        <div>
+          <h3 id="ai-m-name" class="text-lg font-semibold text-neutral-900"></h3>
+          <p id="ai-m-meta" class="text-xs text-neutral-400"></p>
+        </div>
+      </div>
+      <button id="ai-modal-close" type="button" class="rounded p-1 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-700" aria-label="关闭">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="ai-modal-body" class="text-sm leading-relaxed text-neutral-700"></div>
+  </div>
+</div>
+
+<script define:vars={{ toolsData: tools }}>
+  const cards = Array.from(document.querySelectorAll('.ai-card'));
+  const catBtns = document.querySelectorAll('.cat-btn');
+  const searchInput = document.getElementById('ai-search');
+  const resetBtn = document.getElementById('ai-reset');
+  const countEl = document.getElementById('ai-count');
+  const emptyEl = document.getElementById('ai-empty');
+
+  const activeCats = new Set();
+  let query = '';
+
+  function applyFilters() {
+    let visible = 0;
+    cards.forEach((card) => {
+      const cats = (card.dataset.cats || '').split(',').filter(Boolean);
+      const matchCat = activeCats.size === 0 || Array.from(activeCats).some((c) => cats.includes(c));
+      const matchSearch = !query || (card.dataset.search || '').includes(query);
+      const show = matchCat && matchSearch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (countEl) countEl.textContent = `共 ${visible} 款工具`;
+    if (emptyEl) emptyEl.classList.toggle('hidden', visible > 0);
+  }
+
+  catBtns.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.cat || '';
+      const on = activeCats.has(key);
+      if (on) {
+        activeCats.delete(key);
+        btn.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
+        btn.classList.add('border-neutral-300', 'bg-white', 'text-neutral-600');
+      } else {
+        activeCats.add(key);
+        btn.classList.add('border-blue-500', 'bg-blue-50', 'text-blue-600');
+        btn.classList.remove('border-neutral-300', 'bg-white', 'text-neutral-600');
+      }
+      applyFilters();
+    }),
+  );
+
+  searchInput?.addEventListener('input', () => {
+    query = searchInput.value.trim().toLowerCase();
+    applyFilters();
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    activeCats.clear();
+    query = '';
+    if (searchInput) searchInput.value = '';
+    catBtns.forEach((b) => {
+      b.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
+      b.classList.add('border-neutral-300', 'bg-white', 'text-neutral-600');
+    });
+    applyFilters();
+  });
+
+  // 详情弹窗
+  const modal = document.getElementById('ai-modal');
+  const modalClose = document.getElementById('ai-modal-close');
+  const mIcon = document.getElementById('ai-m-icon');
+  const mName = document.getElementById('ai-m-name');
+  const mMeta = document.getElementById('ai-m-meta');
+  const mBody = document.getElementById('ai-modal-body');
+
+  const ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  function esc(s) {
+    return s.replace(/[&<>"']/g, (ch) => ESC_MAP[ch]);
+  }
+
+  function openModal(idx) {
+    const t = toolsData[idx];
+    if (!t) return;
+    if (mIcon) mIcon.textContent = t.icon;
+    if (mName) mName.textContent = t.name;
+    if (mMeta) mMeta.textContent = `${t.provider} · ${t.type} · ${t.price}`;
+
+    const badges = [
+      `<span class="rounded bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">${esc(t.type)}</span>`,
+      `<span class="rounded bg-blue-50 px-2 py-0.5 text-xs text-blue-700">${esc(t.price)}</span>`,
+      ...(t.recommend || []).map((r) => `<span class="rounded bg-red-50 px-2 py-0.5 text-xs text-red-600">${esc(r)}</span>`),
+    ].join(' ');
+
+    const features = (t.detail.features || []).map((f) => `<li>${esc(f)}</li>`).join('');
+    const scenarios = (t.detail.scenarios || []).map((s) => `<li>${esc(s)}</li>`).join('');
+
+    if (mBody) {
+      mBody.innerHTML = `
+        <div class="mb-3 flex flex-wrap gap-1.5">${badges}</div>
+        <p class="text-neutral-700">${esc(t.detail.intro)}</p>
+        <h4 class="mt-4 mb-1.5 font-semibold text-neutral-900">主要功能</h4>
+        <ul class="list-inside list-disc space-y-1 text-neutral-700">${features}</ul>
+        <h4 class="mt-4 mb-1.5 font-semibold text-neutral-900">适用人群</h4>
+        <p class="text-neutral-700">${esc(t.detail.audience)}</p>
+        <h4 class="mt-4 mb-1.5 font-semibold text-neutral-900">典型应用场景</h4>
+        <ul class="list-inside list-disc space-y-1 text-neutral-700">${scenarios}</ul>
+        <h4 class="mt-4 mb-1.5 font-semibold text-neutral-900">使用限制 / 注意事项</h4>
+        <p class="text-neutral-700">${esc(t.detail.limitations)}</p>
+        ${t.url ? `<a href="${esc(t.url)}" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-1.5 rounded-md bg-neutral-900 px-4 py-2 text-xs font-medium text-white hover:bg-neutral-700">访问官网 →</a>` : ''}
+      `;
+    }
+
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  cards.forEach((card) =>
+    card.addEventListener('click', () => openModal(Number(card.dataset.idx))),
+  );
+  modalClose?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // 二维码浮窗
+  const qrModal = document.getElementById('qr-modal');
+  const qrClose = document.getElementById('qr-close');
+  const qrImg = document.getElementById('qr-img');
+  const qrName = document.getElementById('qr-name');
+  const qrBadge = document.getElementById('qr-badge');
+  const qrDesc = document.getElementById('qr-desc');
+
+  const qrCards = document.querySelectorAll('.qr-card');
+  qrCards.forEach((card) =>
+    card.addEventListener('click', () => {
+      if (qrImg) qrImg.src = card.dataset.qr || '';
+      if (qrName) qrName.textContent = card.dataset.name || '';
+      if (qrBadge) qrBadge.textContent = card.dataset.badge || '';
+      if (qrDesc) qrDesc.textContent = card.dataset.desc || '';
+      if (qrModal) {
+        qrModal.classList.remove('hidden');
+        qrModal.classList.add('flex');
+      }
+    }),
+  );
+  qrClose?.addEventListener('click', () => {
+    if (qrModal) {
+      qrModal.classList.add('hidden');
+      qrModal.classList.remove('flex');
+    }
+  });
+  qrModal?.addEventListener('click', (e) => {
+    if (e.target === qrModal) {
+      qrModal.classList.add('hidden');
+      qrModal.classList.remove('flex');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      qrModal?.classList.add('hidden');
+      qrModal?.classList.remove('flex');
+    }
+  });
+
+  applyFilters();
+</script>
