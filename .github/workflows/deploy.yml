@@ -1,8 +1,9 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  push:
-    branches: [main]
+  # 2026-11-12 迁移：停止 push main 自动部署，改由 Cloudflare Pages Git Integration 接管。
+  # 保留本工作流作为手动兜底入口，不与 Cloudflare 自动部署重复。
+  workflow_dispatch: {}
 
 jobs:
   deploy:
