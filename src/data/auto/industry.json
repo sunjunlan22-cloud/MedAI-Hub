@@ -58,8 +58,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.055303+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.055303+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.971211+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.971211+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -98,8 +98,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.055784+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.055784+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.971738+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.971738+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -136,8 +136,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.056318+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.056318+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.972262+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.972262+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -179,8 +179,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.817988+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.817988+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.694307+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.694307+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -219,52 +219,9 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.056798+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.056798+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.972777+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.972777+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
-  },
-  {
-    "id": "ind-edae570718",
-    "title": "VORICONAZOLE 获 FDA 批准",
-    "eventTime": "2022-05-09",
-    "publishTime": "2022-05-09T00:00:00+08:00",
-    "sourceName": "FDA",
-    "sourceUrl": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=ANDA214516",
-    "category": "真菌与耐药",
-    "tags": [],
-    "summary": "VORICONAZOLE",
-    "impact": "来自FDA的官方动态，涉及药品上市许可/审批动态，建议结合官方原文与临床指南综合判断。",
-    "scores": {
-      "policyImpact": 10,
-      "marketImpact": 7,
-      "breakthrough": 3,
-      "competitiveImpact": 7,
-      "timelinessAuthority": 9,
-      "totalScore": 36
-    },
-    "totalScore": 36,
-    "isCluster": false,
-    "factType": "fact",
-    "contentType": "approval",
-    "marketAccessType": "fda",
-    "approvalStatus": "approved",
-    "externalId": "ANDA214516",
-    "drugs": [
-      "VORICONAZOLE"
-    ],
-    "abstract": "VORICONAZOLE",
-    "sourceType": "regulatory",
-    "sourceId": "fda",
-    "language": "en",
-    "geographicScope": "us",
-    "recordStatus": "active",
-    "verificationStatus": "pending",
-    "reviewStatus": "autoProcessed",
-    "licenseStatus": "unknown",
-    "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:08.366536+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:08.366536+08:00",
-    "sourceQuery": "FDA 药品批准"
   },
   {
     "id": "ind-ebf075b8bf",
@@ -300,8 +257,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.057138+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.057138+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.973096+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.973096+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -338,8 +295,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.057620+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.057620+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.973671+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.973671+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -376,8 +333,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.058105+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.058105+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.974129+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.974129+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -419,8 +376,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.820479+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.820479+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.696926+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.696926+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -456,8 +413,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:33.059480+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:33.059480+08:00"
+    "ingestedAt": "2026-11-13T13:30:25.992707+08:00",
+    "lastCheckedAt": "2026-11-13T13:30:25.992707+08:00"
   },
   {
     "id": "ind-ed829a3d2a",
@@ -498,8 +455,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.821464+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.821464+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.697913+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.697913+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -535,8 +492,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:33.068058+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:33.068058+08:00"
+    "ingestedAt": "2026-11-13T13:30:26.001287+08:00",
+    "lastCheckedAt": "2026-11-13T13:30:26.001287+08:00"
   },
   {
     "id": "ind-c0fd23086e",
@@ -577,8 +534,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.823949+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.823949+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.700425+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.700425+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -620,8 +577,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.826132+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.826132+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.702618+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.702618+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -657,8 +614,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:33.075125+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:33.075125+08:00"
+    "ingestedAt": "2026-11-13T13:30:26.008355+08:00",
+    "lastCheckedAt": "2026-11-13T13:30:26.008355+08:00"
   },
   {
     "id": "ind-70984df8f7",
@@ -699,8 +656,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.826756+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.826756+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.703246+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.703246+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -737,8 +694,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.058545+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.058545+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.974611+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.974611+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -780,8 +737,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.827845+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.827845+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.704371+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.704371+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -823,8 +780,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:09.828464+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:09.828464+08:00",
+    "ingestedAt": "2026-11-13T13:36:17.704973+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:17.704973+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -861,52 +818,9 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.058998+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.058998+08:00",
+    "ingestedAt": "2026-11-13T13:36:21.975057+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.975057+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
-  },
-  {
-    "id": "ind-baef7aa2bb",
-    "title": "VORICONAZOLE 获 FDA 批准",
-    "eventTime": "2012-05-30",
-    "publishTime": "2012-05-30T00:00:00+08:00",
-    "sourceName": "FDA",
-    "sourceUrl": "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=ANDA090862",
-    "category": "真菌与耐药",
-    "tags": [],
-    "summary": "VORICONAZOLE",
-    "impact": "来自FDA的官方动态，涉及药品上市许可/审批动态，建议结合官方原文与临床指南综合判断。",
-    "scores": {
-      "policyImpact": 10,
-      "marketImpact": 7,
-      "breakthrough": 3,
-      "competitiveImpact": 7,
-      "timelinessAuthority": 9,
-      "totalScore": 36
-    },
-    "totalScore": 36,
-    "isCluster": false,
-    "factType": "fact",
-    "contentType": "approval",
-    "marketAccessType": "fda",
-    "approvalStatus": "approved",
-    "externalId": "ANDA090862",
-    "drugs": [
-      "VORICONAZOLE"
-    ],
-    "abstract": "VORICONAZOLE",
-    "sourceType": "regulatory",
-    "sourceId": "fda",
-    "language": "en",
-    "geographicScope": "us",
-    "recordStatus": "active",
-    "verificationStatus": "pending",
-    "reviewStatus": "autoProcessed",
-    "licenseStatus": "unknown",
-    "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:08.366843+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:08.366843+08:00",
-    "sourceQuery": "FDA 药品批准"
   },
   {
     "id": "ind-d44dfe8901",
@@ -942,8 +856,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.059671+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.059671+08:00"
+    "ingestedAt": "2026-11-13T13:36:21.975724+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.975724+08:00"
   },
   {
     "id": "ind-33b4fda4e0",
@@ -980,8 +894,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.060108+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.060108+08:00"
+    "ingestedAt": "2026-11-13T13:36:21.976135+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.976135+08:00"
   },
   {
     "id": "ind-8da7ed403d",
@@ -1021,7 +935,7 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:43:14.060314+08:00",
-    "lastCheckedAt": "2026-11-13T03:43:14.060314+08:00"
+    "ingestedAt": "2026-11-13T13:36:21.976353+08:00",
+    "lastCheckedAt": "2026-11-13T13:36:21.976353+08:00"
   }
 ]
