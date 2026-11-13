@@ -36,8 +36,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:30.807881+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:30.807881+08:00",
+    "ingestedAt": "2026-11-13T15:45:09.244147+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:09.244147+08:00",
     "externalId": "43020256",
     "pmid": "43020256",
     "doi": "10.1016/j.ijid.2026.109230",
@@ -89,8 +89,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:30.808731+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:30.808731+08:00",
+    "ingestedAt": "2026-11-13T15:45:09.244986+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:09.244986+08:00",
     "externalId": "43019036",
     "pmid": "43019036",
     "doi": "10.1177/10766294261506748",
@@ -152,8 +152,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.087805+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.087805+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.638866+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.638866+08:00",
     "externalId": "NCT01386437",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -203,8 +203,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.090995+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.090995+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.642045+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.642045+08:00",
     "externalId": "NCT00867269",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -256,8 +256,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.092509+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.092509+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.643547+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.643547+08:00",
     "externalId": "NCT00001352",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -299,8 +299,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:27.406764+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:27.406764+08:00"
+    "ingestedAt": "2026-11-13T15:45:05.248657+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:05.248657+08:00"
   },
   {
     "id": "res-a5b401fe8d",
@@ -401,8 +401,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.880787+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.880787+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.258629+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.258629+08:00",
     "externalId": "43007044",
     "pmid": "43007044",
     "doi": "10.1128/aac.01271-26",
@@ -452,8 +452,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.881212+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.881212+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.259046+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.259046+08:00",
     "externalId": "43007010",
     "pmid": "43007010",
     "doi": "10.1128/aac.01289-26",
@@ -933,8 +933,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:30.810113+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:30.810113+08:00",
+    "ingestedAt": "2026-11-13T15:45:09.246355+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:09.246355+08:00",
     "externalId": "43017542",
     "pmid": "43017542",
     "doi": "10.2147/DDDT.S646095",
@@ -1001,8 +1001,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.094754+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.094754+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.645730+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.645730+08:00",
     "externalId": "NCT05398809",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -1054,8 +1054,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.260057+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.260057+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.998280+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.998280+08:00",
     "externalId": "NCT07898930",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -1246,8 +1246,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.176518+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.176518+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.819106+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.819106+08:00",
     "externalId": "NCT06811727",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -1288,8 +1288,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:30.809280+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:30.809280+08:00",
+    "ingestedAt": "2026-11-13T15:45:09.245539+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:09.245539+08:00",
     "externalId": "43018991",
     "pmid": "43018991",
     "doi": "10.1002/cbdv.71909",
@@ -1402,8 +1402,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.096380+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.096380+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.647316+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.647316+08:00",
     "externalId": "NCT05763251",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -1616,112 +1616,6 @@
     "sourceQuery": "PubMed (真菌/耐药菌 TDM 与疗效比较)"
   },
   {
-    "id": "res-1cd4b66573",
-    "title": "Community-associated Highly-Resistant Enterobacterales",
-    "sourceName": "University of North Carolina, Chapel Hill",
-    "sourceUrl": "https://clinicaltrials.gov/study/NCT03924934",
-    "studyType": "other",
-    "publishStatus": "published",
-    "sampleSize": "2172",
-    "publishTime": "2026-10-29T00:00:00+08:00",
-    "coreFindings": "This is a prospective multi-center study. Bacterial isolates from hospitalized patients with CA-HRE will be compared to those from hospitalized patients with healthcare-associated HRE (HA-HRE). In addition, community spread of CRE will be determined.",
-    "limitations": "本条目为临床试验注册信息自动采集，研究设计、入排标准与统计方法细节请查阅 ClinicalTrials.gov 原始记录。",
-    "inspiration": "可结合本项目抗感染（真菌 / 耐药菌）主题，跟踪该试验的注册状态与后续结果发布。",
-    "evidenceLevel": "原文未评估",
-    "evidenceQuality": "原文未评估",
-    "studyDesign": "caseControl",
-    "publicationStatus": "registered",
-    "trialId": "NCT03924934",
-    "trialStatus": "completed",
-    "scores": {
-      "topicInspiration": 7,
-      "clinicalApplicability": 10,
-      "evidenceLevel": 5,
-      "specialtyUniversality": 6,
-      "researchValue": 7,
-      "totalScore": 35
-    },
-    "totalScore": 35,
-    "isPreprint": false,
-    "tags": [
-      "CRE"
-    ],
-    "abstract": "This is a prospective multi-center study. Bacterial isolates from hospitalized patients with CA-HRE will be compared to those from hospitalized patients with healthcare-associated HRE (HA-HRE). In addition, community spread of CRE will be determined.",
-    "diseases": [
-      "Enterobacteriaceae Infections",
-      "Community-Acquired Infections",
-      "Healthcare Associated Infection",
-      "Carbapenem-Resistant Enterobacteriaceae Infection"
-    ],
-    "contentType": "research",
-    "sourceType": "database",
-    "sourceId": "clinicaltrials",
-    "language": "en",
-    "geographicScope": "global",
-    "recordStatus": "active",
-    "verificationStatus": "pending",
-    "reviewStatus": "autoProcessed",
-    "licenseStatus": "unknown",
-    "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.177931+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.177931+08:00",
-    "externalId": "NCT03924934",
-    "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
-  },
-  {
-    "id": "res-2349b7182b",
-    "title": "Targeted Antimicrobial Comparison for Treatment Individualization in Critically Ill Patients With CRAB Infection",
-    "sourceName": "Central South University",
-    "sourceUrl": "https://clinicaltrials.gov/study/NCT07905235",
-    "studyType": "other",
-    "publishStatus": "published",
-    "sampleSize": "1000",
-    "publishTime": "2026-10-29T00:00:00+08:00",
-    "coreFindings": "The goal of this prospective, multicenter observational study is to learn which antibiotic treatment strategies are associated with better outcomes in critically ill adults with severe infections caused by carbapenem-resistant Acinetobacter baumannii (CRAB). The study will also evaluate the safety a",
-    "limitations": "本条目为临床试验注册信息自动采集，研究设计、入排标准与统计方法细节请查阅 ClinicalTrials.gov 原始记录。",
-    "inspiration": "可结合本项目抗感染（真菌 / 耐药菌）主题，跟踪该试验的注册状态与后续结果发布。",
-    "evidenceLevel": "原文未评估",
-    "evidenceQuality": "原文未评估",
-    "studyDesign": "cohort",
-    "publicationStatus": "registered",
-    "trialId": "NCT07905235",
-    "trialStatus": "registered",
-    "scores": {
-      "topicInspiration": 9,
-      "clinicalApplicability": 10,
-      "evidenceLevel": 6,
-      "specialtyUniversality": 6,
-      "researchValue": 10,
-      "totalScore": 41
-    },
-    "totalScore": 41,
-    "isPreprint": false,
-    "tags": [
-      "CRAB"
-    ],
-    "abstract": "The goal of this prospective, multicenter observational study is to learn which antibiotic treatment strategies are associated with better outcomes in critically ill adults with severe infections caused by carbapenem-resistant Acinetobacter baumannii (CRAB). The study will also evaluate the safety and costs of different treatments and develop prediction models to support personalized treatment decisions. The main questions it aims to answer are: Are there differences in 28-day survival between patients receiving polymyxin-based and non-polymyxin-based antibiotic treatments? Which treatment strategies are associated with better clinical recovery, bacterial clearance, and fewer adverse events, particularly acute kidney injury? Can clinical data and machine learning help predict treatment outcomes and support safer, more effective treatment decisions? Researchers will compare patients receiving polymyxin-based combination therapy with those receiving non-polymyxin-based treatments, including high-dose sulbactam-based, tigecycline-based, and newer antibiotic regimens. Treatment decisions will be made by the patients' treating physicians as part of routine clinical care, rather than assigned by the researchers. Participants will: Receive antibiotic treatments determined by their treating physicians. Have clinical information collected during hospitalization, including laboratory tests, bacterial cultures, organ function, antibiotic use, adverse events, and medical costs. Be followed for 28 days after starting targeted antibiotic treatment to assess survival and clinical outcomes. Be contacted by telephone if necessary to confirm their health status after hospital discharge.",
-    "diseases": [
-      "Carbapenem-Resistant Acinetobacter Baumannii Infection"
-    ],
-    "drugs": [
-      "Antibiotic Therapy for CRAB Infection"
-    ],
-    "contentType": "research",
-    "sourceType": "database",
-    "sourceId": "clinicaltrials",
-    "language": "en",
-    "geographicScope": "global",
-    "recordStatus": "active",
-    "verificationStatus": "pending",
-    "reviewStatus": "autoProcessed",
-    "licenseStatus": "unknown",
-    "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.179966+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.179966+08:00",
-    "externalId": "NCT07905235",
-    "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
-  },
-  {
     "id": "res-0b6d6a65e0",
     "title": "Pharmacokinetics of Aztreonam-Avibactam During Concomitant Extracorporeal Membrane Oxygenation and Continuous Renal Replacement Therapy.",
     "sourceName": "International journal of antimicrobial agents",
@@ -1758,8 +1652,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.882444+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.882444+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.260271+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.260271+08:00",
     "externalId": "42956911",
     "pmid": "42956911",
     "doi": "10.1016/j.ijantimicag.2026.108050",
@@ -1812,8 +1706,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.882985+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.882985+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.260816+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.260816+08:00",
     "externalId": "42956910",
     "pmid": "42956910",
     "doi": "10.1016/j.ijantimicag.2026.108046",
@@ -1838,7 +1732,114 @@
       "Shekar K",
       "Roberts JA"
     ],
+    "abstract": "OBJECTIVES: To characterise the population pharmacokinetics of oseltamivir and oseltamivir carboxylate in critically ill adults receiving veno-venous extracorporeal membrane oxygenation (VV-ECMO) without renal replacement therapy (RRT), and to compare oseltamivir carboxylate exposure with an exploratory exposure-response threshold and published pharmacokinetic data. METHODS: This multinational ASAP ECMO analysis included 8 critically ill adults receiving oseltamivir 75 mg every 12 hours during VV-ECMO. Serial blood samples were collected over a dosing interval, and oseltamivir and oseltamivir carboxylate concentrations were measured using a validated assay. Population pharmacokinetic modelling was performed in Monolix using an integrated parent drug-metabolite model. RESULTS: Fifty-eight plasma concentration-time points were available for analysis. The cohort was relatively young and 63% had augmented renal clearance (ARC). A one-compartment model best described both oseltamivir and oseltamivir carboxylate, with a transit compartment required to account for delayed metabolite formation. Median oseltamivir carboxylate exposure was generally comparable to values reported in healthy adults and critically ill patients receiving standard dosing. Median oseltamivir carboxylate area under the concentration-time curve from 0-12 hours (AUC CONCLUSIONS: Marked variability and lower exposure were observed in adults receiving VV-ECMO without RRT, particularly ARC patients. Higher doses may be required in ARC patients, but the optimal dosing regimen remains undefined. Routine dose escalation is not supported by current evidence.",
     "sourceQuery": "PubMed (CRRT / ECMO 药物剂量调整)"
+  },
+  {
+    "id": "res-1cd4b66573",
+    "title": "Community-associated Highly-Resistant Enterobacterales",
+    "sourceName": "University of North Carolina, Chapel Hill",
+    "sourceUrl": "https://clinicaltrials.gov/study/NCT03924934",
+    "studyType": "other",
+    "publishStatus": "published",
+    "sampleSize": "2172",
+    "publishTime": "2026-10-29T00:00:00+08:00",
+    "coreFindings": "This is a prospective multi-center study. Bacterial isolates from hospitalized patients with CA-HRE will be compared to those from hospitalized patients with healthcare-associated HRE (HA-HRE). In addition, community spread of CRE will be determined.",
+    "limitations": "本条目为临床试验注册信息自动采集，研究设计、入排标准与统计方法细节请查阅 ClinicalTrials.gov 原始记录。",
+    "inspiration": "可结合本项目抗感染（真菌 / 耐药菌）主题，跟踪该试验的注册状态与后续结果发布。",
+    "evidenceLevel": "原文未评估",
+    "evidenceQuality": "原文未评估",
+    "studyDesign": "caseControl",
+    "publicationStatus": "registered",
+    "trialId": "NCT03924934",
+    "trialStatus": "completed",
+    "scores": {
+      "topicInspiration": 7,
+      "clinicalApplicability": 10,
+      "evidenceLevel": 5,
+      "specialtyUniversality": 6,
+      "researchValue": 7,
+      "totalScore": 35
+    },
+    "totalScore": 35,
+    "isPreprint": false,
+    "tags": [
+      "CRE"
+    ],
+    "abstract": "This is a prospective multi-center study. Bacterial isolates from hospitalized patients with CA-HRE will be compared to those from hospitalized patients with healthcare-associated HRE (HA-HRE). In addition, community spread of CRE will be determined.",
+    "diseases": [
+      "Enterobacteriaceae Infections",
+      "Community-Acquired Infections",
+      "Healthcare Associated Infection",
+      "Carbapenem-Resistant Enterobacteriaceae Infection"
+    ],
+    "contentType": "research",
+    "sourceType": "database",
+    "sourceId": "clinicaltrials",
+    "language": "en",
+    "geographicScope": "global",
+    "recordStatus": "active",
+    "verificationStatus": "pending",
+    "reviewStatus": "autoProcessed",
+    "licenseStatus": "unknown",
+    "licensePermissions": [],
+    "ingestedAt": "2026-11-13T15:45:10.820444+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.820444+08:00",
+    "externalId": "NCT03924934",
+    "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
+  },
+  {
+    "id": "res-2349b7182b",
+    "title": "Targeted Antimicrobial Comparison for Treatment Individualization in Critically Ill Patients With CRAB Infection",
+    "sourceName": "Central South University",
+    "sourceUrl": "https://clinicaltrials.gov/study/NCT07905235",
+    "studyType": "other",
+    "publishStatus": "published",
+    "sampleSize": "1000",
+    "publishTime": "2026-10-29T00:00:00+08:00",
+    "coreFindings": "The goal of this prospective, multicenter observational study is to learn which antibiotic treatment strategies are associated with better outcomes in critically ill adults with severe infections caused by carbapenem-resistant Acinetobacter baumannii (CRAB). The study will also evaluate the safety a",
+    "limitations": "本条目为临床试验注册信息自动采集，研究设计、入排标准与统计方法细节请查阅 ClinicalTrials.gov 原始记录。",
+    "inspiration": "可结合本项目抗感染（真菌 / 耐药菌）主题，跟踪该试验的注册状态与后续结果发布。",
+    "evidenceLevel": "原文未评估",
+    "evidenceQuality": "原文未评估",
+    "studyDesign": "cohort",
+    "publicationStatus": "registered",
+    "trialId": "NCT07905235",
+    "trialStatus": "registered",
+    "scores": {
+      "topicInspiration": 9,
+      "clinicalApplicability": 10,
+      "evidenceLevel": 6,
+      "specialtyUniversality": 6,
+      "researchValue": 10,
+      "totalScore": 41
+    },
+    "totalScore": 41,
+    "isPreprint": false,
+    "tags": [
+      "CRAB"
+    ],
+    "abstract": "The goal of this prospective, multicenter observational study is to learn which antibiotic treatment strategies are associated with better outcomes in critically ill adults with severe infections caused by carbapenem-resistant Acinetobacter baumannii (CRAB). The study will also evaluate the safety and costs of different treatments and develop prediction models to support personalized treatment decisions. The main questions it aims to answer are: Are there differences in 28-day survival between patients receiving polymyxin-based and non-polymyxin-based antibiotic treatments? Which treatment strategies are associated with better clinical recovery, bacterial clearance, and fewer adverse events, particularly acute kidney injury? Can clinical data and machine learning help predict treatment outcomes and support safer, more effective treatment decisions? Researchers will compare patients receiving polymyxin-based combination therapy with those receiving non-polymyxin-based treatments, including high-dose sulbactam-based, tigecycline-based, and newer antibiotic regimens. Treatment decisions will be made by the patients' treating physicians as part of routine clinical care, rather than assigned by the researchers. Participants will: Receive antibiotic treatments determined by their treating physicians. Have clinical information collected during hospitalization, including laboratory tests, bacterial cultures, organ function, antibiotic use, adverse events, and medical costs. Be followed for 28 days after starting targeted antibiotic treatment to assess survival and clinical outcomes. Be contacted by telephone if necessary to confirm their health status after hospital discharge.",
+    "diseases": [
+      "Carbapenem-Resistant Acinetobacter Baumannii Infection"
+    ],
+    "drugs": [
+      "Antibiotic Therapy for CRAB Infection"
+    ],
+    "contentType": "research",
+    "sourceType": "database",
+    "sourceId": "clinicaltrials",
+    "language": "en",
+    "geographicScope": "global",
+    "recordStatus": "active",
+    "verificationStatus": "pending",
+    "reviewStatus": "autoProcessed",
+    "licenseStatus": "unknown",
+    "licensePermissions": [],
+    "ingestedAt": "2026-11-13T15:45:10.822391+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.822391+08:00",
+    "externalId": "NCT07905235",
+    "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
   {
     "id": "res-3ba850e386",
@@ -1933,8 +1934,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:30.810576+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:30.810576+08:00",
+    "ingestedAt": "2026-11-13T15:45:09.246811+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:09.246811+08:00",
     "externalId": "43016808",
     "pmid": "43016808",
     "doi": "10.3389/fmicb.2026.1985869",
@@ -1993,8 +1994,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.098719+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.098719+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.649625+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.649625+08:00",
     "externalId": "NCT06985758",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -2046,8 +2047,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.100506+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.100506+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.651426+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.651426+08:00",
     "externalId": "NCT06925321",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -2213,8 +2214,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.101012+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.101012+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.651963+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.651963+08:00",
     "externalId": "NCT07215273",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -2268,8 +2269,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.181720+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.181720+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.824091+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.824091+08:00",
     "externalId": "NCT07890480",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -2321,8 +2322,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.105132+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.105132+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.656110+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.656110+08:00",
     "externalId": "NCT06160713",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -2376,8 +2377,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.183290+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.183290+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.825650+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.825650+08:00",
     "externalId": "NCT05594901",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -2427,8 +2428,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.107599+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.107599+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.658579+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.658579+08:00",
     "externalId": "NCT05925660",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -2482,8 +2483,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.185072+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.185072+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.827417+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.827417+08:00",
     "externalId": "NCT05979545",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -2526,8 +2527,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.881689+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.881689+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.259521+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.259521+08:00",
     "externalId": "42984532",
     "pmid": "42984532",
     "doi": "10.3389/fphar.2026.1896125",
@@ -2542,6 +2543,7 @@
       "Ding X",
       "Zhang P"
     ],
+    "abstract": "OBJECTIVE: To investigate the clinical efficacy, safety and operational feasibility of a low-dose regional citrate anticoagulation (RCA) combined with low-dose nafamostat mesylate (NM) mixed anticoagulation regimen in continuous renal replacement therapy (CRRT) for patients with liver failure, so as to provide clinical reference for the selection of CRRT anticoagulation strategies for such special high-risk critically ill patients. METHOD: A retrospective case series study was conducted. Eleven patients with liver failure who received CRRT in the Department of Critical Care Medicine, Zhongnan Hospital of Wuhan University were enrolled. All patients were treated with CVVHDF mode and uniformly implemented the low-dose citrate combined with nafamostat mixed anticoagulation regimen. CRRT treatment parameters, anticoagulant drugs, and infusion doses of calcium and sodium bicarbonate were standardized. The monitoring frequency of peripheral blood gas and activated partial thromboplastin time (APTT) and the criteria for dose stratification adjustment were standardized. Data including patients' demographic baseline data, CRRT treatment duration, filter service life, blood gas electrolytes, dynamic changes of APTT, pipeline and filter coagulation, bleeding and metabolic adverse events, organ function and clinical outcomes were collected for summary and analysis. RESULTS: A total of 11 patients with liver failure undergoing CRRT in CVVHDF mode were enrolled in this study, using the low-dose regional citrate combined with nafamostat mixed anticoagulation regimen. After treatment, the median filter life of patients reached 48 (38, 68.75) hours, with no severe pipeline or filter coagulation; there were no significant abnormalities in systemic coagulation indicators. One case (9.1%) had mild oral mucosal bleeding; no severe massive bleeding occurred. Hypocalcemia and metabolic alkalosis were observed in several patients but were not severe, and no citrate accumulation, severe hypocalcemia, or severe acid-base or electrolyte disorders occurred. PCT was lower than baseline (P = 0.005) and APACHE II score was improved (P = 0.011) over the course of ICU treatment; however, all patients simultaneously received antibiotics, vasopressors, source control, and other ICU supportive care, and these changes therefore cannot be attributed to the mixed anticoagulation regimen. Liver and kidney function showed no obvious deterioration. CONCLUSION: In this small, single-center retrospective case series, a low-dose regional citrate combined with nafamostat mixed anticoagulation regimen was feasible to implement in patients with liver failure receiving CRRT. In this cohort, the median filter life was 48 h, no severe filter or pipeline coagulation was observed, and no citrate accumulation, severe hypocalcemia, or severe acid-base or electrolyte disorders occurred; one case (9.1%) had mild bleeding. Because no comparator group was included, whether these observations reflect a benefit of the mixed regimen over conventional RCA, nafamostat alone, systemic heparin, or no anticoagulation cannot be determined. These findings are preliminary and hypothesis-generating and require confirmation in adequately powered, multicenter, prospective controlled trials.",
     "sourceQuery": "PubMed (CRRT / ECMO 药物剂量调整)"
   },
   {
@@ -2645,8 +2647,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.110008+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.110008+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.660997+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.660997+08:00",
     "externalId": "NCT05421858",
     "sourceQuery": "ClinicalTrials (侵袭性真菌感染)"
   },
@@ -2736,8 +2738,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.883764+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.883764+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.261604+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.261604+08:00",
     "externalId": "42942850",
     "pmid": "42942850",
     "doi": "10.3390/pharmaceutics18101320",
@@ -2751,6 +2753,7 @@
       "Straistă M",
       "Azamfirei L"
     ],
+    "abstract": "Drug dosing during continuous renal replacement therapy (CRRT) is difficult in critically ill patients because drug exposure is influenced by both the patient and the extracorporeal treatment. This narrative review provides a practical overview of drug dosing during CRRT, while intermittent hemodialysis and sustained low-efficiency dialysis are discussed only where they provide relevant contextual or comparative information. It summarizes the main drug-related, patient-related, and treatment-related factors that influence extracorporeal drug clearance and discusses their clinical implications for commonly used drug classes. Loading and maintenance doses should be considered separately: loading doses depend mainly on volume of distribution and the need for early therapeutic exposure, whereas maintenance dosing depends on total clearance, including residual renal, extracorporeal, and non-renal clearance. Therapeutic drug monitoring can help guide dose adjustment when validated targets are available, while model-informed precision dosing may provide additional support in selected patients. The review also proposes an eight-step practical framework based on residual kidney function, the actual delivered CRRT prescription, drug pharmacokinetics and pharmacodynamics, therapeutic monitoring, and repeated reassessment. Future approaches may combine real-time CRRT data with pharmacokinetic models to support more individualized dosing.",
     "sourceQuery": "PubMed (CRRT / ECMO 药物剂量调整)"
   },
   {
@@ -2790,8 +2793,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.884301+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.884301+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.262148+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.262148+08:00",
     "externalId": "42942835",
     "pmid": "42942835",
     "doi": "10.3390/pharmaceutics18101304",
@@ -2855,8 +2858,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.262216+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.262216+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.000520+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.000520+08:00",
     "externalId": "NCT07593547",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -2907,8 +2910,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.188723+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.188723+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.831026+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.831026+08:00",
     "externalId": "NCT07774403",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -2961,8 +2964,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.189440+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.189440+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.831738+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.831738+08:00",
     "externalId": "NCT06801223",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -3014,8 +3017,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.190015+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.190015+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.832316+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.832316+08:00",
     "externalId": "NCT07088926",
     "sourceQuery": "ClinicalTrials (耐药菌 CRAB/CRE/CRPA)"
   },
@@ -3059,8 +3062,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:27.407544+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:27.407544+08:00"
+    "ingestedAt": "2026-11-13T15:45:05.249456+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:05.249456+08:00"
   },
   {
     "id": "res-564a60ac57",
@@ -3102,8 +3105,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:27.408828+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:27.408828+08:00"
+    "ingestedAt": "2026-11-13T15:45:05.250776+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:05.250776+08:00"
   },
   {
     "id": "res-8bc0b66c54",
@@ -3143,8 +3146,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:27.411187+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:27.411187+08:00"
+    "ingestedAt": "2026-11-13T15:45:05.253289+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:05.253289+08:00"
   },
   {
     "id": "res-cf846aca93",
@@ -3194,8 +3197,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:34:42.452283+08:00",
-    "lastCheckedAt": "2026-11-13T13:34:42.452283+08:00",
+    "ingestedAt": "2026-11-13T15:48:59.791449+08:00",
+    "lastCheckedAt": "2026-11-13T15:48:59.791449+08:00",
     "sourceQuery": "WHO ICTRP (耐药菌 CRAB/CRE/CRPA)"
   },
   {
@@ -3300,8 +3303,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:34:42.452704+08:00",
-    "lastCheckedAt": "2026-11-13T13:34:42.452704+08:00",
+    "ingestedAt": "2026-11-13T15:48:59.791838+08:00",
+    "lastCheckedAt": "2026-11-13T15:48:59.791838+08:00",
     "sourceQuery": "WHO ICTRP (耐药菌 CRAB/CRE/CRPA)"
   },
   {
@@ -3353,8 +3356,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:34:42.453055+08:00",
-    "lastCheckedAt": "2026-11-13T13:34:42.453055+08:00",
+    "ingestedAt": "2026-11-13T15:48:59.792177+08:00",
+    "lastCheckedAt": "2026-11-13T15:48:59.792177+08:00",
     "sourceQuery": "WHO ICTRP (耐药菌 CRAB/CRE/CRPA)"
   },
   {
@@ -3403,8 +3406,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:34:42.453472+08:00",
-    "lastCheckedAt": "2026-11-13T13:34:42.453472+08:00",
+    "ingestedAt": "2026-11-13T15:48:59.792582+08:00",
+    "lastCheckedAt": "2026-11-13T15:48:59.792582+08:00",
     "sourceQuery": "WHO ICTRP (耐药菌 CRAB/CRE/CRPA)"
   },
   {
@@ -3505,8 +3508,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:31:25.579913+08:00",
-    "lastCheckedAt": "2026-11-13T13:31:25.579913+08:00",
+    "ingestedAt": "2026-11-13T15:46:07.436922+08:00",
+    "lastCheckedAt": "2026-11-13T15:46:07.436922+08:00",
     "sourceQuery": "WHO ICTRP (侵袭性真菌感染)"
   },
   {
@@ -3562,8 +3565,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.264570+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.264570+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.002899+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.002899+08:00",
     "externalId": "NCT03489629",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -3613,8 +3616,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:34:42.453869+08:00",
-    "lastCheckedAt": "2026-11-13T13:34:42.453869+08:00",
+    "ingestedAt": "2026-11-13T15:48:59.793013+08:00",
+    "lastCheckedAt": "2026-11-13T15:48:59.793013+08:00",
     "sourceQuery": "WHO ICTRP (耐药菌 CRAB/CRE/CRPA)"
   },
   {
@@ -3656,8 +3659,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:30.806987+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:30.806987+08:00",
+    "ingestedAt": "2026-11-13T15:45:09.243219+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:09.243219+08:00",
     "externalId": "43020551",
     "pmid": "43020551",
     "doi": "10.1016/j.hal.2026.103232",
@@ -3727,8 +3730,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.266555+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.266555+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.004920+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.004920+08:00",
     "externalId": "NCT06637332",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -3780,8 +3783,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:34:42.454220+08:00",
-    "lastCheckedAt": "2026-11-13T13:34:42.454220+08:00",
+    "ingestedAt": "2026-11-13T15:48:59.793376+08:00",
+    "lastCheckedAt": "2026-11-13T15:48:59.793376+08:00",
     "sourceQuery": "WHO ICTRP (耐药菌 CRAB/CRE/CRPA)"
   },
   {
@@ -3834,8 +3837,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.267527+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.267527+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.005890+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.005890+08:00",
     "externalId": "NCT07796555",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -3890,8 +3893,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.269120+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.269120+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.007545+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.007545+08:00",
     "externalId": "NCT07792915",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -3941,8 +3944,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.269627+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.269627+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.008063+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.008063+08:00",
     "externalId": "NCT03586362",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -3983,8 +3986,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T03:38:40.883388+08:00",
-    "lastCheckedAt": "2026-11-13T03:38:40.883388+08:00",
+    "ingestedAt": "2026-11-13T15:45:10.261224+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:10.261224+08:00",
     "externalId": "42948445",
     "pmid": "42948445",
     "doi": "10.1016/j.xjon.2026.102056",
@@ -4000,6 +4003,7 @@
       "Buchtele N",
       "Staudinger T"
     ],
+    "abstract": "OBJECTIVES: Anticoagulation during extracorporeal membrane oxygenation (ECMO) remains challenging. Direct thrombin inhibitors such as argatroban are increasingly proposed as alternatives to unfractionated heparin (UFH). We sought to characterize the dose titration and monitoring reliability of argatroban compared with UFH in adult patients who received ECMO. METHODS: This prespecified subanalysis of a randomized controlled pilot trial (2021-2024) included 40 adults on venovenous or venoarterial ECMO randomized to argatroban (target diluted thrombin time 0.6-0.8 μg/mL; n = 20) or UFH (target anti-factor Xa 0.2-0.3 IU/mL; n = 20). The primary outcome was the pooled proportion of measurements within the therapeutic target range. Secondary outcomes included dose requirements, time to target, dose-assay correlations, and platelet count trajectories. RESULTS: Patients who were treated with argatroban achieved therapeutic targets significantly less often than those receiving UFH (38% vs 51% of pooled active measurements; CONCLUSIONS: In this hypothesis-generating subanalysis, patients receiving argatroban achieved therapeutic targets less reliably than those receiving UFH. However, this variability likely reflects challenges in dosing strategy optimization and differing target stringencies rather than intrinsic pharmacokinetic instability of the drug.",
     "sourceQuery": "PubMed (CRRT / ECMO 药物剂量调整)"
   },
   {
@@ -4053,8 +4057,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.270057+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.270057+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.008498+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.008498+08:00",
     "externalId": "NCT07748143",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -4232,8 +4236,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:30:31.271514+08:00",
-    "lastCheckedAt": "2026-11-13T13:30:31.271514+08:00",
+    "ingestedAt": "2026-11-13T15:45:11.009920+08:00",
+    "lastCheckedAt": "2026-11-13T15:45:11.009920+08:00",
     "externalId": "NCT06982105",
     "sourceQuery": "ClinicalTrials (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
@@ -4284,8 +4288,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:36:15.065253+08:00",
-    "lastCheckedAt": "2026-11-13T13:36:15.065253+08:00",
+    "ingestedAt": "2026-11-13T15:50:20.283404+08:00",
+    "lastCheckedAt": "2026-11-13T15:50:20.283404+08:00",
     "sourceQuery": "WHO ICTRP (MRSA / VRE / 嗜麦芽窄食单胞菌)"
   },
   {
@@ -4494,8 +4498,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:36:21.975289+08:00",
-    "lastCheckedAt": "2026-11-13T13:36:21.975289+08:00",
+    "ingestedAt": "2026-11-13T15:50:27.240714+08:00",
+    "lastCheckedAt": "2026-11-13T15:50:27.240714+08:00",
     "evidenceLevel": "专家共识/权威机构指南"
   },
   {
@@ -4529,8 +4533,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:36:21.975511+08:00",
-    "lastCheckedAt": "2026-11-13T13:36:21.975511+08:00",
+    "ingestedAt": "2026-11-13T15:50:27.240922+08:00",
+    "lastCheckedAt": "2026-11-13T15:50:27.240922+08:00",
     "evidenceLevel": "专家共识/权威机构指南"
   },
   {
@@ -4564,8 +4568,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-13T13:36:21.975926+08:00",
-    "lastCheckedAt": "2026-11-13T13:36:21.975926+08:00",
+    "ingestedAt": "2026-11-13T15:50:27.241327+08:00",
+    "lastCheckedAt": "2026-11-13T15:50:27.241327+08:00",
     "evidenceLevel": "专家共识/权威机构指南"
   }
 ]
