@@ -1,0 +1,10 @@
+# Netlify 构建与部署配置
+# 纯静态 Astro 站点：无需 SSR、无需 Netlify Functions。
+
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PNPM_VERSION = "12.18.0"
