@@ -2,12 +2,66 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="关于本站" description="平台定位、内容来源、使用边界与免责声明">
-  <header class="mb-8">
-    <h1 class="text-2xl font-semibold">关于本站</h1>
-    <p class="mt-2 text-neutral-600">平台定位、内容来源、使用边界与免责声明。</p>
-  </header>
-  <div class="rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
-    内容建设中 · P4 阶段完善
-  </div>
+<BaseLayout title="关于本站" description="MedAI Hub 的平台定位、内容来源、更新机制、审核方式、使用边界与纠错入口">
+  <article class="prose prose-neutral max-w-none">
+    <header class="mb-8">
+      <h1 class="text-2xl font-semibold">关于本站</h1>
+      <p class="mt-2 text-neutral-600">MedAI Hub 的定位、内容来源、更新机制、审核方式、使用边界与纠错入口。</p>
+    </header>
+
+    <section>
+      <h2>平台定位</h2>
+      <p>
+        MedAI Hub 是一个面向医疗工作者、科研人员及医药行业从业者的医学信息检索与工作效率站点，聚合抗感染领域的行业资讯、科研前沿与诊疗指南，并提供临床实用工具、药品说明书摘要与 AI 工具参考。
+      </p>
+      <p>
+        本站以「查指南、找文献、用工具」为核心目标，不提供在线诊疗，不替代临床决策。
+      </p>
+    </section>
+
+    <section>
+      <h2>内容来源</h2>
+      <ul>
+        <li><strong>行业资讯</strong>：收录来自 WHO、CIDRAP、GARDP、CDC、ECDC、FDA、EMA 等公开机构的公告、报告与政策动态，以及国内卫生行政部门、医保局、监管机构与专业学会的公开信息。</li>
+        <li><strong>科研前沿</strong>：通过 PubMed（NCBI E-utilities）等公开接口采集的已发表论文题录与摘要，来源为原发表期刊与数据库。</li>
+        <li><strong>抗感染指南</strong>：人工整理的国内外指南与专家共识摘要，正文保留原始出处与原文链接。</li>
+        <li><strong>药品说明书</strong>：基于公开药品说明书整理的摘要，标注生产企业、规格与原文链接。</li>
+        <li><strong>临床工具</strong>：本地运行的医学计算器与核对表，公式与阈值尽量标注出处。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>更新机制</h2>
+      <p>
+        行业资讯与科研前沿由自动化脚本按一定频率采集更新，并在采集失败时保留原有内容、不因失败清空历史数据。指南与药品说明书为人工维护，按需更新。
+      </p>
+      <p>
+        每类内容均尽量区分发布日期、更新日期、采集时间与监测数据年份；对无法确认的日期不进行推测或伪造。
+      </p>
+    </section>
+
+    <section>
+      <h2>审核方式</h2>
+      <p>
+        本站内容来源为公开资料；指南、药品说明书等人工整理内容会在条目中标注整理/审核日期。本站<strong>不具备临床同行评审或官方认证资质</strong>，相关内容请以原始文献、官方指南与药品说明书为准。
+      </p>
+    </section>
+
+    <section>
+      <h2>使用边界</h2>
+      <ul>
+        <li>本站内容仅供专业学术参考，<strong>不构成诊疗意见</strong>，不替代执业医师的判断。</li>
+        <li>药品说明书摘要、剂量与适应证信息可能与最新版本存在差异，请以药品说明书原文及监管机构最新公布为准。</li>
+        <li>全文访问条件以原站为准；本站不绕过付费墙，不提供未经授权的全文分发。</li>
+        <li>临床工具在浏览器本地运行，不要求上传患者数据。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>纠错与反馈</h2>
+      <p>
+        如发现内容错误、失效链接、日期或来源标注问题，欢迎通过项目仓库提交 issue 或 pull request 反馈。我们会在核实后更正。
+      </p>
+    </section>
+  </article>
 </BaseLayout>

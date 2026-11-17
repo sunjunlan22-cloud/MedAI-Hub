@@ -1,26 +1,27 @@
 ---
-title: "Management of Invasive Pulmonary Aspergillosis   FUNGINOS"
-organization: "ECMM"
+title: "Management of Invasive Pulmonary Aspergillosis"
+organization: "Fungal Infection Network of Switzerland（FUNGINOS）"
 year: 2025
 version: "2025版"
 reviewDate: "2026-11-09"
 docType:
   - "指南"
 pathogens:
-  - "MRSA/VRE"
-infectionSites: []
+  - "曲霉"
+infectionSites:
+  - "肺部感染"
 imagingDiagnosis:
-  - "TDM"
   - "肺部CT影像"
+  - "曲霉影像特征"
 comparisons: []
-description: "Mycoses GUIDELINES OPEN ACCESS Management of Invasive Pulmonary Aspergillosis in Intensive Care Units: Guidelines From the Fungal Infection Network of Switzerland (FUNGINOS) F. Lamoth1,2 | W. C. Albrich3 | S. Ragozzino4 | D. Bosetti5 | J. Delaloye6 | C. El Kho"
+description: "本指南由瑞士真菌感染网络（Fungal Infection Network of Switzerland，FUNGINOS）发布，针对重症监护病房中侵袭性肺曲霉病的诊断与管理提供推荐意见。"
 draft: false
 ---
 
 ## 摘要
 
-Mycoses GUIDELINES OPEN ACCESS Management of Invasive Pulmonary Aspergillosis in Intensive Care Units: Guidelines From the Fungal Infection Network of Switzerland (FUNGINOS) F. Lamoth1,2 | W. C. Albrich3 | S. Ragozzino4 | D. Bosetti5 | J. Delaloye6 | C. El Kho
+本指南由瑞士真菌感染网络（Fungal Infection Network of Switzerland）发布，针对重症监护病房中侵袭性肺曲霉病的诊断与管理提供推荐意见。
 
 ---
 
-> 本文档由 raw_materials/ 原始文件自动解析生成，仅抽取标题与摘要；正文内容请查阅原始 PDF/Word。内容严格对齐原文，未经任何改写。
+> 本文档仅收录标题与摘要，正文请查阅原始文献。内容对齐原文，未经改写。

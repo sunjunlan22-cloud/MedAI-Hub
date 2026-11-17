@@ -68,7 +68,7 @@ export interface ResearchNews {
   coreFindings: string;                   // 核心发现
   limitations: string;                    // 研究局限
   inspiration: string;                    // 临床/科研启发
-  evidenceLevel: string;                  // 证据等级提示
+  evidenceLevel?: string;                 // 证据等级提示（资源导航等非研究条目可缺省）
   scores?: ResearchScores;                // 旧五轴评分（已停用生成，仅兼容历史数据，不再参与业务判断）
   totalScore?: number;                    // 旧总分（已停用生成，仅兼容历史数据）
   isPreprint: boolean;                    // 是否预印本（强制标注"未同行评议"）

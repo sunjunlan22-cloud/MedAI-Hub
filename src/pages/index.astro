@@ -28,14 +28,20 @@ const tools = [
 ];
 const latestTools = tools.slice(0, 3);
 
-// —— 行业资讯最新 3 条 ——
+// —— 行业资讯最新 3 条（仅真实发布时间的记录）——
 const industryNews = (industryData as IndustryNews[])
+  .filter((n) => n.publishTime && Number.isFinite(new Date(n.publishTime).getTime()) && new Date(n.publishTime).getTime() > 0)
   .sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime())
   .slice(0, 3);
 
-// —— 科研前沿最新 3 条 ——
+// —— 科研前沿最新 3 条（机构主页/资源导航不入科研列表）——
 const researchNews = (researchData as ResearchNews[])
-  .sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime())
+  .filter((n) => (n as any).contentType !== 'resource')
+  .sort((a, b) => {
+    const ta = a.publishTime ? new Date(a.publishTime).getTime() : 0;
+    const tb = b.publishTime ? new Date(b.publishTime).getTime() : 0;
+    return tb - ta;
+  })
   .slice(0, 3);
 
 // —— 抗感染指南最新 3 条（按年份倒序，排除草稿）——
@@ -47,8 +53,11 @@ const latestGuides = allGuides
 // —— AI 工具精选 3 个 ——
 const aiTools = aiToolsData.featured;
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('zh-CN', { month: '2-digit', day: '2-digit' });
+function formatDate(iso?: string | null) {
+  if (!iso) return '日期待核实';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '日期待核实';
+  return d.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
 
 const categoryBadgeClass: Record<string, string> = {

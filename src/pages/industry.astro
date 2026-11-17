@@ -3,10 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import industryData from '../data/auto/industry.json';
 import type { IndustryNews } from '../types/news';
 
+// 仅展示有真实发布时间的记录；机构主页/资源导航等无日期描述性条目不入时间轴
+function isValidDate(iso?: string | null): boolean {
+  if (!iso) return false;
+  const t = new Date(iso).getTime();
+  return Number.isFinite(t) && t > 0;
+}
+
 // 按发布时间倒序
-const news = (industryData as IndustryNews[]).sort(
-  (a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime(),
-);
+const news = (industryData as IndustryNews[])
+  .filter((n) => isValidDate(n.publishTime))
+  .sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime());
 
 function formatDateKey(iso: string) {
   const d = new Date(iso);

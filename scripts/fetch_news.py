@@ -1381,7 +1381,7 @@ def make_id(prefix: str, text: str) -> str:
 
 
 def parse_date(date_str: str) -> str:
-    """解析多种日期格式，返回 ISO 字符串（默认当前时间）"""
+    """解析多种日期格式，返回 ISO 字符串（统一为东八区，默认当前时间）"""
     if not date_str:
         return datetime.now(TZ_CN).isoformat()
     # 尝试常见格式
@@ -1395,12 +1395,17 @@ def parse_date(date_str: str) -> str:
     ):
         try:
             dt = datetime.strptime(date_str.strip(), fmt)
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=TZ_CN)
-            return dt.isoformat()
+            return normalize_to_cn(dt).isoformat()
         except ValueError:
             continue
     return datetime.now(TZ_CN).isoformat()
+
+
+def normalize_to_cn(dt: datetime) -> datetime:
+    """将日期统一到东八区（Asia/Shanghai），消除因时区导致的日期偏移。"""
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=TZ_CN)
+    return dt.astimezone(TZ_CN)
 
 
 def parse_date_or_none(date_str: str) -> str | None:
@@ -1422,9 +1427,7 @@ def parse_date_or_none(date_str: str) -> str | None:
     ):
         try:
             dt = datetime.strptime(date_str.strip(), fmt)
-            if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=TZ_CN)
-            return dt.isoformat()
+            return normalize_to_cn(dt).isoformat()
         except ValueError:
             continue
     return None
@@ -3001,15 +3004,15 @@ def main(argv: list[str] | None = None) -> None:
         tags = list(dict.fromkeys(tags + [src["category"]]))
 
         if src["kind"] == "research":
-            # 机构资源入口：不是研究论文，不设置 studyType/studyDesign/evidenceLevel 等研究专属字段
+            # 机构资源入口：不是研究论文，不设置 studyType/studyDesign/evidenceLevel 等研究专属字段，
+            # 也不写 coreFindings/limitations/inspiration 等模板文字（避免下次采集重新引入）。
             entry = {
                 "id": make_id("res", src["id"]),
                 "title": f"{src['name']}：{src['description']}",
                 "sourceName": src["name"],
                 "sourceUrl": src["url"],
-                "coreFindings": src["description"],
-                "limitations": "本条目为权威机构资源入口，具体内容请访问原网站。",
-                "inspiration": f"{src['name']}是{src['category']}领域权威来源，建议定期跟踪其指南更新与监测数据。",
+                "abstract": src["description"],
+                "description": src["description"],
                 "tags": tags[:6],
             }
             research_entries.append(apply_schema_fields(entry, src, {}, "research"))

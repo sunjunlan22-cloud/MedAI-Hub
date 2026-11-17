@@ -268,7 +268,7 @@
     "studyType": "review",
     "publishStatus": "published",
     "sampleSize": null,
-    "publishTime": "2026-11-11T12:48:30+00:00",
+    "publishTime": "2026-11-11T20:48:30+08:00",
     "coreFindings": "",
     "limitations": "",
     "inspiration": "",
@@ -2283,7 +2283,7 @@
     "studyType": "other",
     "publishStatus": "published",
     "sampleSize": null,
-    "publishTime": "2026-09-30T09:50:02+00:00",
+    "publishTime": "2026-09-30T17:50:02+08:00",
     "coreFindings": "",
     "limitations": "",
     "inspiration": "",
@@ -2317,7 +2317,7 @@
     "studyType": "other",
     "publishStatus": "published",
     "sampleSize": null,
-    "publishTime": "2026-09-30T09:46:11+00:00",
+    "publishTime": "2026-09-30T17:46:11+08:00",
     "coreFindings": "",
     "limitations": "",
     "inspiration": "",
@@ -2351,7 +2351,7 @@
     "studyType": "other",
     "publishStatus": "published",
     "sampleSize": null,
-    "publishTime": "2026-09-30T09:38:25+00:00",
+    "publishTime": "2026-09-30T17:38:25+08:00",
     "coreFindings": "",
     "limitations": "",
     "inspiration": "",
@@ -3398,9 +3398,6 @@
     "title": "ECMM（欧洲医学真菌学联合会）：欧洲医学真菌学权威机构，发布曲霉、毛霉、念珠菌指南与药敏折点更新。",
     "sourceName": "ECMM（欧洲医学真菌学联合会）",
     "sourceUrl": "https://www.ecmm.info/",
-    "coreFindings": "",
-    "limitations": "",
-    "inspiration": "",
     "tags": [
       "曲霉",
       "毛霉",
@@ -3418,17 +3415,13 @@
     "licenseStatus": "unknown",
     "licensePermissions": [],
     "ingestedAt": "2026-11-17T09:43:32.859898+08:00",
-    "lastCheckedAt": "2026-11-17T09:43:32.859898+08:00",
-    "evidenceLevel": "专家共识/权威机构指南"
+    "lastCheckedAt": "2026-11-17T09:43:32.859898+08:00"
   },
   {
     "id": "res-9f634c9fd2",
     "title": "ISHAM（国际人畜真菌学会）：国际临床真菌学与 TDM 权威学术组织。",
     "sourceName": "ISHAM（国际人畜真菌学会）",
     "sourceUrl": "https://www.isham.org/",
-    "coreFindings": "",
-    "limitations": "",
-    "inspiration": "",
     "tags": [
       "TDM",
       "真菌与耐药"
@@ -3444,17 +3437,13 @@
     "licenseStatus": "unknown",
     "licensePermissions": [],
     "ingestedAt": "2026-11-17T09:43:32.860046+08:00",
-    "lastCheckedAt": "2026-11-17T09:43:32.860046+08:00",
-    "evidenceLevel": "专家共识/权威机构指南"
+    "lastCheckedAt": "2026-11-17T09:43:32.860046+08:00"
   },
   {
     "id": "res-206c6d4f59",
     "title": "Mycology Online（阿德莱德真菌网）：临床真菌鉴别与影像图谱知识库。",
     "sourceName": "Mycology Online（阿德莱德真菌网）",
     "sourceUrl": "https://mycology.adelaide.edu.au/",
-    "coreFindings": "",
-    "limitations": "",
-    "inspiration": "",
     "tags": [
       "感染影像",
       "真菌与耐药"
@@ -3470,8 +3459,7 @@
     "licenseStatus": "unknown",
     "licensePermissions": [],
     "ingestedAt": "2026-11-17T09:43:32.860349+08:00",
-    "lastCheckedAt": "2026-11-17T09:43:32.860349+08:00",
-    "evidenceLevel": "专家共识/权威机构指南"
+    "lastCheckedAt": "2026-11-17T09:43:32.860349+08:00"
   },
   {
     "id": "res-5c163a079c",

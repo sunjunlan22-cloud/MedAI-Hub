@@ -100,23 +100,31 @@ const { data } = guide;
     </div>
 
     <!-- 原文链接 -->
-    <div class="mt-8 flex flex-wrap items-center gap-4 border-t border-neutral-200 pt-6">
-      <a
-        href={data.sourceUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-      >
-        阅读原文指南
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 3h6v6" />
-          <path d="M10 14 21 3" />
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-        </svg>
-      </a>
-      <p class="text-xs text-neutral-500">
-        本站仅存储人工整理的指南摘要，内容仅供专业学术参考，不能替代临床决策。
-      </p>
+    <div class="mt-8 border-t border-neutral-200 pt-6">
+      {data.sourceUrl ? (
+        <div class="flex flex-wrap items-center gap-4">
+          <a
+            href={data.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            阅读原文指南
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h6v6" />
+              <path d="M10 14 21 3" />
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
+          </a>
+          <p class="text-xs text-neutral-500">
+            本站仅存储人工整理的指南摘要，内容仅供专业学术参考，不能替代临床决策。
+          </p>
+        </div>
+      ) : (
+        <p class="text-sm text-amber-700">
+          原文链接暂未收录，请根据上方的发布组织、年份与期刊信息自行检索官方原文或开放获取版本。
+        </p>
+      )}
     </div>
   </article>
 </BaseLayout>

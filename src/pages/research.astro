@@ -3,10 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import researchData from '../data/auto/research.json';
 import type { ResearchNews } from '../types/news';
 
-// 按发布时间倒序
-const news = (researchData as ResearchNews[]).sort(
-  (a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime(),
-);
+// 机构主页/资源导航不作为有发表日期的研究（contentType=resource 不入科研列表）
+const news = (researchData as ResearchNews[])
+  .filter((n) => (n as any).contentType !== 'resource')
+  .sort((a, b) => {
+    const ta = a.publishTime ? new Date(a.publishTime).getTime() : 0;
+    const tb = b.publishTime ? new Date(b.publishTime).getTime() : 0;
+    return tb - ta;
+  });
 
 const studyTypes = [...new Set(news.map((n) => n.studyType))];
 
@@ -21,7 +25,10 @@ const studyTypeLabel: Record<string, string> = {
 };
 
 // 证据等级徽章颜色（按等级代码/说明）
-function evidenceClass(level: string) {
+function evidenceClass(level?: string | null) {
+  if (!level) {
+    return 'bg-neutral-100 text-neutral-600 border-neutral-200';
+  }
   if (level.startsWith('1') || level.includes('专家共识') || level.includes('指南')) {
     return 'bg-emerald-50 text-emerald-700 border-emerald-200';
   }
@@ -50,8 +57,11 @@ const trialStatusLabel: Record<string, string> = {
   unknown: '状态未知',
 };
 
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('zh-CN', {
+function formatDate(iso?: string | null) {
+  if (!iso) return '日期待核实';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '日期待核实';
+  return d.toLocaleDateString('zh-CN', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -127,10 +137,12 @@ function formatDate(iso: string) {
           data-search={`${item.title} ${item.abstract ?? ''} ${item.pmid ?? ''} ${item.tags.join(' ')} ${item.sourceName}`.toLowerCase()}
         >
           <div class="mb-3 flex flex-wrap items-center gap-2 text-xs">
-            {/* 证据等级（突出） */}
-            <span class={`rounded border px-2 py-0.5 font-semibold ${evidenceClass(item.evidenceLevel)}`}>
-              证据等级：{item.evidenceLevel}
-            </span>
+            {/* 证据等级（突出，仅在有值时展示） */}
+            {item.evidenceLevel && (
+              <span class={`rounded border px-2 py-0.5 font-semibold ${evidenceClass(item.evidenceLevel)}`}>
+                证据等级：{item.evidenceLevel}
+              </span>
+            )}
             <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">
               {studyTypeLabel[item.studyType] ?? item.studyType}
             </span>

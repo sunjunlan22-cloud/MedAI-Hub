@@ -11,7 +11,7 @@ export default function CockcroftGault() {
   const [weight, setWeight] = useState('');
   const [scr, setScr] = useState(''); // mg/dL
   const [sex, setSex] = useState<'male' | 'female'>('male');
-  const [result, setResult] = useState<{ crcl: number; stage: string } | null>(null);
+  const [result, setResult] = useState<{ crcl: number } | null>(null);
   const [error, setError] = useState('');
 
   function calculate() {
@@ -29,15 +29,9 @@ export default function CockcroftGault() {
     if (sex === 'female') crcl *= 0.85;
     crcl = Math.round(crcl * 10) / 10;
 
-    let stage = '';
-    if (crcl >= 90) stage = 'CKD 1 期（正常或增高）';
-    else if (crcl >= 60) stage = 'CKD 2 期（轻度下降）';
-    else if (crcl >= 45) stage = 'CKD 3a 期（轻中度下降）';
-    else if (crcl >= 30) stage = 'CKD 3b 期（中重度下降）';
-    else if (crcl >= 15) stage = 'CKD 4 期（重度下降）';
-    else stage = 'CKD 5 期（肾衰竭）';
-
-    setResult({ crcl, stage });
+    // 注意：CrCl 仅用于药物剂量调整，不用于 CKD 分期。
+    // CKD 分期应使用 eGFR（CKD-EPI/MDRD）+ 病程 ≥3 个月 + 肾损伤标志物，单次 CrCl 不能诊断 CKD。
+    setResult({ crcl });
   }
 
   return (
@@ -92,10 +86,13 @@ export default function CockcroftGault() {
           <div className="text-center">
             <div className="text-sm text-neutral-600">肌酐清除率（CrCl）</div>
             <div className="mt-1 text-4xl font-bold text-blue-700">{result.crcl}</div>
-            <div className="mt-1 text-sm text-neutral-600">mL/min / 1.73m²</div>
+            <div className="mt-1 text-sm text-neutral-600">mL/min</div>
             <div className="mt-3 inline-block rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-700">
-              {result.stage}
+              结果仅供药物剂量调整参考
             </div>
+            <p className="mt-2 text-xs leading-relaxed text-neutral-400">
+              CrCl ≠ eGFR，不用于 CKD 分期。CKD 分期需 eGFR（CKD-EPI/MDRD）+ 病程 ≥3 个月 + 肾损伤标志物综合判断。
+            </p>
           </div>
         </ResultCard>
       )}

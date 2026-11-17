@@ -45,8 +45,9 @@ function yearOf(iso: string | undefined | null): number {
 
 const docs: SearchDoc[] = [];
 
-// 科研前沿
+// 科研前沿（机构主页/资源导航不入科研检索）
 for (const n of researchData as ResearchNews[]) {
+  if ((n as any).contentType === 'resource') continue;
   docs.push({
     id: `research:${n.id}`,
     section: 'research',
