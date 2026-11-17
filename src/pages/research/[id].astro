@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import researchData from '../../data/auto/research.json';
 import type { ResearchNews } from '../../types/news';
+import { formatDateTimeZh } from '../../lib/date';
 
 export async function getStaticPaths() {
   return (researchData as ResearchNews[])
@@ -25,16 +26,7 @@ const studyTypeLabel: Record<string, string> = {
 };
 
 function formatDate(iso?: string | null) {
-  if (!iso) return '日期待核实';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return '日期待核实';
-  return d.toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return formatDateTimeZh(iso);
 }
 
 // 研究设计 / 临床试验状态 / 发表状态（新增字段）

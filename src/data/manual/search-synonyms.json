@@ -1,12 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "updatedAt": "2026-11-17",
-  "description": "统一检索的术语映射与输入联想（医学文献检索第一版）。queries 为触发词，expansions 为参与匹配的规范术语集合；ambiguous=true 时检索结果上方会显示说明，不做静默强制映射。",
+  "description": "统一检索的术语映射与输入联想（医学文献检索第二版）。queries 为触发词，expansions 为参与匹配的规范术语集合；ambiguous=true 时检索结果上方会显示说明，不做静默强制映射。覆盖常用抗感染药品、病原体、耐药菌与缩写。",
   "concepts": [
     {
       "id": "voriconazole",
       "label": "伏立康唑（voriconazole）",
-      "queries": ["伏立康唑", "voriconazole"],
+      "queries": ["伏立康唑", "voriconazole", "威凡"],
       "expansions": ["伏立康唑", "voriconazole"],
       "source": "WHO 国际非专利药品名（INN）中英文对照",
       "ambiguous": false,
@@ -15,8 +15,170 @@
     {
       "id": "isavuconazole",
       "label": "艾沙康唑（isavuconazole）",
-      "queries": ["艾沙康唑", "isavuconazole"],
+      "queries": ["艾沙康唑", "isavuconazole", "康新博"],
       "expansions": ["艾沙康唑", "isavuconazole"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "posaconazole",
+      "label": "泊沙康唑（posaconazole）",
+      "queries": ["泊沙康唑", "posaconazole"],
+      "expansions": ["泊沙康唑", "posaconazole"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "fluconazole",
+      "label": "氟康唑（fluconazole）",
+      "queries": ["氟康唑", "fluconazole"],
+      "expansions": ["氟康唑", "fluconazole"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "itraconazole",
+      "label": "伊曲康唑（itraconazole）",
+      "queries": ["伊曲康唑", "itraconazole"],
+      "expansions": ["伊曲康唑", "itraconazole"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "amphotericin-b",
+      "label": "两性霉素B（amphotericin B）",
+      "queries": ["两性霉素B", "两性霉素 B", "amphotericin B", "amphotericin"],
+      "expansions": ["两性霉素B", "amphotericin B", "amphotericin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "caspofungin",
+      "label": "卡泊芬净（caspofungin）",
+      "queries": ["卡泊芬净", "caspofungin"],
+      "expansions": ["卡泊芬净", "caspofungin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "micafungin",
+      "label": "米卡芬净（micafungin）",
+      "queries": ["米卡芬净", "micafungin"],
+      "expansions": ["米卡芬净", "micafungin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "anidulafungin",
+      "label": "阿尼芬净（anidulafungin）",
+      "queries": ["阿尼芬净", "anidulafungin"],
+      "expansions": ["阿尼芬净", "anidulafungin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "ceftazidime-avibactam",
+      "label": "头孢他啶阿维巴坦（ceftazidime-avibactam）",
+      "queries": ["头孢他啶阿维巴坦", "ceftazidime-avibactam", "ceftazidime avibactam", "思福妥"],
+      "expansions": ["头孢他啶阿维巴坦", "ceftazidime-avibactam", "ceftazidime avibactam"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "meropenem",
+      "label": "美罗培南（meropenem）",
+      "queries": ["美罗培南", "meropenem"],
+      "expansions": ["美罗培南", "meropenem"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "imipenem",
+      "label": "亚胺培南（imipenem）",
+      "queries": ["亚胺培南", "imipenem"],
+      "expansions": ["亚胺培南", "imipenem"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "vancomycin",
+      "label": "万古霉素（vancomycin）",
+      "queries": ["万古霉素", "vancomycin"],
+      "expansions": ["万古霉素", "vancomycin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "teicoplanin",
+      "label": "替考拉宁（teicoplanin）",
+      "queries": ["替考拉宁", "teicoplanin"],
+      "expansions": ["替考拉宁", "teicoplanin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "linezolid",
+      "label": "利奈唑胺（linezolid）",
+      "queries": ["利奈唑胺", "linezolid"],
+      "expansions": ["利奈唑胺", "linezolid"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "daptomycin",
+      "label": "达托霉素（daptomycin）",
+      "queries": ["达托霉素", "daptomycin"],
+      "expansions": ["达托霉素", "daptomycin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "colistin",
+      "label": "多黏菌素（colistin / polymyxin E）",
+      "queries": ["多黏菌素", "多粘菌素", "黏菌素", "粘菌素", "colistin", "polymyxin"],
+      "expansions": ["多黏菌素", "多粘菌素", "colistin", "polymyxin"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "tigecycline",
+      "label": "替加环素（tigecycline）",
+      "queries": ["替加环素", "tigecycline"],
+      "expansions": ["替加环素", "tigecycline"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "eravacycline",
+      "label": "依拉环素（eravacycline）",
+      "queries": ["依拉环素", "eravacycline"],
+      "expansions": ["依拉环素", "eravacycline"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "cefiderocol",
+      "label": "头孢地尔（cefiderocol）",
+      "queries": ["头孢地尔", "cefiderocol"],
+      "expansions": ["头孢地尔", "cefiderocol"],
       "source": "WHO 国际非专利药品名（INN）中英文对照",
       "ambiguous": false,
       "note": ""
@@ -24,7 +186,7 @@
     {
       "id": "ipa",
       "label": "IPA = 侵袭性肺曲霉病（invasive pulmonary aspergillosis）",
-      "queries": ["IPA", "invasive pulmonary aspergillosis", "侵袭性肺曲霉病"],
+      "queries": ["IPA", "invasive pulmonary aspergillosis", "侵袭性肺曲霉病", "侵袭性曲霉病"],
       "expansions": ["invasive pulmonary aspergillosis", "侵袭性肺曲霉病", "IPA"],
       "source": "医学真菌病命名（EORTC/MSG 侵袭性真菌病共识）",
       "ambiguous": true,
@@ -49,11 +211,182 @@
       "note": ""
     },
     {
+      "id": "crpa",
+      "label": "CRPA = 耐碳青霉烯铜绿假单胞菌（carbapenem-resistant Pseudomonas aeruginosa）",
+      "queries": ["CRPA", "carbapenem-resistant Pseudomonas aeruginosa", "耐碳青霉烯铜绿假单胞菌"],
+      "expansions": ["CRPA", "carbapenem-resistant Pseudomonas aeruginosa", "耐碳青霉烯铜绿假单胞菌"],
+      "source": "临床微生物学常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "crkp",
+      "label": "CRKP = 耐碳青霉烯肺炎克雷伯菌（carbapenem-resistant Klebsiella pneumoniae）",
+      "queries": ["CRKP", "carbapenem-resistant Klebsiella pneumoniae", "耐碳青霉烯肺炎克雷伯菌"],
+      "expansions": ["CRKP", "carbapenem-resistant Klebsiella pneumoniae", "耐碳青霉烯肺炎克雷伯菌"],
+      "source": "临床微生物学常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
       "id": "pseudomonas-aeruginosa",
       "label": "铜绿假单胞菌（Pseudomonas aeruginosa）",
       "queries": ["铜绿假单胞菌", "Pseudomonas aeruginosa", "绿脓杆菌"],
       "expansions": ["铜绿假单胞菌", "Pseudomonas aeruginosa", "绿脓杆菌"],
       "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "klebsiella-pneumoniae",
+      "label": "肺炎克雷伯菌（Klebsiella pneumoniae）",
+      "queries": ["肺炎克雷伯菌", "克雷伯菌", "Klebsiella pneumoniae", "Klebsiella"],
+      "expansions": ["肺炎克雷伯菌", "克雷伯菌", "Klebsiella pneumoniae", "Klebsiella"],
+      "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "escherichia-coli",
+      "label": "大肠埃希菌（Escherichia coli / E. coli）",
+      "queries": ["大肠埃希菌", "大肠杆菌", "Escherichia coli", "E. coli", "E coli"],
+      "expansions": ["大肠埃希菌", "大肠杆菌", "Escherichia coli", "E. coli"],
+      "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "staphylococcus-aureus",
+      "label": "金黄色葡萄球菌（Staphylococcus aureus / S. aureus）",
+      "queries": ["金黄色葡萄球菌", "金葡菌", "Staphylococcus aureus", "S. aureus"],
+      "expansions": ["金黄色葡萄球菌", "Staphylococcus aureus", "S. aureus"],
+      "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "mrsa",
+      "label": "MRSA = 耐甲氧西林金黄色葡萄球菌（methicillin-resistant Staphylococcus aureus）",
+      "queries": ["MRSA", "methicillin-resistant Staphylococcus aureus", "耐甲氧西林金黄色葡萄球菌"],
+      "expansions": ["MRSA", "methicillin-resistant Staphylococcus aureus", "耐甲氧西林金黄色葡萄球菌"],
+      "source": "临床微生物学常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "vre",
+      "label": "VRE = 耐万古霉素肠球菌（vancomycin-resistant Enterococcus）",
+      "queries": ["VRE", "vancomycin-resistant Enterococcus", "耐万古霉素肠球菌"],
+      "expansions": ["VRE", "vancomycin-resistant Enterococcus", "耐万古霉素肠球菌"],
+      "source": "临床微生物学常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "enterococcus",
+      "label": "肠球菌（Enterococcus）",
+      "queries": ["肠球菌", "Enterococcus", "屎肠球菌", "粪肠球菌"],
+      "expansions": ["肠球菌", "Enterococcus", "屎肠球菌", "粪肠球菌"],
+      "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "aspergillus",
+      "label": "曲霉（Aspergillus）",
+      "queries": ["曲霉", "曲霉菌", "Aspergillus", "烟曲霉", "黄曲霉"],
+      "expansions": ["曲霉", "曲霉菌", "Aspergillus", "烟曲霉", "黄曲霉"],
+      "source": "病原体中英文命名对照（医学真菌学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "candida",
+      "label": "念珠菌（Candida）",
+      "queries": ["念珠菌", "Candida", "白色念珠菌", "光滑念珠菌", "近平滑念珠菌"],
+      "expansions": ["念珠菌", "Candida", "白色念珠菌", "光滑念珠菌", "近平滑念珠菌"],
+      "source": "病原体中英文命名对照（医学真菌学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "cryptococcus",
+      "label": "隐球菌（Cryptococcus）",
+      "queries": ["隐球菌", "Cryptococcus", "新型隐球菌"],
+      "expansions": ["隐球菌", "Cryptococcus", "新型隐球菌"],
+      "source": "病原体中英文命名对照（医学真菌学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "mucormycosis",
+      "label": "毛霉病（mucormycosis / 毛霉）",
+      "queries": ["毛霉", "毛霉菌", "毛霉病", "mucormycosis", "Mucor"],
+      "expansions": ["毛霉", "毛霉菌", "毛霉病", "mucormycosis", "Mucor"],
+      "source": "病原体中英文命名对照（医学真菌学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "stenotrophomonas",
+      "label": "嗜麦芽窄食单胞菌（Stenotrophomonas maltophilia）",
+      "queries": ["嗜麦芽窄食单胞菌", "Stenotrophomonas maltophilia"],
+      "expansions": ["嗜麦芽窄食单胞菌", "Stenotrophomonas maltophilia"],
+      "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "uti",
+      "label": "UTI = 尿路感染（urinary tract infection）",
+      "queries": ["UTI", "urinary tract infection", "尿路感染", "泌尿系感染"],
+      "expansions": ["UTI", "urinary tract infection", "尿路感染", "泌尿系感染"],
+      "source": "临床常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "bsi",
+      "label": "BSI = 血流感染（bloodstream infection）",
+      "queries": ["BSI", "bloodstream infection", "血流感染"],
+      "expansions": ["BSI", "bloodstream infection", "血流感染"],
+      "source": "临床常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "ifi",
+      "label": "侵袭性真菌感染（invasive fungal infection）",
+      "queries": ["侵袭性真菌感染", "invasive fungal infection", "IFI"],
+      "expansions": ["侵袭性真菌感染", "invasive fungal infection", "IFI"],
+      "source": "医学真菌病命名",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "vap",
+      "label": "VAP = 呼吸机相关性肺炎（ventilator-associated pneumonia）",
+      "queries": ["VAP", "ventilator-associated pneumonia", "呼吸机相关性肺炎"],
+      "expansions": ["VAP", "ventilator-associated pneumonia", "呼吸机相关性肺炎"],
+      "source": "临床常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "hap",
+      "label": "HAP = 医院获得性肺炎（hospital-acquired pneumonia）",
+      "queries": ["HAP", "hospital-acquired pneumonia", "医院获得性肺炎"],
+      "expansions": ["HAP", "hospital-acquired pneumonia", "医院获得性肺炎"],
+      "source": "临床常用缩写",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "cap",
+      "label": "CAP = 社区获得性肺炎（community-acquired pneumonia）",
+      "queries": ["CAP", "community-acquired pneumonia", "社区获得性肺炎"],
+      "expansions": ["CAP", "community-acquired pneumonia", "社区获得性肺炎"],
+      "source": "临床常用缩写",
       "ambiguous": false,
       "note": ""
     }

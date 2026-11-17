@@ -2,8 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import industryData from '../data/auto/industry.json';
 import type { IndustryNews } from '../types/news';
+import { formatDateZh } from '../lib/date';
 
-// 仅展示有真实发布时间的记录；机构主页/资源导航等无日期描述性条目不入时间轴
+// 仅展示有真实发布时间的记录；机构主页/资源导航等无日期描述性条目不入列表
 function isValidDate(iso?: string | null): boolean {
   if (!iso) return false;
   const t = new Date(iso).getTime();
@@ -14,37 +15,6 @@ function isValidDate(iso?: string | null): boolean {
 const news = (industryData as IndustryNews[])
   .filter((n) => isValidDate(n.publishTime))
   .sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime());
-
-function formatDateKey(iso: string) {
-  const d = new Date(iso);
-  return `${d.getMonth() + 1}月${d.getDate()}日`;
-}
-function formatYear(iso: string) {
-  return new Date(iso).getFullYear();
-}
-function formatTime(iso: string) {
-  const d = new Date(iso);
-  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-}
-
-// 按日期分组（时间轴流）
-const groups: Array<{ date: string; year: number; items: IndustryNews[] }> = [];
-for (const item of news) {
-  const date = formatDateKey(item.publishTime);
-  const year = formatYear(item.publishTime);
-  let g = groups.find((x) => x.date === date);
-  if (!g) {
-    g = { date, year, items: [] };
-    groups.push(g);
-  }
-  g.items.push(item);
-}
-
-const factTypeLabel: Record<string, { text: string; class: string }> = {
-  fact: { text: '事实', class: 'bg-neutral-100 text-neutral-700' },
-  analysis: { text: '分析', class: 'bg-amber-50 text-amber-700' },
-  forecast: { text: '预测', class: 'bg-purple-50 text-purple-700' },
-};
 
 const categoryBadgeClass: Record<string, string> = {
   '真菌与耐药': 'bg-pink-50 text-pink-700 border border-pink-200',
@@ -76,30 +46,6 @@ const typeTabs = [
 function ctypeGroup(ctype?: string): string {
   if (ctype === 'policy' || ctype === 'approval' || ctype === 'surveillance') return ctype;
   return 'other';
-}
-
-const approvalStatusLabel: Record<string, string> = {
-  filed: '已受理',
-  underReview: '审评中',
-  approved: '已批准',
-  rejected: '未批准',
-  withdrawn: '已撤回',
-};
-
-const marketAccessTypeLabel: Record<string, string> = {
-  nmpa: 'NMPA',
-  fda: 'FDA',
-  ema: 'EMA',
-  pmda: 'PMDA',
-  insurance: '医保',
-  hospital: '医院',
-};
-
-// 从 abstract 中提取 GLASS 原始 PDF 链接
-function extractPdfUrl(abstract?: string): string | null {
-  if (!abstract) return null;
-  const m = abstract.match(/官方 PDF:\s*(https?:\/\/\S+)/);
-  return m ? m[1] : null;
 }
 
 // 行业资讯页专属 Footer：行业优质 AI 导航矩阵与友情链接
@@ -142,6 +88,12 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 
+  <!-- 总数 + 页码 -->
+  <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+    <p id="industry-total" class="text-sm text-neutral-500"></p>
+    <div id="industry-pagination" class="flex flex-wrap items-center gap-1.5"></div>
+  </div>
+
   {
     news.length === 0 && (
       <div class="rounded-lg border border-dashed border-neutral-300 p-10 text-center text-neutral-500">
@@ -154,132 +106,37 @@ const currentYear = new Date().getFullYear();
     <p id="industry-empty-text">暂无匹配的资讯内容</p>
   </div>
 
-  {
-    groups.map((group) => (
-      <section class="industry-group relative mb-10">
-        <!-- 日期标题 -->
-        <div class="mb-4 flex items-baseline gap-2">
-          <h2 class="text-lg font-semibold text-neutral-900">{group.year}年{group.date}</h2>
-          <span class="text-xs text-neutral-400">{group.items.length} 条</span>
-        </div>
+  <ul id="industry-list" class="space-y-4">
+    {
+      news.map((item) => {
+        const ct = contentTypeLabel[item.contentType ?? ''];
+        return (
+          <li class="industry-item" data-ctype={ctypeGroup(item.contentType)}>
+            <div class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+              <div class="flex flex-wrap items-center gap-2 text-xs text-neutral-400">
+                <time class="font-medium text-neutral-600">{formatDateZh(item.publishTime)}</time>
+                <span>{item.sourceName}</span>
+                {ct && (
+                  <span class={`rounded border px-1.5 py-0.5 ${ct.class}`}>{ct.text}</span>
+                )}
+                <span class={`rounded px-1.5 py-0.5 ${categoryBadgeClass[item.category] ?? 'bg-blue-50 text-blue-700'}`}>{item.category}</span>
+              </div>
+              <a
+                href={`/industry/${item.id}`}
+                class="mt-2 line-clamp-2 block text-base font-medium text-neutral-900 hover:text-blue-600 hover:underline"
+              >
+                {item.title}
+              </a>
+              <p class="mt-1.5 line-clamp-2 text-sm leading-relaxed text-neutral-600">{item.summary}</p>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
 
-        <ul class="space-y-5">
-          {
-            group.items.map((item, idx) => {
-              const ft = factTypeLabel[item.factType];
-              const ct = contentTypeLabel[item.contentType ?? ''];
-              const pdfUrl = extractPdfUrl(item.abstract);
-              const isLast = idx === group.items.length - 1;
-              return (
-                <li class="industry-item relative pl-8" data-ctype={ctypeGroup(item.contentType)}>
-                  {/* 时间轴圆点 */}
-                  <span class="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-100"></span>
-                  {/* 连接线（非最后一项） */}
-                  {!isLast && (
-                    <span class="absolute left-1.5 top-7 bottom-0 w-px bg-neutral-200"></span>
-                  )}
-
-                  <div class="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md">
-                    {/* 时间 + 来源 + 徽章 */}
-                    <div class="flex flex-wrap items-center gap-2 text-xs text-neutral-400">
-                      <time class="font-medium text-neutral-600">{formatTime(item.publishTime)}</time>
-                      <span>{item.sourceName}</span>
-                      {ct && (
-                        <span class={`rounded border px-1.5 py-0.5 ${ct.class}`}>{ct.text}</span>
-                      )}
-                      <span class={`rounded px-1.5 py-0.5 ${categoryBadgeClass[item.category] ?? 'bg-blue-50 text-blue-700'}`}>{item.category}</span>
-                      <span class={`rounded px-1.5 py-0.5 ${ft.class}`}>{ft.text}</span>
-                      {item.isCluster && (
-                        <span class="rounded bg-emerald-50 px-1.5 py-0.5 text-emerald-700">多源聚合</span>
-                      )}
-                    </div>
-
-                    {/* 标题 */}
-                    <a
-                      href={`/industry/${item.id}`}
-                      class="mt-2 block text-lg font-medium text-neutral-900 hover:text-blue-600 hover:underline"
-                    >
-                      {item.title}
-                    </a>
-
-                    {/* AI 摘要 */}
-                    <p class="mt-2 text-sm leading-relaxed text-neutral-700">
-                      <span class="mr-1 font-medium text-neutral-900">AI 摘要：</span>
-                      {item.summary}
-                    </p>
-
-                    {/* 推荐理由 */}
-                    <p class="mt-2 text-sm leading-relaxed text-neutral-600">
-                      <span class="mr-1 font-medium text-neutral-900">推荐理由：</span>
-                      {item.impact}
-                    </p>
-
-                    {/* 耐药监测（GLASS）：结构化数据维度入口 */}
-                    {item.contentType === 'surveillance' && ((item.pathogens?.length ?? 0) > 0 || (item.drugs?.length ?? 0) > 0 || pdfUrl) && (
-                      <div class="mt-3 rounded-lg border border-orange-100 bg-orange-50/40 p-3">
-                        <p class="text-xs font-semibold text-orange-700">耐药监测 · 结构化数据</p>
-                        {(item.pathogens?.length ?? 0) > 0 && (
-                          <div class="mt-2 flex flex-wrap items-center gap-1.5">
-                            <span class="text-xs text-neutral-500">病原体：</span>
-                            {item.pathogens!.map((p) => (
-                              <span class="rounded border border-orange-100 bg-white px-2 py-0.5 text-xs text-neutral-700">{p}</span>
-                            ))}
-                          </div>
-                        )}
-                        {(item.drugs?.length ?? 0) > 0 && (
-                          <div class="mt-2 flex flex-wrap items-center gap-1.5">
-                            <span class="text-xs text-neutral-500">药物：</span>
-                            {item.drugs!.map((d) => (
-                              <span class="rounded border border-orange-100 bg-white px-2 py-0.5 text-xs text-neutral-700">{d}</span>
-                            ))}
-                          </div>
-                        )}
-                        {pdfUrl && (
-                          <a href={pdfUrl} target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:text-blue-800">
-                            原始 PDF →
-                          </a>
-                        )}
-                      </div>
-                    )}
-
-                    {/* 药品审批：状态 + 准入类型 + 文号 */}
-                    {item.contentType === 'approval' && (
-                      <div class="mt-3 flex flex-wrap items-center gap-2 text-xs text-neutral-600">
-                        {item.approvalStatus && (
-                          <span class="rounded bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
-                            审批状态：{approvalStatusLabel[item.approvalStatus] ?? item.approvalStatus}
-                          </span>
-                        )}
-                        {item.marketAccessType && (
-                          <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">
-                            {marketAccessTypeLabel[item.marketAccessType] ?? item.marketAccessType}
-                          </span>
-                        )}
-                        {item.externalId && (
-                          <span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">文号：{item.externalId}</span>
-                        )}
-                      </div>
-                    )}
-
-                    {/* 标签 */}
-                    {item.tags.length > 0 && (
-                      <div class="mt-3 flex flex-wrap gap-1.5">
-                        {item.tags.map((tag) => (
-                          <span class="rounded-full bg-neutral-100 px-2 py-0.5 text-xs text-neutral-600">
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </li>
-              );
-            })
-          }
-        </ul>
-      </section>
-    ))
-  }
+  <!-- 底部分页（长列表） -->
+  <div id="industry-pagination-bottom" class="mt-6 flex flex-wrap items-center justify-center gap-1.5"></div>
 
   <!-- 行业资讯页专属 Footer：行业优质 AI 导航矩阵与友情链接 -->
   <footer class="mt-12 border-t border-neutral-200 bg-neutral-50">
@@ -318,12 +175,18 @@ const currentYear = new Date().getFullYear();
 </BaseLayout>
 
 <script>
+  const PAGE_SIZE = 15;
   const tabs = Array.from(document.querySelectorAll<HTMLElement>('.ctype-tab'));
   const items = Array.from(document.querySelectorAll<HTMLElement>('.industry-item'));
-  const groups = Array.from(document.querySelectorAll<HTMLElement>('.industry-group'));
+  const listEl = document.getElementById('industry-list');
+  const totalEl = document.getElementById('industry-total');
+  const paginationEl = document.getElementById('industry-pagination');
+  const paginationBottomEl = document.getElementById('industry-pagination-bottom');
   const emptyEl = document.getElementById('industry-empty');
   const emptyText = document.getElementById('industry-empty-text');
+
   let activeCtype = 'all';
+  let activePage = 1;
 
   const emptyMessages: Record<string, string> = {
     policy: '暂无政策动态类资讯，后续采集政策与监管文件后将在此展示。',
@@ -332,29 +195,72 @@ const currentYear = new Date().getFullYear();
     other: '暂无匹配的资讯内容。',
   };
 
-  function applyFilter() {
-    let visible = 0;
-    items.forEach((li) => {
+  function filteredItems(): HTMLElement[] {
+    return items.filter((li) => {
       const ctype = li.dataset.ctype || 'other';
-      const show = activeCtype === 'all' || ctype === activeCtype;
-      li.style.display = show ? '' : 'none';
-      if (show) visible++;
+      return activeCtype === 'all' || ctype === activeCtype;
     });
-    groups.forEach((g) => {
-      const hasVisible = Array.from(g.querySelectorAll('.industry-item')).some(
-        (li) => (li as HTMLElement).style.display !== 'none',
-      );
-      g.style.display = hasVisible ? '' : 'none';
-    });
+  }
+
+  function renderPageButton(page: number, label: string, disabled: boolean, current: boolean) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = label;
+    btn.disabled = disabled;
+    btn.className = 'rounded-md px-2.5 py-1 text-sm transition ' + (
+      current
+        ? 'bg-blue-600 text-white font-medium'
+        : disabled
+          ? 'text-neutral-300 cursor-not-allowed'
+          : 'text-neutral-600 hover:bg-neutral-100'
+    );
+    if (!disabled) btn.addEventListener('click', () => { activePage = page; render(); });
+    return btn;
+  }
+
+  function renderPagination(totalPages: number) {
+    const build = (container: HTMLElement | null) => {
+      if (!container) return;
+      container.innerHTML = '';
+      if (totalPages <= 1) return;
+      container.appendChild(renderPageButton(activePage - 1, '上一页', activePage <= 1, false));
+      for (let p = 1; p <= totalPages; p++) {
+        container.appendChild(renderPageButton(p, String(p), false, p === activePage));
+      }
+      container.appendChild(renderPageButton(activePage + 1, '下一页', activePage >= totalPages, false));
+    };
+    build(paginationEl);
+    build(paginationBottomEl);
+  }
+
+  function render() {
+    const filtered = filteredItems();
+    const total = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (activePage > totalPages) activePage = totalPages;
+
+    items.forEach((li) => { li.style.display = 'none'; });
+    const start = (activePage - 1) * PAGE_SIZE;
+    filtered.slice(start, start + PAGE_SIZE).forEach((li) => { li.style.display = ''; });
+
+    if (totalEl) {
+      totalEl.textContent = total > 0
+        ? `共 ${total} 条 · 第 ${activePage} / ${totalPages} 页`
+        : '共 0 条';
+    }
+    renderPagination(totalPages);
+
     if (emptyEl) {
-      emptyEl.classList.toggle('hidden', visible > 0);
+      emptyEl.classList.toggle('hidden', total > 0);
       if (emptyText) emptyText.textContent = emptyMessages[activeCtype] ?? '暂无匹配的资讯内容';
     }
+    if (listEl) listEl.style.display = total > 0 ? '' : 'none';
   }
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       activeCtype = tab.dataset.ctype || 'all';
+      activePage = 1; // 切换分类后回到第一页
       tabs.forEach((t) => {
         const active = t === tab;
         t.classList.toggle('bg-white', active);
@@ -363,9 +269,9 @@ const currentYear = new Date().getFullYear();
         t.classList.toggle('text-neutral-600', !active);
         t.classList.toggle('hover:text-neutral-900', !active);
       });
-      applyFilter();
+      render();
     });
   });
 
-  applyFilter();
+  render();
 </script>

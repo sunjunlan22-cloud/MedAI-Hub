@@ -48,36 +48,6 @@ const guides = defineCollection({
     }),
 });
 
-// 药品说明书：Markdown 知识库（人工维护，受保护）
-// 字段严格对齐 PRD 第 8.1 节【确定】要求
-const drugLabels = defineCollection({
-  type: 'content',
-  schema: ({ image }) =>
-    z.object({
-      drugName: z.string(),                        // 通用名
-      brandNames: z.array(z.string()).default([]), // 商品名（可选多个）
-      manufacturer: z.string(),                    // 生产企业
-      dosageForm: z.string(),                      // 剂型（如：注射剂、片剂）
-      strengths: z.array(z.string()).nonempty(),   // 规格（如：["500mg/支", "1g/支"]）
-      atcCode: z.string().default(''),             // ATC 分类代码
-      antibioticClass: z.string().default(''),     // 抗菌药物分类
-      indications: z.array(z.string()).nonempty(), // 适应证
-      contraindications: z.array(z.string()).default([]), // 禁忌
-      specialPopulations: z.array(z.string()).default([]), // 特殊人群（妊娠/哺乳/儿童/老年）
-      renalAdjustment: z.boolean().default(false), // 是否需肾功能调整
-      hepaticAdjustment: z.boolean().default(false), // 是否需肝功能调整
-      drugInteractions: z.array(z.string()).default([]), // 药物相互作用
-      preparation: z.string().default(''),         // 给药配置说明（如溶媒、浓度、滴速）
-      sourceUrl: z.string().url().optional(),      // 原文链接（NMPA 或制药商公开）
-      reviewDate: z.string(),                      // 整理审核日期
-      tags: z.array(z.string()).default([]),
-      description: z.string().default(''),
-      cover: image().optional(),
-      draft: z.boolean().default(false),
-    }),
-});
-
 export const collections = {
   guides,
-  'drug-labels': drugLabels,
 };

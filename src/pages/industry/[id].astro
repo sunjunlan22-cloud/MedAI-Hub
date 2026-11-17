@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScoreBadge from '../../components/ScoreBadge.astro';
 import industryData from '../../data/auto/industry.json';
 import type { IndustryNews } from '../../types/news';
+import { formatDateTimeZh } from '../../lib/date';
 
 export async function getStaticPaths() {
   return (industryData as IndustryNews[])
@@ -66,16 +67,7 @@ const pdfUrl = extractPdfUrl(item.abstract);
 const abstractText = item.abstract?.replace(/官方 PDF:\s*https?:\/\/\S+\s*/g, '').trim() ?? '';
 
 function formatDate(iso?: string | null) {
-  if (!iso) return '日期待核实';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return '日期待核实';
-  return d.toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return formatDateTimeZh(iso);
 }
 
 const axes = [

@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import researchData from '../data/auto/research.json';
+import synonymsData from '../data/manual/search-synonyms.json';
 import type { ResearchNews } from '../types/news';
+import { formatDateZh } from '../lib/date';
+
+const concepts = (synonymsData as any).concepts ?? [];
 
 // 机构主页/资源导航不作为有发表日期的研究（contentType=resource 不入科研列表）
 const news = (researchData as ResearchNews[])
@@ -58,14 +62,7 @@ const trialStatusLabel: Record<string, string> = {
 };
 
 function formatDate(iso?: string | null) {
-  if (!iso) return '日期待核实';
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return '日期待核实';
-  return d.toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
+  return formatDateZh(iso);
 }
 ---
 
@@ -181,14 +178,14 @@ function formatDate(iso?: string | null) {
           {/* 原文摘要（优先）或核心发现（有真实结果时） */}
           {item.abstract ? (
             <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
-              <p class="text-sm leading-relaxed text-neutral-800">
+              <p class="text-sm leading-relaxed text-neutral-800 line-clamp-2">
                 <span class="mr-1 font-semibold text-blue-700">摘要：</span>
                 {item.abstract}
               </p>
             </div>
           ) : item.coreFindings ? (
             <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
-              <p class="text-sm leading-relaxed text-neutral-800">
+              <p class="text-sm leading-relaxed text-neutral-800 line-clamp-2">
                 <span class="mr-1 font-semibold text-blue-700">核心发现：</span>
                 {item.coreFindings}
               </p>
@@ -243,22 +240,44 @@ function formatDate(iso?: string | null) {
   </div>
 </BaseLayout>
 
+<script type="application/json" id="research-concepts" set:html={JSON.stringify(concepts).replace(/</g, '\\u003c')}></script>
 <script>
+  const concepts: any[] = JSON.parse(document.getElementById('research-concepts')!.textContent!);
   const cards = Array.from(document.querySelectorAll<HTMLElement>('.news-card'));
   const typeTags = document.querySelectorAll<HTMLElement>('.type-tag');
   const tagBtns = document.querySelectorAll<HTMLElement>('.tag-btn');
   const searchInput = document.getElementById('research-search') as HTMLInputElement | null;
   const resetBtn = document.getElementById('research-reset');
-  const countEl = document.getElementById('research-count');
-  const emptyEl = document.getElementById('research-empty');
+  const countEl = document.getElementById('research-count')!;
+  const emptyEl = document.getElementById('research-empty')!;
 
   const activeTypes = new Set<string>();
   const activeTags = new Set<string>();
   let query = '';
 
+  // 中英文/缩写术语归一化：命中同义词概念时，用其全部规范术语参与匹配
+  function expandQuery(raw: string): Set<string> {
+    const q = raw.trim().toLowerCase();
+    const terms = new Set<string>();
+    if (!q) return terms;
+    terms.add(q);
+    for (const c of concepts) {
+      const queries: string[] = c.queries ?? [];
+      const hit = queries.some((t: string) => {
+        const tl = t.toLowerCase();
+        return q === tl || q.includes(tl);
+      });
+      if (hit) {
+        (c.expansions ?? []).forEach((e: any) => terms.add(String(e).toLowerCase()));
+      }
+    }
+    return terms;
+  }
+
   function applyFilters() {
     let visible = 0;
-    cards.forEach((card) => {
+    const terms = expandQuery(query);
+    cards.forEach((card: HTMLElement) => {
       const type = card.dataset.type!;
       const tags = card.dataset.tags!.split(',');
       const searchText = card.dataset.search ?? '';
@@ -267,15 +286,16 @@ function formatDate(iso?: string | null) {
       const matchTags =
         activeTags.size === 0 ||
         Array.from(activeTags).some((t) => tags.includes(t));
-      const matchSearch = !query || searchText.includes(query);
+      const matchSearch =
+        terms.size === 0 || Array.from(terms).some((t) => searchText.includes(t));
 
       const show = matchType && matchTags && matchSearch;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
 
-    countEl!.textContent = `共 ${visible} 条文献`;
-    emptyEl!.classList.toggle('hidden', visible > 0);
+    countEl.textContent = `共 ${visible} 条文献`;
+    emptyEl.classList.toggle('hidden', visible > 0);
   }
 
   function toggleType(btn: HTMLElement) {

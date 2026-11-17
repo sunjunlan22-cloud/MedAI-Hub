@@ -12,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section>
       <h2>平台定位</h2>
       <p>
-        MedAI Hub 是一个面向医疗工作者、科研人员及医药行业从业者的医学信息检索与工作效率站点，聚合抗感染领域的行业资讯、科研前沿与诊疗指南，并提供临床实用工具、药品说明书摘要与 AI 工具参考。
+        MedAI Hub 是一个面向医疗工作者、科研人员及医药行业从业者的医学信息检索与工作效率站点，聚合抗感染领域的行业资讯、科研前沿与诊疗指南，并提供临床实用工具与 AI 工具参考。
       </p>
       <p>
         本站以「查指南、找文献、用工具」为核心目标，不提供在线诊疗，不替代临床决策。
@@ -22,18 +22,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section>
       <h2>内容来源</h2>
       <ul>
-        <li><strong>行业资讯</strong>：收录来自 WHO、CIDRAP、GARDP、CDC、ECDC、FDA、EMA 等公开机构的公告、报告与政策动态，以及国内卫生行政部门、医保局、监管机构与专业学会的公开信息。</li>
-        <li><strong>科研前沿</strong>：通过 PubMed（NCBI E-utilities）等公开接口采集的已发表论文题录与摘要，来源为原发表期刊与数据库。</li>
+        <li><strong>行业资讯</strong>：自动采集 WHO GLASS（全球耐药监测报告）、EMA（抗感染药品上市许可）、FDA（openFDA 批准/召回）、CIDRAP、GARDP 等公开机构的公告、报告与政策；按抗感染相关性过滤后入库。</li>
+        <li><strong>科研前沿</strong>：通过 PubMed（NCBI E-utilities）、ClinicalTrials.gov、WHO ICTRP（含 ChiCTR 等注册中心）公开接口采集的已发表论文题录与临床试验注册信息，来源为原发表期刊与数据库。</li>
         <li><strong>抗感染指南</strong>：人工整理的国内外指南与专家共识摘要，正文保留原始出处与原文链接。</li>
-        <li><strong>药品说明书</strong>：基于公开药品说明书整理的摘要，标注生产企业、规格与原文链接。</li>
         <li><strong>临床工具</strong>：本地运行的医学计算器与核对表，公式与阈值尽量标注出处。</li>
       </ul>
+      <p class="mt-3">
+        国内来源（国家药监局 NMPA/CDE、国家及省级医保局、卫健委、CHINET 中国细菌耐药监测网、国内真菌监测网、专业学会与期刊）中，部分站点存在页面反爬或需登录授权，暂未实现稳定自动采集；相关内容以人工方式补录维护，无法自动接入的来源已在采集脚本中注明原因与人工维护方式。
+      </p>
     </section>
 
     <section>
       <h2>更新机制</h2>
       <p>
-        行业资讯与科研前沿由自动化脚本按一定频率采集更新，并在采集失败时保留原有内容、不因失败清空历史数据。指南与药品说明书为人工维护，按需更新。
+        行业资讯与科研前沿由自动化脚本按一定频率采集更新，并在采集失败时保留原有内容、不因失败清空历史数据；每个来源会记录最近成功采集时间、新增数量与失败原因，区分「无更新」与「抓取失败」。指南为人工维护，按需更新。
       </p>
       <p>
         每类内容均尽量区分发布日期、更新日期、采集时间与监测数据年份；对无法确认的日期不进行推测或伪造。
@@ -43,7 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section>
       <h2>审核方式</h2>
       <p>
-        本站内容来源为公开资料；指南、药品说明书等人工整理内容会在条目中标注整理/审核日期。本站<strong>不具备临床同行评审或官方认证资质</strong>，相关内容请以原始文献、官方指南与药品说明书为准。
+        本站内容来源为公开资料；指南等人工整理内容会在条目中标注整理/审核日期。本站<strong>不具备临床同行评审或官方认证资质</strong>，相关内容请以原始文献、官方指南为准。
       </p>
     </section>
 
@@ -51,7 +53,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h2>使用边界</h2>
       <ul>
         <li>本站内容仅供专业学术参考，<strong>不构成诊疗意见</strong>，不替代执业医师的判断。</li>
-        <li>药品说明书摘要、剂量与适应证信息可能与最新版本存在差异，请以药品说明书原文及监管机构最新公布为准。</li>
         <li>全文访问条件以原站为准；本站不绕过付费墙，不提供未经授权的全文分发。</li>
         <li>临床工具在浏览器本地运行，不要求上传患者数据。</li>
       </ul>
@@ -62,6 +63,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>
         如发现内容错误、失效链接、日期或来源标注问题，欢迎通过项目仓库提交 issue 或 pull request 反馈。我们会在核实后更正。
       </p>
+      <ul>
+        <li>
+          项目仓库：
+          <a href="https://github.com/sunjunlan22-cloud/MedAI-Hub" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+            https://github.com/sunjunlan22-cloud/MedAI-Hub
+          </a>
+        </li>
+        <li>
+          提交 Issue：
+          <a href="https://github.com/sunjunlan22-cloud/MedAI-Hub/issues/new" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+            https://github.com/sunjunlan22-cloud/MedAI-Hub/issues/new
+          </a>
+        </li>
+        <li>
+          Pull Requests：
+          <a href="https://github.com/sunjunlan22-cloud/MedAI-Hub/pulls" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+            https://github.com/sunjunlan22-cloud/MedAI-Hub/pulls
+          </a>
+        </li>
+      </ul>
     </section>
   </article>
 </BaseLayout>

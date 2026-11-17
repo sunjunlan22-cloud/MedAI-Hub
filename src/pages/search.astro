@@ -12,7 +12,7 @@ import type { IndustryNews, ResearchNews } from '../types/news';
 // ============================================================
 interface SearchDoc {
   id: string;
-  section: string; // research | industry | guide | drug-label | ai-tool
+  section: string; // research | industry | guide | ai-tool
   sectionLabel: string;
   title: string;
   text: string; // 搜索文本：标题 + 摘要 + 标签 + 关键词 + 来源
@@ -104,29 +104,6 @@ for (const g of guideDocs) {
     litType,
     litTypeLabel: litType,
     abstract: g.data.description || '',
-    pmid: '',
-    doi: '',
-    isExternal: false,
-  });
-}
-
-// 药品说明书
-const labelDocs = await getCollection('drug-labels');
-for (const d of labelDocs) {
-  if (d.data.draft) continue;
-  const litType = d.data.antibioticClass || '说明书';
-  docs.push({
-    id: `drug-label:${d.id}`,
-    section: 'drug-label',
-    sectionLabel: '说明书',
-    title: d.data.drugName,
-    text: [d.data.drugName, d.data.brandNames?.join(' ') ?? '', d.data.description, d.data.indications?.join(' ') ?? '', d.data.antibioticClass, d.data.tags?.join(' ') ?? ''].join(' ').toLowerCase(),
-    href: `/drug-labels/${d.id}`,
-    source: d.data.manufacturer,
-    year: yearOf(d.data.reviewDate),
-    litType,
-    litTypeLabel: litType,
-    abstract: d.data.description || '',
     pmid: '',
     doi: '',
     isExternal: false,
@@ -277,7 +254,6 @@ const meta = { litTypes: [...litTypeMap.entries()], sources: sourceList };
     research: 'bg-purple-50 text-purple-700',
     industry: 'bg-blue-50 text-blue-700',
     guide: 'bg-green-50 text-green-700',
-    'drug-label': 'bg-amber-50 text-amber-700',
     'ai-tool': 'bg-cyan-50 text-cyan-700',
   };
 

@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import synonymsData from '../data/manual/search-synonyms.json';
+
+const concepts = (synonymsData as any).concepts ?? [];
 
 // 多维分类维度定义（对齐 Evidence Navigator 体系）
 // key: 对应 content.config.ts 中 schema 字段
@@ -173,7 +176,7 @@ const guides = (await getCollection('guides', ({ data }) => !data.draft))
   </div>
 </BaseLayout>
 
-<script define:vars={{ dimensions: FILTER_DIMENSIONS }}>
+<script define:vars={{ dimensions: FILTER_DIMENSIONS, concepts }} lang="ts">
   const searchInput = document.getElementById('guides-search');
   const cards = document.querySelectorAll('.guide-card');
   const emptyEl = document.getElementById('guides-empty');
@@ -185,6 +188,25 @@ const guides = (await getCollection('guides', ({ data }) => !data.draft))
   dimensions.forEach((d) => {
     fieldMap[d.key] = d.field;
   });
+
+  // 中英文/缩写术语归一化：命中同义词概念时，用其全部规范术语参与匹配
+  function expandQuery(raw) {
+    const q = raw.trim().toLowerCase();
+    const terms = new Set();
+    if (!q) return terms;
+    terms.add(q);
+    for (const c of concepts) {
+      const queries = c.queries ?? [];
+      const hit = queries.some((t) => {
+        const tl = t.toLowerCase();
+        return q === tl || q.includes(tl);
+      });
+      if (hit) {
+        (c.expansions ?? []).forEach((e) => terms.add(String(e).toLowerCase()));
+      }
+    }
+    return terms;
+  }
 
   function getSelected() {
     const selected = {};
@@ -199,12 +221,14 @@ const guides = (await getCollection('guides', ({ data }) => !data.draft))
   }
 
   function applyFilters() {
-    const q = searchInput.value.trim().toLowerCase();
+    const terms = expandQuery(searchInput.value);
     const selected = getSelected();
     let visible = 0;
 
     cards.forEach((card) => {
-      const matchSearch = !q || (card.dataset.search || '').includes(q);
+      const matchSearch =
+        terms.size === 0 ||
+        Array.from(terms).some((t) => (card.dataset.search || '').includes(t));
 
       // 同维度内 OR，跨维度 AND
       let matchDims = true;

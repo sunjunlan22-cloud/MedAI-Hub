@@ -60,20 +60,6 @@ const tools = [
   },
 ];
 
-const drugLabels = [
-  { name: '头孢他啶阿维巴坦（思福妥®）', href: '/drug-labels/ceftazidime-avibactam' },
-  { name: '氨曲南阿维巴坦（Emblaveo）', href: '/drug-labels/aztreonam-avibactam' },
-  { name: '注射用舒巴坦钠/度洛巴坦钠组合包装（双坦 / XACDURO）', href: '/drug-labels/sulbactam-durlobactam' },
-  { name: '注射用依拉环素（依嘉 / XERAVA）', href: '/drug-labels/eravacycline' },
-  { name: '亚胺西瑞（锐可博®/RECARBRIO®）', href: '/drug-labels/imipenem-cilastatin-relebactam' },
-  { name: '硫酸艾沙康唑注射液（康新博）', href: '/drug-labels/isavuconazole-injection' },
-  { name: '硫酸艾沙康唑胶囊（康新博）', href: '/drug-labels/isavuconazole-capsule' },
-  { name: '伏立康唑注射液（威凡®）', href: '/drug-labels/voriconazole-injection' },
-  { name: '伏立康唑片（威凡®）', href: '/drug-labels/voriconazole-tablet' },
-  { name: '两性霉素B脂质体（AmBisome）', href: '/drug-labels/amphotericin-b-liposome' },
-  { name: '两性霉素B胆固醇硫酸酯（ABelcet）', href: '/drug-labels/amphotericin-b-cholesterol' },
-];
-
 const colorMap: Record<string, string> = {
   blue: 'bg-blue-50 text-blue-700 border-blue-200',
   amber: 'bg-amber-50 text-amber-700 border-amber-200',
@@ -112,26 +98,5 @@ const colorMap: Record<string, string> = {
         ))
       }
     </div>
-  </section>
-
-  <!-- 药品说明书快速入口 -->
-  <section>
-    <h2 class="mb-4 text-lg font-semibold text-neutral-900">药品说明书（抗感染核心品种）</h2>
-    <div class="grid gap-3 sm:grid-cols-2">
-      {
-        drugLabels.map((d) => (
-          <a
-            href={d.href}
-            class="block rounded-lg border border-neutral-200 bg-neutral-50 p-4 transition hover:border-blue-400 hover:bg-white hover:shadow-sm"
-          >
-            <div class="text-sm font-medium text-neutral-900">{d.name}</div>
-            <div class="mt-1 text-xs text-neutral-500">适应证 · 用法用量 · 禁忌 · 肾功能调整</div>
-          </a>
-        ))
-      }
-    </div>
-    <a href="/drug-labels" class="mt-4 inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">
-      查看全部药品说明书 →
-    </a>
   </section>
 </BaseLayout>
