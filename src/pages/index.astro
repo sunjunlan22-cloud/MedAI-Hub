@@ -6,44 +6,14 @@ import researchData from '../data/auto/research.json';
 import aiToolsData from '../data/manual/ai-tools.json';
 import type { IndustryNews, ResearchNews } from '../types/news';
 
-// —— 五大核心板块入口 ——
-const sections = [
-  {
-    icon: '📰',
-    name: '行业资讯',
-    href: '/industry',
-    color: 'bg-blue-50',
-    desc: '关注医药行业政策、企业动态、药品市场与市场准入变化，为医药从业者提供及时的行业信息。',
-  },
-  {
-    icon: '🔬',
-    name: '科研前沿',
-    href: '/research',
-    color: 'bg-purple-50',
-    desc: '追踪医学领域重要研究进展，关注临床试验、系统评价、指南共识及高质量原始研究。',
-  },
-  {
-    icon: '📋',
-    name: '抗感染指南',
-    href: '/guides',
-    color: 'bg-green-50',
-    desc: '汇集国内外抗感染诊疗指南、专家共识及循证资料，支持快速检索与查阅。',
-  },
-  {
-    icon: '🧮',
-    name: '临床工具',
-    href: '/tools',
-    color: 'bg-amber-50',
-    desc: '帮助医务人员快速完成临床评估与计算，浏览器本地运行，保护患者隐私。',
-  },
-  {
-    icon: '🤖',
-    name: 'AI工具',
-    href: '/ai-tools',
-    color: 'bg-cyan-50',
-    desc: '发现适合医学临床、科研学习、医学教学及日常办公的 AI 工具，为医疗工作者提供实用参考。',
-  },
-];
+// —— 各栏目介绍（放在内容区标题下方，替代原中部介绍卡片）——
+const sectionDescriptions = {
+  '行业资讯': '关注医药行业政策、企业动态、药品市场与市场准入变化，为医药从业者提供及时的行业信息。',
+  '科研前沿': '追踪医学领域重要研究进展，关注临床试验、系统评价、指南共识及高质量原始研究。',
+  '抗感染指南': '汇集国内外抗感染诊疗指南、专家共识及循证资料，支持快速检索与查阅。',
+  '临床工具': '帮助医务人员快速完成临床评估与计算，浏览器本地运行，保护患者隐私。',
+  'AI工具': '发现适合医学临床、科研学习、医学教学及日常办公的 AI 工具，为医疗工作者提供实用参考。',
+};
 
 // —— 临床工具（与 /tools 页面保持一致）——
 const tools = [
@@ -100,27 +70,8 @@ const categoryBadgeClass: Record<string, string> = {
     </p>
   </section>
 
-  <!-- 五大核心板块入口区 -->
-  <section class="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-    {
-      sections.map((s) => (
-        <a
-          href={s.href}
-          class="group rounded-xl border border-neutral-200 bg-white p-5 text-center transition hover:border-blue-300 hover:shadow-md"
-        >
-          <span class={`mx-auto flex h-12 w-12 items-center justify-center rounded-lg text-2xl ${s.color}`}>{s.icon}</span>
-          <h3 class="mt-3 text-base font-semibold text-neutral-900">{s.name}</h3>
-          <p class="mt-1.5 text-xs leading-relaxed text-neutral-500">{s.desc}</p>
-          <span class="mt-3 inline-flex items-center gap-1 text-xs font-medium text-blue-600 opacity-0 transition group-hover:opacity-100">
-            进入 →
-          </span>
-        </a>
-      ))
-    }
-  </section>
-
   <!-- 内容聚合展示区 -->
-  <section class="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+  <section class="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
 
     <!-- 行业资讯 -->
     <div>
@@ -128,6 +79,7 @@ const categoryBadgeClass: Record<string, string> = {
         <h2 class="text-lg font-semibold">行业资讯</h2>
         <a href="/industry" class="text-sm text-blue-600 hover:underline">查看更多 →</a>
       </div>
+      <p class="-mt-2 mb-3 text-xs leading-relaxed text-neutral-500">{sectionDescriptions['行业资讯']}</p>
       <ul class="space-y-3">
         {
           industryNews.map((item) => (
@@ -152,6 +104,7 @@ const categoryBadgeClass: Record<string, string> = {
         <h2 class="text-lg font-semibold">科研前沿</h2>
         <a href="/research" class="text-sm text-blue-600 hover:underline">查看更多 →</a>
       </div>
+      <p class="-mt-2 mb-3 text-xs leading-relaxed text-neutral-500">{sectionDescriptions['科研前沿']}</p>
       <ul class="space-y-3">
         {
           researchNews.map((item) => (
@@ -164,7 +117,7 @@ const categoryBadgeClass: Record<string, string> = {
               <a href={`/research/${item.id}`} class="line-clamp-2 text-sm font-medium text-neutral-900 hover:text-blue-600">
                 {item.title}
               </a>
-              <p class="mt-1.5 line-clamp-2 text-xs text-neutral-500">{item.coreFindings}</p>
+              <p class="mt-1.5 line-clamp-2 text-xs text-neutral-500">{item.abstract ?? ''}</p>
             </li>
           ))
         }
@@ -177,6 +130,7 @@ const categoryBadgeClass: Record<string, string> = {
         <h2 class="text-lg font-semibold">抗感染指南</h2>
         <a href="/guides" class="text-sm text-blue-600 hover:underline">查看更多 →</a>
       </div>
+      <p class="-mt-2 mb-3 text-xs leading-relaxed text-neutral-500">{sectionDescriptions['抗感染指南']}</p>
       <ul class="space-y-3">
         {
           latestGuides.map((guide) => (
@@ -203,6 +157,7 @@ const categoryBadgeClass: Record<string, string> = {
         <h2 class="text-lg font-semibold">临床工具</h2>
         <a href="/tools" class="text-sm text-blue-600 hover:underline">查看更多 →</a>
       </div>
+      <p class="-mt-2 mb-3 text-xs leading-relaxed text-neutral-500">{sectionDescriptions['临床工具']}</p>
       <ul class="space-y-3">
         {
           latestTools.map((tool) => (
@@ -224,6 +179,7 @@ const categoryBadgeClass: Record<string, string> = {
         <h2 class="text-lg font-semibold">AI工具</h2>
         <a href="/ai-tools" class="text-sm text-blue-600 hover:underline">查看更多 →</a>
       </div>
+      <p class="-mt-2 mb-3 text-xs leading-relaxed text-neutral-500">{sectionDescriptions['AI工具']}</p>
       <ul class="space-y-3">
         {
           aiTools.map((tool) => (

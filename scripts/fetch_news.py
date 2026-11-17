@@ -524,13 +524,13 @@ PREPRINT_SOURCE_HINTS = (
 )
 
 # 旧 studyType → 新 studyDesign（研究设计类型，与证据质量正交，不代表证据等级）
+# 「预印本」是发表状态而非研究设计，不映射到 studyDesign；统一归 other。
 STUDY_DESIGN_MAP = {
     "RCT": "rct",
     "cohort": "cohort",
     "real-world": "realWorld",
     "meta-analysis": "metaAnalysis",
     "review": "other",  # 普通综述不自动升级为系统综述；无法区分时保守归为 other
-    "preprint": "preprint",
     "other": "other",
 }
 
@@ -1445,10 +1445,34 @@ def resolve_link(link: str, feed: dict) -> str:
 # ============================================================
 # 关键词打分与标签提取
 # ============================================================
+def _pattern_flags(pattern: str) -> int:
+    """纯大写 ASCII 缩写（CRAB/CRE/CT/AI 等）区分大小写，
+    避免把 crab(螃蟹) 误判为 CRAB 耐药、cre 等其他含义误判为 CRE。
+    含小写字母的规范词（如 acinetobacter baumannii、carbapenem-resistant）
+    及中文词仍不区分大小写。
+
+    只统计未被反斜杠转义的字母，忽略 \\b、\\d、\\s、\\w 等元字符，
+    否则 \\bCRAB\\b 会因 \\b 里的字母 b 被误判为「含小写」而回到 IGNORECASE。
+    """
+    letters: list[str] = []
+    i = 0
+    while i < len(pattern):
+        c = pattern[i]
+        if c == "\\" and i + 1 < len(pattern):
+            i += 2  # 跳过转义序列
+            continue
+        if c.isascii() and c.isalpha():
+            letters.append(c)
+        i += 1
+    if letters and all(c.isupper() for c in letters):
+        return 0
+    return re.IGNORECASE
+
+
 def score_relevance(text: str) -> tuple[int, dict[str, int], list[str]]:
     """
-    计算关键词相关性得分。
-    返回：(总分, 各分组得分, 命中的标签列表)
+    计算关键词相关性命中数（相关性，非研究质量评分）。
+    返回：(相关性命中总数, 各分组命中数, 命中的标签列表)
     """
     group_scores: dict[str, int] = {}
     matched_tags: list[str] = []
@@ -1456,7 +1480,7 @@ def score_relevance(text: str) -> tuple[int, dict[str, int], list[str]]:
     for group_id, group in KEYWORD_GROUPS.items():
         hits = 0
         for pattern in group["patterns"]:
-            if re.search(pattern, text, re.IGNORECASE):
+            if re.search(pattern, text, _pattern_flags(pattern)):
                 hits += 1
         if hits > 0:
             group_scores[group_id] = hits
@@ -1464,14 +1488,16 @@ def score_relevance(text: str) -> tuple[int, dict[str, int], list[str]]:
 
     total = sum(group_scores.values())
 
-    # 提取细粒度标签（ASCII 缩写用词边界，避免 "CT" 误命中 "infection"、"AI" 误命中 "detail"）
+    # 提取细粒度标签（ASCII 缩写用词边界 + 大小写敏感，避免 CRAB 误命中 crab、CT 误命中 ct）
     fine_tags: list[str] = []
     for kw, tag in TAG_KEYWORDS.items():
         if kw.isascii() and kw.isalnum():
             pattern = r"\b" + re.escape(kw) + r"\b"
+            flags = 0 if kw.isupper() else re.IGNORECASE
         else:
             pattern = re.escape(kw)
-        if re.search(pattern, text, re.IGNORECASE) and tag not in fine_tags:
+            flags = re.IGNORECASE
+        if re.search(pattern, text, flags) and tag not in fine_tags:
             fine_tags.append(tag)
 
     return total, group_scores, fine_tags
@@ -1528,34 +1554,6 @@ def score_industry(text: str, group_scores: dict, authority: int) -> dict:
         "breakthrough": breakthrough,
         "competitiveImpact": competitive,
         "timelinessAuthority": timeliness,
-    }
-    scores["totalScore"] = sum(scores.values())
-    return scores
-
-
-def score_research(text: str, group_scores: dict, authority: int, study_type: str) -> dict:
-    """科研资讯五轴评分"""
-    rel = sum(group_scores.values())
-    has_fungal = "fungal" in group_scores
-    has_amr = "amr" in group_scores
-    has_imaging = "imaging" in group_scores
-    has_ai = "ai_clinical" in group_scores
-
-    ev_base = {"RCT": 9, "meta-analysis": 9, "cohort": 7, "real-world": 7,
-               "review": 6, "preprint": 4, "other": 5}.get(study_type, 5)
-
-    topic_insp = clamp(5 + has_fungal * 2 + has_amr * 2 + has_ai * 2 + has_imaging * 1)
-    clinical_app = clamp(4 + has_fungal * 2 + has_amr * 3 + has_imaging * 2 + authority * 0.3)
-    evidence = clamp(ev_base + (rel > 2) * 1)
-    specialty = clamp(5 + has_fungal * 1 + has_amr * 1 + has_imaging * 1)
-    research_val = clamp(5 + has_ai * 3 + has_fungal * 2 + has_amr * 2 + (rel > 3) * 1)
-
-    scores = {
-        "topicInspiration": topic_insp,
-        "clinicalApplicability": clinical_app,
-        "evidenceLevel": evidence,
-        "specialtyUniversality": specialty,
-        "researchValue": research_val,
     }
     scores["totalScore"] = sum(scores.values())
     return scores
@@ -1974,22 +1972,13 @@ def build_research_entry(item: dict, feed: dict, group_scores: dict, tags: list[
     study_type = detect_study_type(title + " " + desc)
     is_preprint = _is_preprint(item, title + " " + desc)
 
-    core = desc[:300] if desc else title
-    limitations = "本条目为自动采集摘要，研究设计与统计方法细节请查阅原文。"
-    inspiration = "建议进一步阅读原文以评估证据质量与临床适用性。"
-
-    if "fungal" in group_scores:
-        inspiration = "深部真菌感染诊疗方向，可结合药敏与 TDM 数据设计临床研究。"
-    if "amr" in group_scores:
-        inspiration = "耐药菌（CRAB/CRE 等）诊疗方向，可启发耐药监测与新药临床研究课题。"
-    if "ai_clinical" in group_scores:
-        inspiration = "AI 辅助诊断/决策方向，可探索多中心验证与临床落地路径。"
+    core = ""
+    limitations = ""
+    inspiration = ""
 
     # 证据等级：停用自动推断，统一「原文未评估」（不根据 studyType 生成 1a/2b）
     study_design = STUDY_DESIGN_MAP.get(study_type, "other")
     publication_status = "preprint" if is_preprint else PUBLICATION_STATUS_MAP.get("published", "published")
-
-    scores = score_research(title + " " + desc, group_scores, feed["authority"], study_type)
 
     entry = {
         "id": eid,
@@ -2007,8 +1996,6 @@ def build_research_entry(item: dict, feed: dict, group_scores: dict, tags: list[
         "evidenceQuality": UNASSESSED,
         "studyDesign": study_design,
         "publicationStatus": publication_status,
-        "scores": scores,
-        "totalScore": scores["totalScore"],
         "isPreprint": is_preprint,
         "tags": tags[:6],
     }
@@ -2032,11 +2019,9 @@ def build_clinicaltrial_entry(item: dict, feed: dict, group_scores: dict, tags: 
     # 来源名称：优先申办方组织名；缺失时退化为查询任务名（不伪装）
     source_name = item.get("sponsor") or feed.get("name", "ClinicalTrials.gov")
 
-    core = desc[:300] if desc else title
-    limitations = "本条目为临床试验注册信息自动采集，研究设计、入排标准与统计方法细节请查阅 ClinicalTrials.gov 原始记录。"
-    inspiration = "可结合本项目抗感染（真菌 / 耐药菌）主题，跟踪该试验的注册状态与后续结果发布。"
-
-    scores = score_research(title + " " + desc, group_scores, feed["authority"], "other")
+    core = ""
+    limitations = ""
+    inspiration = ""
 
     entry = {
         "id": eid,
@@ -2056,8 +2041,6 @@ def build_clinicaltrial_entry(item: dict, feed: dict, group_scores: dict, tags: 
         "publicationStatus": "registered",
         "trialId": nct_id,
         "trialStatus": item.get("trialStatus", "unknown"),
-        "scores": scores,
-        "totalScore": scores["totalScore"],
         "isPreprint": False,
         "tags": tags[:6],
     }
@@ -2091,11 +2074,9 @@ def build_ictrp_entry(item: dict, feed: dict, group_scores: dict, tags: list[str
     # 来源名称：优先申办方（如医院）；缺失时退化为注册中心官方名（不伪装）
     source_name = item.get("sponsor") or meta["sourceName"]
 
-    core = title
-    limitations = "本条目为临床试验注册信息自动采集，研究设计、入排标准与统计方法细节请查阅 WHO ICTRP 原始记录。"
-    inspiration = "可结合本项目抗感染（真菌 / 耐药菌）主题，跟踪该试验的注册状态与后续结果发布。"
-
-    scores = score_research(title, group_scores, feed["authority"], "other")
+    core = ""
+    limitations = ""
+    inspiration = ""
 
     entry = {
         "id": eid,
@@ -2118,8 +2099,6 @@ def build_ictrp_entry(item: dict, feed: dict, group_scores: dict, tags: list[str
         "sourceId": source_id,
         "language": meta["language"],
         "geographicScope": meta["geographicScope"],
-        "scores": scores,
-        "totalScore": scores["totalScore"],
         "isPreprint": False,
         "tags": tags[:6],
     }
@@ -2773,8 +2752,7 @@ def main(argv: list[str] | None = None) -> None:
 
             if feed["kind"] == "research":
                 entry = build_research_entry(item, feed, group_scores, tags)
-                if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
-                    research_entries.append(entry)
+                research_entries.append(entry)
             else:
                 entry = build_industry_entry(item, feed, group_scores, tags)
                 if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
@@ -2811,8 +2789,7 @@ def main(argv: list[str] | None = None) -> None:
                 continue
 
             entry = build_research_entry(item, feed_meta, group_scores, tags)
-            if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
-                research_entries.append(entry)
+            research_entries.append(entry)
 
     # 全部 PubMed 查询成功时，旧 PubMed 记录（无 sourceQuery）按快照丢弃，避免残留旧数据
     if pubmed_all_ok:
@@ -2849,8 +2826,7 @@ def main(argv: list[str] | None = None) -> None:
                 continue
 
             entry = build_clinicaltrial_entry(item, feed_meta, group_scores, tags)
-            if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
-                research_entries.append(entry)
+            research_entries.append(entry)
 
     # 全部 ClinicalTrials 查询成功时，旧 ClinicalTrials 记录（无 sourceQuery）按快照丢弃
     if clinicaltrials_all_ok:
@@ -2888,8 +2864,7 @@ def main(argv: list[str] | None = None) -> None:
                 continue
 
             entry = build_ictrp_entry(item, feed_meta, group_scores, tags)
-            if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
-                research_entries.append(entry)
+            research_entries.append(entry)
 
     # 全部 WHO ICTRP 查询成功时，旧 ChiCTR 记录（无 sourceQuery）按快照丢弃
     if ictrp_all_ok:
@@ -3035,13 +3010,9 @@ def main(argv: list[str] | None = None) -> None:
                 "coreFindings": src["description"],
                 "limitations": "本条目为权威机构资源入口，具体内容请访问原网站。",
                 "inspiration": f"{src['name']}是{src['category']}领域权威来源，建议定期跟踪其指南更新与监测数据。",
-                "scores": score_research(text, group_scores, src["authority"], "other"),
-                "totalScore": 0,
                 "tags": tags[:6],
             }
-            entry["totalScore"] = entry["scores"]["totalScore"]
-            if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
-                research_entries.append(apply_schema_fields(entry, src, {}, "research"))
+            research_entries.append(apply_schema_fields(entry, src, {}, "research"))
         else:
             entry = {
                 "id": make_id("ind", src["id"]),

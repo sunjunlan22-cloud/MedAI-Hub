@@ -100,7 +100,6 @@ export type StudyDesign =
   | 'metaAnalysis'
   | 'systematicReview'
   | 'realWorld'
-  | 'preprint'
   | 'other';
 export type TrialStatus = 'registered' | 'recruiting' | 'completed' | 'terminated' | 'unknown';
 export type PublicationStatus = 'registered' | 'resultsPosted' | 'published' | 'preprint' | 'inReview';
@@ -174,7 +173,7 @@ const STUDY_DESIGN_MAP: Record<StudyType, StudyDesign> = {
   'real-world': 'realWorld',
   'meta-analysis': 'metaAnalysis',
   'review': 'other', // 普通综述不自动升级为系统综述；无法区分时保守归为 other
-  'preprint': 'preprint',
+  'preprint': 'other', // 预印本是发表状态而非研究设计，不映射为 preprint
   'other': 'other',
 };
 

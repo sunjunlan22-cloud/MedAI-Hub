@@ -124,7 +124,7 @@ function formatDate(iso: string) {
           class="news-card rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md"
           data-type={item.studyType}
           data-tags={item.tags.join(',')}
-          data-search={`${item.title} ${item.coreFindings} ${item.inspiration} ${item.tags.join(' ')} ${item.evidenceLevel}`.toLowerCase()}
+          data-search={`${item.title} ${item.abstract ?? ''} ${item.pmid ?? ''} ${item.tags.join(' ')} ${item.sourceName}`.toLowerCase()}
         >
           <div class="mb-3 flex flex-wrap items-center gap-2 text-xs">
             {/* 证据等级（突出） */}
@@ -166,19 +166,30 @@ function formatDate(iso: string) {
             {item.title}
           </a>
 
-          {/* 核心发现（突出） */}
-          <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
-            <p class="text-sm leading-relaxed text-neutral-800">
-              <span class="mr-1 font-semibold text-blue-700">核心发现：</span>
-              {item.coreFindings}
-            </p>
-          </div>
+          {/* 原文摘要（优先）或核心发现（有真实结果时） */}
+          {item.abstract ? (
+            <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
+              <p class="text-sm leading-relaxed text-neutral-800">
+                <span class="mr-1 font-semibold text-blue-700">摘要：</span>
+                {item.abstract}
+              </p>
+            </div>
+          ) : item.coreFindings ? (
+            <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
+              <p class="text-sm leading-relaxed text-neutral-800">
+                <span class="mr-1 font-semibold text-blue-700">核心发现：</span>
+                {item.coreFindings}
+              </p>
+            </div>
+          ) : null}
 
-          {/* 临床启发 */}
-          <p class="mt-3 text-sm leading-relaxed text-neutral-700">
-            <span class="mr-1 font-medium text-neutral-900">临床启发：</span>
-            {item.inspiration}
-          </p>
+          {/* 临床/科研启发（仅保留有依据的人工内容） */}
+          {item.inspiration && (
+            <p class="mt-3 text-sm leading-relaxed text-neutral-700">
+              <span class="mr-1 font-medium text-neutral-900">临床启发：</span>
+              {item.inspiration}
+            </p>
+          )}
 
           {/* 研究局限（次要信息） */}
           {item.limitations && (

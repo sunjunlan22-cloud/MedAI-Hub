@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="文献详情" description="PubMed 文献详情（按需实时获取，不依赖静态重建）。">
+  <article class="mx-auto max-w-3xl">
+    <a href="/search" class="mb-6 inline-block text-sm text-blue-600 hover:underline">← 返回搜索</a>
+
+    <div id="loading" class="rounded-lg border border-dashed border-neutral-300 p-10 text-center text-sm text-neutral-500">
+      正在获取文献详情…
+    </div>
+    <div id="error" class="hidden rounded-lg border border-amber-300 bg-amber-50 p-6 text-sm text-amber-800"></div>
+    <div id="detail" class="hidden"></div>
+  </article>
+</BaseLayout>
+
+<script>
+  const loading = document.getElementById('loading')!;
+  const errorEl = document.getElementById('error')!;
+  const detailEl = document.getElementById('detail')!;
+  let currentRecord: any = null;
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
+  }
+
+  function fmt(s: unknown): string {
+    return escapeHtml(String(s ?? ''));
+  }
+
+  async function load() {
+    const pmid = new URLSearchParams(location.search).get('pmid');
+    if (!pmid || !/^\d{1,9}$/.test(pmid)) {
+      loading.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+      errorEl.textContent = '缺少有效的 PMID 参数。';
+      return;
+    }
+    try {
+      const res = await fetch(`/api/pubmed?pmid=${encodeURIComponent(pmid)}`);
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        throw new Error(data.message || `HTTP ${res.status}`);
+      }
+      render(data.record);
+    } catch (err: any) {
+      loading.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+      errorEl.innerHTML = `文献详情获取失败：${escapeHtml(err.message || '未知错误')}。<br><br>可尝试直接打开 <a class="text-blue-600 hover:underline" href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(pmid)}/" target="_blank" rel="noopener noreferrer">PubMed 官方页面</a>。`;
+    }
+  }
+
+  function render(r: any) {
+    loading.classList.add('hidden');
+    detailEl.classList.remove('hidden');
+    currentRecord = r;
+
+    const authors = (r.authors || []).join('; ') || '未提供';
+    const metaBits = [
+      r.journal ? `<span>期刊：${fmt(r.journal)}</span>` : '',
+      r.pubDate ? `<span>发表：${fmt(r.pubDate)}</span>` : '',
+      r.volume ? `<span>卷：${fmt(r.volume)}</span>` : '',
+      r.issue ? `<span>期：${fmt(r.issue)}</span>` : '',
+      r.pages ? `<span>页码：${fmt(r.pages)}</span>` : '',
+    ].filter(Boolean).join(' · ');
+
+    const idBits = [
+      r.pmid ? `<span class="rounded bg-neutral-100 px-2 py-0.5">PMID: ${fmt(r.pmid)}</span>` : '',
+      r.pmcid ? `<span class="rounded bg-neutral-100 px-2 py-0.5">PMCID: ${fmt(r.pmcid)}</span>` : '',
+      r.doi ? `<span class="rounded bg-neutral-100 px-2 py-0.5">DOI: ${fmt(r.doi)}</span>` : '',
+    ].filter(Boolean).join(' ');
+
+    const pubTypes = (r.pubTypes || []).map((t: string) => `<span class="rounded bg-sky-50 px-2 py-0.5 text-sky-700">${fmt(t)}</span>`).join(' ');
+    const mesh = (r.mesh || []).map((m: string) => `<span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">${fmt(m)}</span>`).join(' ');
+
+    detailEl.innerHTML = `
+      <h1 class="text-xl font-semibold leading-snug">${fmt(r.title)}</h1>
+
+      <div class="mt-3 flex flex-wrap items-center gap-2 text-sm">
+        <span class="rounded bg-sky-50 px-2 py-0.5 font-medium text-sky-700">PubMed</span>
+        ${pubTypes}
+      </div>
+
+      <div class="mt-4 text-sm text-neutral-600">
+        <p class="font-medium text-neutral-800">作者</p>
+        <p class="mt-1 leading-relaxed">${fmt(authors)}</p>
+      </div>
+
+      <div class="mt-4 text-sm text-neutral-600">
+        <p class="font-medium text-neutral-800">书目信息</p>
+        <p class="mt-1">${metaBits}</p>
+        <p class="mt-2 flex flex-wrap gap-2">${idBits}</p>
+      </div>
+
+      ${r.abstract ? `
+      <section class="mt-6">
+        <h2 class="mb-2 text-base font-semibold">摘要</h2>
+        <p class="whitespace-pre-line leading-relaxed text-neutral-700">${fmt(r.abstract)}</p>
+      </section>` : `<section class="mt-6"><p class="text-sm text-neutral-400">该记录未提供摘要。</p></section>`}
+
+      ${r.mesh && r.mesh.length ? `
+      <section class="mt-6">
+        <h2 class="mb-2 text-base font-semibold">MeSH 主题词</h2>
+        <div class="flex flex-wrap gap-2">${mesh}</div>
+      </section>` : ''}
+
+      ${r.grants && r.grants.length ? `
+      <section class="mt-6">
+        <h2 class="mb-2 text-base font-semibold">资助信息</h2>
+        <p class="text-sm text-neutral-600">${fmt(r.grants.join('; '))}</p>
+      </section>` : ''}
+
+      <section class="mt-8 border-t border-neutral-200 pt-6 text-sm text-neutral-500">
+        <p>检索时间：${new Date().toLocaleString('zh-CN')} · 数据来源：PubMed（NCBI E-utilities）</p>
+        <p class="mt-1">全文访问条件以原站为准，本站不绕过付费墙。</p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(r.pmid)}/" target="_blank" rel="noopener noreferrer" class="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700">PubMed 原文 →</a>
+          ${r.doi ? `<a href="https://doi.org/${encodeURIComponent(r.doi)}" target="_blank" rel="noopener noreferrer" class="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50">DOI 出版社链接 →</a>` : ''}
+          <button type="button" id="send-email-btn" class="rounded-lg border border-blue-300 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50">发送链接到邮箱</button>
+        </div>
+        <div id="email-box" class="mt-3 hidden rounded-lg border border-blue-200 bg-blue-50 p-3">
+          <p class="mb-2 text-xs text-neutral-600">将本条的标题、作者、期刊、日期、DOI/PMID、摘要及原文链接发送到你的邮箱（无需注册）。</p>
+          <div class="flex flex-wrap gap-2">
+            <input id="email-input" type="email" placeholder="you@example.com" class="min-w-0 flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 text-sm" />
+            <button id="email-send" type="button" class="rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700">发送</button>
+          </div>
+          <p id="email-result" class="mt-2 text-xs text-neutral-600"></p>
+        </div>
+      </section>
+    `;
+
+    bindEmail();
+  }
+
+  function bindEmail() {
+    const btn = document.getElementById('send-email-btn');
+    const box = document.getElementById('email-box');
+    const input = document.getElementById('email-input') as HTMLInputElement | null;
+    const send = document.getElementById('email-send');
+    const result = document.getElementById('email-result');
+
+    btn?.addEventListener('click', () => {
+      box!.classList.toggle('hidden');
+    });
+
+    async function doSend() {
+      const email = input!.value.trim();
+      if (!email) { result!.textContent = '请填写邮箱地址。'; return; }
+      result!.textContent = '正在提交…';
+      try {
+        const res = await fetch('/api/send-literature', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            item: {
+              title: currentRecord?.title || '',
+              authors: (currentRecord?.authors || []).join('; '),
+              journal: currentRecord?.journal || '',
+              date: currentRecord?.pubDate || '',
+              doi: currentRecord?.doi || '',
+              pmid: currentRecord?.pmid || '',
+              abstract: currentRecord?.abstract || '',
+              source: currentRecord?.source || 'PubMed',
+            },
+          }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          result!.textContent = data.message || '已受理发送请求。';
+          result!.className = 'mt-2 text-xs text-green-700';
+        } else {
+          result!.textContent = data.message || '发送失败。';
+          result!.className = 'mt-2 text-xs text-amber-700';
+        }
+      } catch (err: any) {
+        result!.textContent = '发送失败：' + (err.message || '网络错误');
+        result!.className = 'mt-2 text-xs text-amber-700';
+      }
+    }
+
+    send?.addEventListener('click', doSend);
+    input?.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); doSend(); } });
+  }
+
+  load();
+</script>

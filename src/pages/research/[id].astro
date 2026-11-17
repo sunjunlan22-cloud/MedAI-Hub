@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ScoreBadge from '../../components/ScoreBadge.astro';
 import researchData from '../../data/auto/research.json';
 import type { ResearchNews } from '../../types/news';
 
@@ -59,13 +58,6 @@ const publicationStatusLabel: Record<string, string> = {
   inReview: '在审',
 };
 
-const axes = [
-  { label: '课题启发性', value: item.scores.topicInspiration },
-  { label: '临床可落地性', value: item.scores.clinicalApplicability },
-  { label: '证据等级', value: item.scores.evidenceLevel },
-  { label: '专科普适性', value: item.scores.specialtyUniversality },
-  { label: '科研增益价值', value: item.scores.researchValue },
-];
 ---
 
 <BaseLayout title={item.title} description={item.coreFindings}>
@@ -146,30 +138,29 @@ const axes = [
       </section>
     )}
 
-    <!-- 核心发现 -->
-    <section class="mt-8">
-      <h2 class="mb-2 text-lg font-semibold">核心发现</h2>
-      <p class="leading-relaxed text-neutral-700">{item.coreFindings}</p>
-    </section>
+    <!-- 核心发现（仅在存在真实研究结果/人工摘要时展示） -->
+    {item.coreFindings && (
+      <section class="mt-8">
+        <h2 class="mb-2 text-lg font-semibold">核心发现</h2>
+        <p class="leading-relaxed text-neutral-700">{item.coreFindings}</p>
+      </section>
+    )}
 
-    <!-- 研究局限 -->
-    <section class="mt-6">
-      <h2 class="mb-2 text-lg font-semibold">研究局限</h2>
-      <p class="leading-relaxed text-neutral-700">{item.limitations}</p>
-    </section>
+    <!-- 研究局限（仅在有依据时展示，自动生成模板已停用） -->
+    {item.limitations && (
+      <section class="mt-6">
+        <h2 class="mb-2 text-lg font-semibold">研究局限</h2>
+        <p class="leading-relaxed text-neutral-700">{item.limitations}</p>
+      </section>
+    )}
 
-    <!-- 临床/科研启发 -->
-    <section class="mt-6">
-      <h2 class="mb-2 text-lg font-semibold">临床 / 科研启发</h2>
-      <p class="leading-relaxed text-neutral-700">{item.inspiration}</p>
-    </section>
-
-    <!-- 五轴评分 -->
-    <section class="mt-8">
-      <h2 class="mb-3 text-lg font-semibold">五轴评分</h2>
-      <ScoreBadge totalScore={item.totalScore} axes={axes} />
-      <p class="mt-2 text-xs text-neutral-400">满分 50 分，准入线 35 分（双 Agent 审核通过）</p>
-    </section>
+    <!-- 临床/科研启发（仅保留有依据的人工内容） -->
+    {item.inspiration && (
+      <section class="mt-6">
+        <h2 class="mb-2 text-lg font-semibold">临床 / 科研启发</h2>
+        <p class="leading-relaxed text-neutral-700">{item.inspiration}</p>
+      </section>
+    )}
 
     <!-- 标签 -->
     {item.tags.length > 0 && (

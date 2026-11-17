@@ -69,8 +69,8 @@ export interface ResearchNews {
   limitations: string;                    // 研究局限
   inspiration: string;                    // 临床/科研启发
   evidenceLevel: string;                  // 证据等级提示
-  scores: ResearchScores;                 // 五轴评分
-  totalScore: number;                     // 总分（满分 50，准入线 35）
+  scores?: ResearchScores;                // 旧五轴评分（已停用生成，仅兼容历史数据，不再参与业务判断）
+  totalScore?: number;                    // 旧总分（已停用生成，仅兼容历史数据）
   isPreprint: boolean;                    // 是否预印本（强制标注"未同行评议"）
   tags: string[];                         // 标签
   // —— 以下为新增字段（可选，兼容旧数据）——

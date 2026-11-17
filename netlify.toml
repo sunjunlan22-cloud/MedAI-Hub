@@ -1,5 +1,5 @@
 # Netlify 构建与部署配置
-# 纯静态 Astro 站点：无需 SSR、无需 Netlify Functions。
+# 纯静态 Astro 站点 + 轻量 Serverless 接口（PubMed 检索 / 文献详情 / 文献发送邮箱）。
 
 [build]
   command = "pnpm build"
@@ -8,3 +8,25 @@
 [build.environment]
   NODE_VERSION = "20"
   PNPM_VERSION = "12.18.0"
+
+[functions]
+  directory = "netlify/functions"
+
+# PubMed 检索 / 文献详情（Serverless，暴露为 /api/pubmed）
+[[redirects]]
+  from = "/api/pubmed"
+  to = "/.netlify/functions/pubmed"
+  status = 200
+  force = true
+
+# 文献链接邮件发送（Serverless，暴露为 /api/send-literature）
+[[redirects]]
+  from = "/api/send-literature"
+  to = "/.netlify/functions/send-literature"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/api/pubmed"
+  [headers.values]
+    Cache-Control = "no-store"

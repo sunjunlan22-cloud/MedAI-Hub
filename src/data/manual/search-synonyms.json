@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-17",
+  "description": "统一检索的术语映射与输入联想（医学文献检索第一版）。queries 为触发词，expansions 为参与匹配的规范术语集合；ambiguous=true 时检索结果上方会显示说明，不做静默强制映射。",
+  "concepts": [
+    {
+      "id": "voriconazole",
+      "label": "伏立康唑（voriconazole）",
+      "queries": ["伏立康唑", "voriconazole"],
+      "expansions": ["伏立康唑", "voriconazole"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "isavuconazole",
+      "label": "艾沙康唑（isavuconazole）",
+      "queries": ["艾沙康唑", "isavuconazole"],
+      "expansions": ["艾沙康唑", "isavuconazole"],
+      "source": "WHO 国际非专利药品名（INN）中英文对照",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "ipa",
+      "label": "IPA = 侵袭性肺曲霉病（invasive pulmonary aspergillosis）",
+      "queries": ["IPA", "invasive pulmonary aspergillosis", "侵袭性肺曲霉病"],
+      "expansions": ["invasive pulmonary aspergillosis", "侵袭性肺曲霉病", "IPA"],
+      "source": "医学真菌病命名（EORTC/MSG 侵袭性真菌病共识）",
+      "ambiguous": true,
+      "note": "IPA 在医学真菌语境下通常指侵袭性肺曲霉病，但也可能指异丙醇（isopropyl alcohol）等其他含义；如非此义请改用更精确关键词。"
+    },
+    {
+      "id": "cre",
+      "label": "CRE = 耐碳青霉烯肠杆菌目（carbapenem-resistant Enterobacterales）",
+      "queries": ["CRE", "carbapenem-resistant Enterobacteriaceae", "carbapenem-resistant Enterobacterales", "耐碳青霉烯肠杆菌"],
+      "expansions": ["CRE", "carbapenem-resistant Enterobacteriaceae", "carbapenem-resistant Enterobacterales", "耐碳青霉烯肠杆菌"],
+      "source": "临床微生物学常用缩写（CLSI / IDSA 指南）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "crab",
+      "label": "CRAB = 耐碳青霉烯鲍曼不动杆菌（carbapenem-resistant Acinetobacter baumannii）",
+      "queries": ["CRAB", "carbapenem-resistant Acinetobacter baumannii", "鲍曼不动杆菌", "耐碳青霉烯鲍曼不动杆菌"],
+      "expansions": ["CRAB", "carbapenem-resistant Acinetobacter baumannii", "鲍曼不动杆菌", "耐碳青霉烯鲍曼不动杆菌"],
+      "source": "临床微生物学常用缩写（IDSA 2023 耐药革兰阴性菌指南）",
+      "ambiguous": false,
+      "note": ""
+    },
+    {
+      "id": "pseudomonas-aeruginosa",
+      "label": "铜绿假单胞菌（Pseudomonas aeruginosa）",
+      "queries": ["铜绿假单胞菌", "Pseudomonas aeruginosa", "绿脓杆菌"],
+      "expansions": ["铜绿假单胞菌", "Pseudomonas aeruginosa", "绿脓杆菌"],
+      "source": "病原体中英文命名对照（医学微生物学）",
+      "ambiguous": false,
+      "note": ""
+    }
+  ]
+}

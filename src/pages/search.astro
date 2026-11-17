@@ -1,0 +1,511 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import industryData from '../data/auto/industry.json';
+import researchData from '../data/auto/research.json';
+import aiToolsData from '../data/manual/ai-tools.json';
+import synonymsData from '../data/manual/search-synonyms.json';
+import type { IndustryNews, ResearchNews } from '../types/news';
+
+// ============================================================
+// 统一站内检索索引（构建期归一化，客户端过滤）
+// ============================================================
+interface SearchDoc {
+  id: string;
+  section: string; // research | industry | guide | drug-label | ai-tool
+  sectionLabel: string;
+  title: string;
+  text: string; // 搜索文本：标题 + 摘要 + 标签 + 关键词 + 来源
+  href: string;
+  source: string; // 数据库来源 / 发布机构（与内容分区是两个维度）
+  year: number; // 0 表示未知
+  litType: string; // 文献类型 / 内容类型（原始值）
+  litTypeLabel: string;
+  abstract: string;
+  pmid: string;
+  doi: string;
+  isExternal: boolean;
+}
+
+const studyTypeLabel: Record<string, string> = {
+  'RCT': 'RCT',
+  'cohort': '队列研究',
+  'real-world': '真实世界研究',
+  'meta-analysis': 'Meta 分析',
+  'review': '综述',
+  'preprint': '预印本',
+  'other': '其他',
+};
+
+function yearOf(iso: string | undefined | null): number {
+  if (!iso) return 0;
+  const y = parseInt(String(iso).slice(0, 4), 10);
+  return Number.isFinite(y) && y > 1900 ? y : 0;
+}
+
+const docs: SearchDoc[] = [];
+
+// 科研前沿
+for (const n of researchData as ResearchNews[]) {
+  docs.push({
+    id: `research:${n.id}`,
+    section: 'research',
+    sectionLabel: '科研前沿',
+    title: n.title,
+    text: [n.title, n.abstract ?? '', n.tags.join(' '), n.sourceName, n.pmid ?? ''].join(' ').toLowerCase(),
+    href: `/research/${n.id}`,
+    source: n.sourceName,
+    year: yearOf(n.publishTime),
+    litType: n.studyType,
+    litTypeLabel: studyTypeLabel[n.studyType] ?? n.studyType,
+    abstract: n.abstract ?? '',
+    pmid: n.pmid ?? '',
+    doi: '',
+    isExternal: false,
+  });
+}
+
+// 行业资讯
+for (const n of industryData as IndustryNews[]) {
+  const summary = (n as any).summary ?? (n as any).abstract ?? '';
+  docs.push({
+    id: `industry:${n.id}`,
+    section: 'industry',
+    sectionLabel: '行业资讯',
+    title: n.title,
+    text: [n.title, summary, n.tags?.join(' ') ?? '', n.sourceName, (n as any).category ?? ''].join(' ').toLowerCase(),
+    href: `/industry/${n.id}`,
+    source: n.sourceName,
+    year: yearOf(n.publishTime),
+    litType: (n as any).category ?? '资讯',
+    litTypeLabel: (n as any).category ?? '资讯',
+    abstract: summary,
+    pmid: '',
+    doi: '',
+    isExternal: false,
+  });
+}
+
+// 抗感染指南
+const guideDocs = await getCollection('guides');
+for (const g of guideDocs) {
+  if (g.data.draft) continue;
+  const litType = g.data.docType?.[0] ?? '指南';
+  docs.push({
+    id: `guide:${g.id}`,
+    section: 'guide',
+    sectionLabel: '抗感染指南',
+    title: g.data.title,
+    text: [g.data.title, g.data.organization, g.data.description, g.data.pathogens?.join(' ') ?? '', g.data.tags?.join(' ') ?? '', g.data.docType?.join(' ') ?? ''].join(' ').toLowerCase(),
+    href: `/guides/${g.id}`,
+    source: g.data.organization,
+    year: g.data.year || 0,
+    litType,
+    litTypeLabel: litType,
+    abstract: g.data.description || '',
+    pmid: '',
+    doi: '',
+    isExternal: false,
+  });
+}
+
+// 药品说明书
+const labelDocs = await getCollection('drug-labels');
+for (const d of labelDocs) {
+  if (d.data.draft) continue;
+  const litType = d.data.antibioticClass || '说明书';
+  docs.push({
+    id: `drug-label:${d.id}`,
+    section: 'drug-label',
+    sectionLabel: '说明书',
+    title: d.data.drugName,
+    text: [d.data.drugName, d.data.brandNames?.join(' ') ?? '', d.data.description, d.data.indications?.join(' ') ?? '', d.data.antibioticClass, d.data.tags?.join(' ') ?? ''].join(' ').toLowerCase(),
+    href: `/drug-labels/${d.id}`,
+    source: d.data.manufacturer,
+    year: yearOf(d.data.reviewDate),
+    litType,
+    litTypeLabel: litType,
+    abstract: d.data.description || '',
+    pmid: '',
+    doi: '',
+    isExternal: false,
+  });
+}
+
+// AI 工具
+for (const t of (aiToolsData as any).tools ?? []) {
+  docs.push({
+    id: `ai-tool:${t.name}`,
+    section: 'ai-tool',
+    sectionLabel: 'AI工具',
+    title: t.name,
+    text: [t.name, t.provider, t.type, t.positioning, t.capability, (t.tags ?? []).join(' ')].join(' ').toLowerCase(),
+    href: t.url || '/ai-tools',
+    source: t.provider,
+    year: 0,
+    litType: t.type,
+    litTypeLabel: t.type,
+    abstract: t.capability || t.positioning || '',
+    pmid: '',
+    doi: '',
+    isExternal: false,
+  });
+}
+
+// 筛选选项（仅从有数据支撑的字段派生）
+const litTypeMap = new Map<string, string>();
+for (const d of docs) if (d.litType) litTypeMap.set(d.litType, d.litTypeLabel);
+const sourceList = [...new Set(docs.map((d) => d.source).filter(Boolean))].sort();
+
+const synonyms = (synonymsData as any).concepts ?? [];
+const meta = { litTypes: [...litTypeMap.entries()], sources: sourceList };
+---
+
+<BaseLayout title="搜索" description="统一检索医学文献、抗感染指南、行业资讯与外部数据库文献。">
+  <div class="mx-auto max-w-4xl">
+    <header class="mb-6">
+      <h1 class="text-2xl font-semibold">搜索</h1>
+      <p class="mt-2 text-sm text-neutral-600">
+        统一检索站内收录与外部数据库文献。站内结果即时返回；外部 PubMed 结果按需实时检索。
+      </p>
+    </header>
+
+    <!-- 搜索框 -->
+    <form id="search-form" class="mb-4" onsubmit="return false;">
+      <div class="relative">
+        <svg class="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input
+          id="q"
+          type="search"
+          placeholder="输入病原体、通用名、缩写或关键词，如：伏立康唑、CRAB、铜绿假单胞菌…"
+          class="w-full rounded-xl border border-neutral-300 bg-white py-3 pl-10 pr-4 text-base focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+        />
+      </div>
+    </form>
+
+    <!-- 术语映射说明（歧义词不静默强制映射） -->
+    <div id="synonym-note" class="mb-4 hidden"></div>
+
+    <!-- 内容分区筛选 -->
+    <div id="section-tabs" class="mb-4 flex flex-wrap gap-2"></div>
+
+    <!-- 时间 / 类型 / 来源 筛选 -->
+    <div class="mb-6 flex flex-wrap items-center gap-3">
+      <label class="flex items-center gap-1.5 text-sm text-neutral-600">
+        时间
+        <select id="filter-time" class="rounded-lg border border-neutral-300 bg-white px-2 py-1.5 text-sm">
+          <option value="all">全部</option>
+          <option value="1y">近一年</option>
+          <option value="3y">近三年</option>
+        </select>
+      </label>
+      <label class="flex items-center gap-1.5 text-sm text-neutral-600">
+        类型
+        <select id="filter-type" class="rounded-lg border border-neutral-300 bg-white px-2 py-1.5 text-sm">
+          <option value="all">全部</option>
+        </select>
+      </label>
+      <label class="flex items-center gap-1.5 text-sm text-neutral-600">
+        来源
+        <select id="filter-source" class="rounded-lg border border-neutral-300 bg-white px-2 py-1.5 text-sm">
+          <option value="all">全部</option>
+        </select>
+      </label>
+      <button id="reset" type="button" class="text-sm text-blue-600 hover:underline">清除筛选</button>
+    </div>
+
+    <!-- 站内结果 -->
+    <section>
+      <div class="mb-2 flex items-center justify-between">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">站内收录</h2>
+        <span id="station-count" class="text-xs text-neutral-400"></span>
+      </div>
+      <div id="station-empty" class="hidden rounded-lg border border-dashed border-neutral-300 p-8 text-center text-sm text-neutral-500">
+        无匹配的站内结果
+      </div>
+      <ul id="station-list" class="space-y-3"></ul>
+    </section>
+
+    <!-- 外部文献 -->
+    <section class="mt-8">
+      <div class="mb-2 flex items-center justify-between">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-neutral-500">外部文献数据库</h2>
+        <div id="external-status" class="text-xs text-neutral-400"></div>
+      </div>
+      <div class="mb-3 rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-2 text-xs text-neutral-500">
+        <strong>PubMed</strong> 实时检索 · <strong>Embase / Web of Science</strong>：授权接入后开放（未伪装已接入）
+      </div>
+      <ul id="external-list" class="space-y-3"></ul>
+    </section>
+  </div>
+
+  <script type="application/json" id="search-docs" set:html={JSON.stringify(docs).replace(/</g, '\\u003c')}></script>
+  <script type="application/json" id="search-synonyms" set:html={JSON.stringify(synonyms).replace(/</g, '\\u003c')}></script>
+  <script type="application/json" id="search-meta" set:html={JSON.stringify(meta).replace(/</g, '\\u003c')}></script>
+</BaseLayout>
+
+<script>
+  const docs: any[] = JSON.parse(document.getElementById('search-docs')!.textContent!);
+  const synonyms: any[] = JSON.parse(document.getElementById('search-synonyms')!.textContent!);
+  const meta: any = JSON.parse(document.getElementById('search-meta')!.textContent!);
+
+  const qInput = document.getElementById('q') as HTMLInputElement;
+  const sectionTabs = document.getElementById('section-tabs')!;
+  const timeSelect = document.getElementById('filter-time') as HTMLSelectElement;
+  const typeSelect = document.getElementById('filter-type') as HTMLSelectElement;
+  const sourceSelect = document.getElementById('filter-source') as HTMLSelectElement;
+  const resetBtn = document.getElementById('reset')!;
+  const stationList = document.getElementById('station-list')!;
+  const stationEmpty = document.getElementById('station-empty')!;
+  const stationCount = document.getElementById('station-count')!;
+  const externalList = document.getElementById('external-list')!;
+  const externalStatus = document.getElementById('external-status')!;
+  const synonymNote = document.getElementById('synonym-note')!;
+
+  const sectionOptions = [
+    { value: 'all', label: '全部' },
+    { value: 'research', label: '科研前沿' },
+    { value: 'guide', label: '抗感染指南' },
+    { value: 'industry', label: '行业资讯' },
+  ];
+
+  const sectionBadge: Record<string, string> = {
+    research: 'bg-purple-50 text-purple-700',
+    industry: 'bg-blue-50 text-blue-700',
+    guide: 'bg-green-50 text-green-700',
+    'drug-label': 'bg-amber-50 text-amber-700',
+    'ai-tool': 'bg-cyan-50 text-cyan-700',
+  };
+
+  // 状态
+  let q = '';
+  let section = 'all';
+  let time = 'all';
+  let type = 'all';
+  let source = 'all';
+  let activeSynonymNotes: { label: string; note: string }[] = [];
+
+  // 初始化筛选下拉
+  function buildSelects() {
+    for (const [value, label] of meta.litTypes) {
+      const opt = document.createElement('option');
+      opt.value = value; opt.textContent = label;
+      typeSelect.appendChild(opt);
+    }
+    for (const s of meta.sources) {
+      const opt = document.createElement('option');
+      opt.value = s; opt.textContent = s;
+      sourceSelect.appendChild(opt);
+    }
+  }
+
+  function buildSectionTabs() {
+    sectionTabs.innerHTML = '';
+    for (const o of sectionOptions) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.dataset.value = o.value;
+      btn.textContent = o.label;
+      btn.className = 'rounded-full border px-3 py-1 text-sm transition ' + (o.value === section
+        ? 'border-blue-500 bg-blue-50 text-blue-600'
+        : 'border-neutral-300 bg-white text-neutral-600 hover:border-blue-400');
+      btn.addEventListener('click', () => { section = o.value; syncUrl(); renderAll(); });
+      sectionTabs.appendChild(btn);
+    }
+  }
+
+  function tokenize(s: string): string[] {
+    return s.toLowerCase().split(/[\s,，;；、/]+/).filter(Boolean);
+  }
+
+  function matchConcept(query: string) {
+    const ql = query.toLowerCase();
+    const expansions = new Set<string>();
+    const notes: { label: string; note: string }[] = [];
+    for (const c of synonyms) {
+      const hit = (c.queries || []).some((x: string) => ql.includes(x.toLowerCase()));
+      if (hit) {
+        for (const e of c.expansions || []) expansions.add(e.toLowerCase());
+        if (c.ambiguous && c.note) notes.push({ label: c.label, note: c.note });
+      }
+    }
+    return { expansions: [...expansions], notes };
+  }
+
+  function buildPubMedTerm(query: string): string {
+    // 仅对非歧义映射扩展 PubMed 检索式；歧义词保持原词并在 UI 说明
+    const ql = query.toLowerCase();
+    for (const c of synonyms) {
+      if (c.ambiguous) continue;
+      if ((c.queries || []).some((x: string) => ql.includes(x.toLowerCase()))) {
+        const terms = [query, ...(c.expansions || []).filter((e: string) => e.toLowerCase() !== ql)];
+        return terms.map((t: string) => (t.includes(' ') ? `"${t}"` : t)).join(' OR ');
+      }
+    }
+    return query;
+  }
+
+  function matchDoc(doc: any, expansions: string[]): boolean {
+    const tokens = tokenize(q);
+    if (tokens.length === 0) return true;
+    return tokens.every((tok) => {
+      if (doc.text.includes(tok)) return true;
+      return expansions.some((e) => doc.text.includes(e));
+    });
+  }
+
+  function filterStation() {
+    const nowYear = new Date().getFullYear();
+    return docs.filter((d) => {
+      if (section !== 'all' && d.section !== section) return false;
+      if (time === '1y' && (d.year === 0 || nowYear - d.year > 1)) return false;
+      if (time === '3y' && (d.year === 0 || nowYear - d.year > 3)) return false;
+      if (type !== 'all' && d.litType !== type) return false;
+      if (source !== 'all' && d.source !== source) return false;
+      return matchDoc(d, activeSynonymExpansions);
+    });
+  }
+
+  let activeSynonymExpansions: string[] = [];
+
+  function renderStation(results: any[]) {
+    stationList.innerHTML = '';
+    stationEmpty.classList.toggle('hidden', results.length > 0);
+    stationCount.textContent = results.length ? `${results.length} 条` : '';
+    const shown = results.slice(0, 60);
+    for (const d of shown) {
+      const li = document.createElement('li');
+      li.className = 'rounded-xl border border-neutral-200 bg-white p-4 shadow-sm';
+      const badge = sectionBadge[d.section] || 'bg-neutral-100 text-neutral-600';
+      const metaBits = [d.sectionLabel, d.source, d.year || ''].filter(Boolean).join(' · ');
+      li.innerHTML = `
+        <div class="mb-1 flex flex-wrap items-center gap-2 text-xs">
+          <span class="rounded px-2 py-0.5 font-medium ${badge}">${d.sectionLabel}</span>
+          ${d.litTypeLabel ? `<span class="rounded bg-neutral-100 px-2 py-0.5 text-neutral-600">${escapeHtml(d.litTypeLabel)}</span>` : ''}
+          <span class="text-neutral-400">${escapeHtml(metaBits)}</span>
+        </div>
+        <a href="${d.href}" class="text-base font-medium text-neutral-900 hover:text-blue-600 hover:underline">${escapeHtml(d.title)}</a>
+        ${d.abstract ? `<p class="mt-1.5 line-clamp-2 text-sm text-neutral-600">${escapeHtml(d.abstract)}</p>` : ''}
+        <div class="mt-1 text-xs text-neutral-400">来源：${escapeHtml(d.source)}${d.pmid ? ' · PMID: ' + d.pmid : ''}</div>
+      `;
+      stationList.appendChild(li);
+    }
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
+  }
+
+  function renderSynonymNote() {
+    if (activeSynonymNotes.length === 0) { synonymNote.classList.add('hidden'); synonymNote.innerHTML = ''; return; }
+    synonymNote.classList.remove('hidden');
+    synonymNote.innerHTML = activeSynonymNotes.map((n) =>
+      `<div class="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-800">
+        <strong>${escapeHtml(n.label)}</strong>：${escapeHtml(n.note)}
+      </div>`
+    ).join('');
+  }
+
+  async function renderExternal() {
+    externalList.innerHTML = '';
+    if (!q.trim()) {
+      externalStatus.textContent = '输入关键词后检索外部文献';
+      return;
+    }
+    externalStatus.textContent = '正在检索 PubMed…';
+    const term = buildPubMedTerm(q.trim());
+    try {
+      const res = await fetch(`/api/pubmed?q=${encodeURIComponent(term)}&retmax=20`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (!data.ok) {
+        if (data.error === 'upstream_error' || data.error === 'timeout') {
+          externalStatus.textContent = 'PubMed 检索失败：' + (data.message || '请稍后重试');
+        } else {
+          externalStatus.textContent = '检索失败：' + (data.message || '未知错误');
+        }
+        return;
+      }
+      externalStatus.textContent = `PubMed 命中 ${data.count} 条（展示前 ${data.records.length} 条，非去重后总数）`;
+      for (const r of data.records) {
+        const li = document.createElement('li');
+        li.className = 'rounded-xl border border-neutral-200 bg-white p-4 shadow-sm';
+        const authors = (r.authors || []).slice(0, 5).join(', ') + ((r.authors || []).length > 5 ? ' 等' : '');
+        li.innerHTML = `
+          <div class="mb-1 flex flex-wrap items-center gap-2 text-xs">
+            <span class="rounded bg-sky-50 px-2 py-0.5 font-medium text-sky-700">PubMed</span>
+            <span class="text-neutral-400">${escapeHtml([r.journal, r.pubDate].filter(Boolean).join(' · '))}</span>
+          </div>
+          <a href="/paper?pmid=${r.pmid}" class="text-base font-medium text-neutral-900 hover:text-blue-600 hover:underline">${escapeHtml(r.title)}</a>
+          ${authors ? `<p class="mt-1 text-xs text-neutral-500">${escapeHtml(authors)}</p>` : ''}
+          ${r.abstract ? `<p class="mt-1.5 line-clamp-3 text-sm text-neutral-600">${escapeHtml(r.abstract)}</p>` : ''}
+          <div class="mt-1.5 flex flex-wrap gap-2 text-xs">
+            ${r.doi ? `<a href="https://doi.org/${encodeURIComponent(r.doi)}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">DOI: ${escapeHtml(r.doi)}</a>` : ''}
+            <a href="https://pubmed.ncbi.nlm.nih.gov/${r.pmid}/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">PubMed ${r.pmid}</a>
+          </div>
+        `;
+        externalList.appendChild(li);
+      }
+    } catch (err) {
+      externalStatus.textContent = 'PubMed 接口不可用，站内结果仍可用（来源未开通或网络异常）';
+    }
+  }
+
+  function renderAll() {
+    const expansion = matchConcept(q);
+    activeSynonymExpansions = expansion.expansions;
+    activeSynonymNotes = expansion.notes;
+    renderSynonymNote();
+    const results = filterStation();
+    renderStation(results);
+    buildSectionTabs();
+    renderExternal();
+  }
+
+  function syncUrl() {
+    const p = new URLSearchParams();
+    if (q.trim()) p.set('q', q.trim());
+    if (section !== 'all') p.set('section', section);
+    if (time !== 'all') p.set('time', time);
+    if (type !== 'all') p.set('type', type);
+    if (source !== 'all') p.set('source', source);
+    const qs = p.toString();
+    history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+  }
+
+  function readUrl() {
+    const p = new URLSearchParams(location.search);
+    q = p.get('q') || '';
+    section = p.get('section') || 'all';
+    time = p.get('time') || 'all';
+    type = p.get('type') || 'all';
+    source = p.get('source') || 'all';
+    qInput.value = q;
+    timeSelect.value = time;
+    typeSelect.value = type;
+    sourceSelect.value = source;
+  }
+
+  // 事件
+  let debounceTimer: number;
+  qInput.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => { q = qInput.value; syncUrl(); renderAll(); }, 300);
+  });
+  timeSelect.addEventListener('change', () => { time = timeSelect.value; syncUrl(); renderAll(); });
+  typeSelect.addEventListener('change', () => { type = typeSelect.value; syncUrl(); renderAll(); });
+  sourceSelect.addEventListener('change', () => { source = sourceSelect.value; syncUrl(); renderAll(); });
+  resetBtn.addEventListener('click', () => {
+    q = ''; section = 'all'; time = 'all'; type = 'all'; source = 'all';
+    qInput.value = ''; timeSelect.value = 'all'; typeSelect.value = 'all'; sourceSelect.value = 'all';
+    syncUrl(); renderAll();
+  });
+
+  // 初始
+  buildSelects();
+  readUrl();
+  renderAll();
+</script>
