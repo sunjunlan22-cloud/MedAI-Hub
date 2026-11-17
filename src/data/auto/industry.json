@@ -5,7 +5,7 @@
     "eventTime": "2026-11-14",
     "publishTime": "2026-11-14T00:00:00+08:00",
     "sourceName": "国家医疗保障局（NHSA）",
-    "sourceUrl": "https://news.cctv.cn/2026/11/15/ARTIZWTXBK1jxopDHfqD6JC2261115.shtml",
+    "sourceUrl": "https://www.nhsa.gov.cn/art/2026/11/14/art_14_23385.html",
     "category": "政策动态",
     "contentType": "policy",
     "tags": [
@@ -17,7 +17,7 @@
     ],
     "summary": "2026 年国家医保药品目录与商保创新药目录发布：共 107 种药品进入医保目录（其中 51 个为 1 类创新药，数量创历史新高）、12 种进入商保创新药目录，参保人用药保障进一步扩容。",
     "impact": "创新药（含抗感染新药）纳入医保后支付可及性显著提升，将直接影响相关品种的市场放量与临床可及性。",
-    "abstract": "2026 年国家基本医保药品目录及商保创新药目录发布，新增 107 种药品（51 个 1 类创新药）、12 种进入商保创新药目录。\n\n原文入口：\n央视网/新华社：https://news.cctv.cn/2026/11/15/ARTIZWTXBK1jxopDHfqD6JC2261115.shtml",
+    "abstract": "2026 年国家基本医保药品目录及商保创新药目录发布，新增 107 种药品（51 个 1 类创新药）、12 种进入商保创新药目录。\n\n原文入口：\n国家医保局：https://www.nhsa.gov.cn/art/2026/11/14/art_14_23385.html",
     "scores": {
       "policyImpact": 10,
       "marketImpact": 9,
@@ -48,7 +48,7 @@
     "eventTime": "2026-11-12",
     "publishTime": "2026-11-12T00:00:00+08:00",
     "sourceName": "国家药品监督管理局（NMPA）",
-    "sourceUrl": "https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/index.html",
+    "sourceUrl": "https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/20261112142043188.html",
     "category": "政策动态",
     "contentType": "approval",
     "tags": [
@@ -62,7 +62,7 @@
     ],
     "summary": "国家药监局批准苏州信诺维医药自主研发的 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦，商品名福诺凯）上市，系全球首个针对三大碳青霉烯类耐药革兰阴性杆菌（CRO）具备广谱抗菌活性的 β-内酰胺类/β-内酰胺酶抑制剂。",
     "impact": "为碳青霉烯类耐药革兰阴性菌（CRO）感染提供新的国内可及治疗选择，可能影响 CRE/CRAB 等耐药菌感染的治疗格局与医保准入。",
-    "abstract": "国家药监局批准 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦）上市，用于碳青霉烯类耐药革兰阴性杆菌（CRO）相关感染。\n\n原文入口：\nNMPA 药品审评审批「进展成效」：https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/index.html",
+    "abstract": "国家药监局批准 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦）上市，用于医院获得性细菌性肺炎和呼吸机相关性细菌性肺炎（HABP/VABP）。\n\n原文入口：\n国家药监局批准注射用亚胺西福上市（2026-11-12）：https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/20261112142043188.html",
     "scores": {
       "policyImpact": 9,
       "marketImpact": 8,
@@ -150,7 +150,7 @@
     ],
     "summary": "CHINET 发布 2026 年上半年（1-6 月）细菌耐药监测结果，汇总全国成员单位临床分离菌的药敏数据与重点耐药菌检出率及变迁趋势。",
     "impact": "国内最权威的细菌耐药监测数据来源，覆盖 CRAB、CRE/CRKP、CRPA、MRSA 等重点耐药菌；建议临床结合本中心药敏数据与指南综合判断经验性抗菌方案。",
-    "abstract": "CHINET 2026 上半年细菌耐药监测结果（复旦大学附属华山医院抗生素研究所牵头，覆盖全国三甲医院临床分离菌药敏数据）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果20261109.pptx\n摘要版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果2026-8-25.pptx",
+    "abstract": "CHINET 2026 上半年细菌耐药监测结果（复旦大学附属华山医院抗生素研究所牵头，覆盖全国三甲医院临床分离菌药敏数据）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果20261109.pptx\n摘要版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果2026-8-25.pptx\n\n版本说明：文件名显示「摘要版」发布于 2026-08-25、「完整版」上传于 2026-11-09（同一「2026 上半年」报告的两个版本，按文件名区分）。样本量 / 分母：尚未提取。",
     "scores": {
       "policyImpact": 9,
       "marketImpact": 8,
@@ -305,12 +305,12 @@
     "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
   },
   {
-    "id": "ind-bbb22f1010",
-    "title": "Global antibiotic resistance surveillance report 2025: summary",
+    "id": "ind-fc2f0033a5",
+    "title": "Global antibiotic resistance surveillance report 2025",
     "eventTime": "2025-01-01",
     "publishTime": "2025-10-13T00:00:00+08:00",
     "sourceName": "WHO GLASS",
-    "sourceUrl": "https://www.who.int/publications/i/item/B09585",
+    "sourceUrl": "https://www.who.int/publications/i/item/9789240116337",
     "category": "AMR",
     "tags": [
       "AMR",
@@ -321,66 +321,9 @@
       "MRSA",
       "耐药监测"
     ],
-    "summary": "监测年份 2025；发布日期 2025-10-13。Antimicrobial resistance (AMR) is a growing threat to global health, undermining the effectiveness of life-saving treatments and placing populations at...",
+    "summary": "监测年份 2023（摘要版 Table 1）与 2025 报告全文；本条目合并 GLASS 2025 报告完整版与摘要版，分别提供原文入口。",
     "impact": "来自WHO GLASS的耐药监测动态，关注革兰阴性菌及 CRE 等耐药菌的耐药变迁，建议结合官方报告原文与临床药敏数据综合判断。",
-    "abstract": "监测年份 2023（Table 1，p.16-18），全球耐药率（%）与趋势（2018-2023）：\n1. 碳青霉烯耐药鲍曼不动杆菌·亚胺培南·血流感染 54.3%（95% CrI 49.3-59.2），最高东地中海区 66.5%，趋势 +5.3%/年；\n2. 三代头孢菌素耐药大肠埃希菌·三代头孢·血流感染 44.8%（39.3-50.4），最高非洲区 70.7%；头孢噻肟·尿路感染 39.8%（33.9-46.0）；\n3. 碳青霉烯耐药大肠埃希菌·亚胺培南·血流感染 2.4%（1.8-3.3）、尿路感染 2.6%（2.0-3.5），趋势 +12.5%/年；\n4. 三代头孢菌素耐药肺炎克雷伯菌·头孢噻肟·血流感染 55.2%（48.5-61.7），最高非洲区 77.8%；尿路感染 45.5%（38.6-52.5）；\n5. 碳青霉烯耐药肺炎克雷伯菌·亚胺培南·血流感染 16.7%（13.9-19.9），最高东南亚区 41.2%，趋势 +15.3%/年；尿路感染 10.9%（8.7-13.6）；\n6. 耐甲氧西林金黄色葡萄球菌（MRSA）·甲氧西林·血流感染 27.1%（23.5-31.0），最高东地中海区 50.3%；\n7. 氟喹诺酮耐药非伤寒沙门菌·环丙沙星·血流感染 18.0%（13.9-22.9）；\n8. 氟喹诺酮耐药志贺菌·环丙沙星·胃肠道感染 29.7%（22.9-37.5）；\n9. 淋病奈瑟菌·环丙沙星 75.0%（70.9-78.8）、头孢曲松 0.3%（0.1-0.6）。\n官方 PDF: https://iris.who.int/server/api/core/bitstreams/139d068a-1086-43f7-a47d-575d0118d034/content",
-    "scores": {
-      "policyImpact": 10,
-      "marketImpact": 8,
-      "breakthrough": 3,
-      "competitiveImpact": 8,
-      "timelinessAuthority": 9,
-      "totalScore": 38
-    },
-    "totalScore": 38,
-    "isCluster": false,
-    "factType": "fact",
-    "contentType": "surveillance",
-    "externalId": "B09585",
-    "pathogens": [
-      "鲍曼不动杆菌",
-      "大肠埃希菌",
-      "肺炎克雷伯菌",
-      "金黄色葡萄球菌(MRSA)",
-      "非伤寒沙门菌",
-      "志贺菌属",
-      "淋病奈瑟菌"
-    ],
-    "drugs": [
-      "亚胺培南",
-      "第三代头孢菌素",
-      "头孢噻肟",
-      "环丙沙星",
-      "甲氧西林",
-      "头孢曲松"
-    ],
-    "sourceType": "database",
-    "sourceId": "glass",
-    "language": "en",
-    "geographicScope": "global",
-    "recordStatus": "active",
-    "verificationStatus": "pending",
-    "reviewStatus": "autoProcessed",
-    "licenseStatus": "unknown",
-    "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.835277+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.835277+08:00",
-    "sourceQuery": "WHO GLASS 监测报告"
-  },
-  {
-    "id": "ind-fc2f0033a5",
-    "title": "Global antibiotic resistance surveillance report 2025",
-    "eventTime": "2025-01-01",
-    "publishTime": "2025-10-13T00:00:00+08:00",
-    "sourceName": "WHO GLASS",
-    "sourceUrl": "https://www.who.int/publications/i/item/9789240116337",
-    "category": "AMR",
-    "tags": [
-      "AMR"
-    ],
-    "summary": "监测年份 2025；发布日期 2025-10-13。Antimicrobial resistance (AMR) is a growing threat to global health, undermining the effectiveness of life-saving treatments and placing populations at...",
-    "impact": "来自WHO GLASS的耐药监测动态，关注革兰阴性菌及 CRE 等耐药菌的耐药变迁，建议结合官方报告原文与临床药敏数据综合判断。",
-    "abstract": "官方 PDF: https://iris.who.int/server/api/core/bitstreams/8831cd08-44cc-4741-9e30-5b1293150bda/content",
+    "abstract": "监测年份 2023（Table 1，p.16-18），全球耐药率（%）与趋势（2018-2023）：\n1. 碳青霉烯耐药鲍曼不动杆菌·亚胺培南·血流感染 54.3%（95% CrI 49.3-59.2），最高东地中海区 66.5%，趋势 +5.3%/年；\n2. 三代头孢菌素耐药大肠埃希菌·三代头孢·血流感染 44.8%（39.3-50.4），最高非洲区 70.7%；头孢噻肟·尿路感染 39.8%（33.9-46.0）；\n3. 碳青霉烯耐药大肠埃希菌·亚胺培南·血流感染 2.4%（1.8-3.3）、尿路感染 2.6%（2.0-3.5），趋势 +12.5%/年；\n4. 三代头孢菌素耐药肺炎克雷伯菌·头孢噻肟·血流感染 55.2%（48.5-61.7），最高非洲区 77.8%；尿路感染 45.5%（38.6-52.5）；\n5. 碳青霉烯耐药肺炎克雷伯菌·亚胺培南·血流感染 16.7%（13.9-19.9），最高东南亚区 41.2%，趋势 +15.3%/年；尿路感染 10.9%（8.7-13.6）；\n6. 耐甲氧西林金黄色葡萄球菌（MRSA）·甲氧西林·血流感染 27.1%（23.5-31.0），最高东地中海区 50.3%；\n7. 氟喹诺酮耐药非伤寒沙门菌·环丙沙星·血流感染 18.0%（13.9-22.9）；\n8. 氟喹诺酮耐药志贺菌·环丙沙星·胃肠道感染 29.7%（22.9-37.5）；\n9. 淋病奈瑟菌·环丙沙星 75.0%（70.9-78.8）、头孢曲松 0.3%（0.1-0.6）。\n\n原文入口：\n完整版：https://www.who.int/publications/i/item/9789240116337\n完整版 PDF：https://iris.who.int/server/api/core/bitstreams/8831cd08-44cc-4741-9e30-5b1293150bda/content\n摘要版：https://www.who.int/publications/i/item/B09585\n摘要版 PDF：https://iris.who.int/server/api/core/bitstreams/139d068a-1086-43f7-a47d-575d0118d034/content\n样本量 / 分母：尚未提取（摘要版 Table 1 仅提供全球耐药率百分比与 95% CrI；完整报告中的样本量/分母未提取）。",
     "scores": {
       "policyImpact": 10,
       "marketImpact": 8,
@@ -405,7 +348,24 @@
     "licensePermissions": [],
     "ingestedAt": "2026-11-17T20:06:42.835570+08:00",
     "lastCheckedAt": "2026-11-17T20:06:42.835570+08:00",
-    "sourceQuery": "WHO GLASS 监测报告"
+    "sourceQuery": "WHO GLASS 监测报告",
+    "pathogens": [
+      "鲍曼不动杆菌",
+      "大肠埃希菌",
+      "肺炎克雷伯菌",
+      "金黄色葡萄球菌(MRSA)",
+      "非伤寒沙门菌",
+      "志贺菌属",
+      "淋病奈瑟菌"
+    ],
+    "drugs": [
+      "亚胺培南",
+      "第三代头孢菌素",
+      "头孢噻肟",
+      "环丙沙星",
+      "甲氧西林",
+      "头孢曲松"
+    ]
   },
   {
     "id": "ind-bcdf475e8d",

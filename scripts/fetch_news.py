@@ -404,7 +404,7 @@ MANUAL_INDUSTRY_NEWS = [
         "tags": ["CHINET", "耐药监测", "CRE", "CRKP", "CRAB", "MRSA", "抗感染"],
         "summary": "CHINET 发布 2026 年上半年（1-6 月）细菌耐药监测结果，汇总全国成员单位临床分离菌的药敏数据与重点耐药菌检出率及变迁趋势。",
         "impact": "国内最权威的细菌耐药监测数据来源，覆盖 CRAB、CRE/CRKP、CRPA、MRSA 等重点耐药菌；建议临床结合本中心药敏数据与指南综合判断经验性抗菌方案。",
-        "abstract": "CHINET 2026 上半年细菌耐药监测结果（复旦大学附属华山医院抗生素研究所牵头，覆盖全国三甲医院临床分离菌药敏数据）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果20261109.pptx\n摘要版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果2026-8-25.pptx",
+        "abstract": "CHINET 2026 上半年细菌耐药监测结果（复旦大学附属华山医院抗生素研究所牵头，覆盖全国三甲医院临床分离菌药敏数据）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果20261109.pptx\n摘要版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果2026-8-25.pptx\n\n版本说明：文件名显示「摘要版」发布于 2026-08-25、「完整版」上传于 2026-11-09（同一「2026 上半年」报告的两个版本，按文件名区分）。样本量 / 分母：尚未提取。",
         "scores": {"policyImpact": 9, "marketImpact": 8, "breakthrough": 4, "competitiveImpact": 7, "timelinessAuthority": 10, "totalScore": 38},
         "totalScore": 38,
         "isCluster": False,
@@ -464,13 +464,13 @@ MANUAL_INDUSTRY_NEWS = [
         "eventTime": "2026-11-12",
         "publishTime": "2026-11-12T00:00:00+08:00",
         "sourceName": "国家药品监督管理局（NMPA）",
-        "sourceUrl": "https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/index.html",
+        "sourceUrl": "https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/20261112142043188.html",
         "category": "政策动态",
         "contentType": "approval",
         "tags": ["NMPA", "亚胺西福", "福诺凯", "碳青霉烯耐药", "CRO", "创新药", "抗感染"],
-        "summary": "国家药监局批准苏州信诺维医药自主研发的 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦，商品名福诺凯）上市，系全球首个针对三大碳青霉烯类耐药革兰阴性杆菌（CRO）具备广谱抗菌活性的 β-内酰胺类/β-内酰胺酶抑制剂。",
+        "summary": "国家药监局批准苏州信诺维医药自主研发的 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦，商品名福诺凯）上市，适应症为医院获得性细菌性肺炎和呼吸机相关性细菌性肺炎（HABP/VABP），系全球首个针对三大碳青霉烯类耐药革兰阴性杆菌（CRO）具备广谱抗菌活性的 β-内酰胺类/β-内酰胺酶抑制剂。",
         "impact": "为碳青霉烯类耐药革兰阴性菌（CRO）感染提供新的国内可及治疗选择，可能影响 CRE/CRAB 等耐药菌感染的治疗格局与医保准入。",
-        "abstract": "国家药监局批准 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦）上市，用于碳青霉烯类耐药革兰阴性杆菌（CRO）相关感染。\n\n原文入口：\nNMPA 药品审评审批「进展成效」：https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/index.html",
+        "abstract": "国家药监局批准 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦）上市，用于医院获得性细菌性肺炎和呼吸机相关性细菌性肺炎（HABP/VABP）。\n\n原文入口：\n国家药监局批准注射用亚胺西福上市（2026-11-12）：https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/20261112142043188.html",
         "scores": {"policyImpact": 9, "marketImpact": 8, "breakthrough": 10, "competitiveImpact": 9, "timelinessAuthority": 10, "totalScore": 46},
         "totalScore": 46,
         "isCluster": False,
@@ -488,13 +488,13 @@ MANUAL_INDUSTRY_NEWS = [
         "eventTime": "2026-11-14",
         "publishTime": "2026-11-14T00:00:00+08:00",
         "sourceName": "国家医疗保障局（NHSA）",
-        "sourceUrl": "https://news.cctv.cn/2026/11/15/ARTIZWTXBK1jxopDHfqD6JC2261115.shtml",
+        "sourceUrl": "https://www.nhsa.gov.cn/art/2026/11/14/art_14_23385.html",
         "category": "政策动态",
         "contentType": "policy",
         "tags": ["医保目录", "医保", "创新药", "抗感染", "市场准入"],
         "summary": "2026 年国家医保药品目录与商保创新药目录发布：共 107 种药品进入医保目录（其中 51 个为 1 类创新药，数量创历史新高）、12 种进入商保创新药目录，参保人用药保障进一步扩容。",
         "impact": "创新药（含抗感染新药）纳入医保后支付可及性显著提升，将直接影响相关品种的市场放量与临床可及性。",
-        "abstract": "2026 年国家基本医保药品目录及商保创新药目录发布，新增 107 种药品（51 个 1 类创新药）、12 种进入商保创新药目录。\n\n原文入口：\n央视网/新华社：https://news.cctv.cn/2026/11/15/ARTIZWTXBK1jxopDHfqD6JC2261115.shtml",
+        "abstract": "2026 年国家基本医保药品目录及商保创新药目录发布，新增 107 种药品（51 个 1 类创新药）、12 种进入商保创新药目录。\n\n原文入口：\n国家医保局：https://www.nhsa.gov.cn/art/2026/11/14/art_14_23385.html",
         "scores": {"policyImpact": 10, "marketImpact": 9, "breakthrough": 5, "competitiveImpact": 8, "timelinessAuthority": 10, "totalScore": 42},
         "totalScore": 42,
         "isCluster": False,
@@ -2894,6 +2894,56 @@ def build_surveillance_entry(item: dict, feed: dict, group_scores: dict, tags: l
     return apply_schema_fields(entry, feed, item, "news")
 
 
+def _extract_pdf_url(abstract: str | None) -> str:
+    """从摘要文本中提取首个「官方 PDF: <url>」链接（无则返回空串）。"""
+    if not abstract:
+        return ""
+    m = re.search(r"官方 PDF:\s*(https?://\S+)", abstract)
+    return m.group(1) if m else ""
+
+
+def merge_glass_report_pairs(entries: list[dict]) -> list[dict]:
+    """合并 WHO GLASS 同一报告的「完整版 + summary 摘要版」为一条。
+
+    WHO GLASS 页面将同一报告（如 2025 Global antibiotic resistance surveillance
+    report）拆为「完整版」（ISBN 出版物条目）与「summary」两个条目。本函数按标题匹配
+    （summary 标题以 ': summary' 结尾，对应完整版标题为其去掉后缀），将摘要版的
+    结构化 Table 1 数据、病原体/药物与 PDF 链接并入完整版，仅保留一条，避免同一报告重复展示。
+    """
+    summary_of: dict[str, dict] = {}
+    kept: list[dict] = []
+    for e in entries:
+        t = (e.get("title") or "").strip()
+        if e.get("sourceName") == "WHO GLASS" and re.search(r":\s*summary\s*$", t, re.I):
+            base = re.sub(r":\s*summary\s*$", "", t, flags=re.I).strip()
+            summary_of[base.lower()] = e
+        else:
+            kept.append(e)
+
+    for e in kept:
+        s = summary_of.get((e.get("title") or "").strip().lower())
+        if not s:
+            continue
+        full_pdf = _extract_pdf_url(e.get("abstract"))
+        sum_pdf = _extract_pdf_url(s.get("abstract"))
+        sum_table = re.sub(r"\s*官方 PDF:\s*https?://\S+", "", s.get("abstract") or "").strip()
+        parts = [sum_table] if sum_table else []
+        parts.append("原文入口：")
+        parts.append(f"完整版：{e.get('sourceUrl', '')}")
+        if full_pdf:
+            parts.append(f"完整版 PDF：{full_pdf}")
+        parts.append(f"摘要版：{s.get('sourceUrl', '')}")
+        if sum_pdf:
+            parts.append(f"摘要版 PDF：{sum_pdf}")
+        parts.append("样本量 / 分母：尚未提取（摘要版 Table 1 仅提供全球耐药率百分比与 95% CrI；完整报告中的样本量/分母未提取）。")
+        e["abstract"] = "\n".join(parts)
+        for k in ("pathogens", "drugs"):
+            if s.get(k) and not e.get(k):
+                e[k] = s[k]
+        e["tags"] = list(dict.fromkeys(e.get("tags", []) + s.get("tags", [])))
+    return kept
+
+
 # ============================================================
 # 主流程
 # ============================================================
@@ -3176,6 +3226,9 @@ def main(argv: list[str] | None = None) -> None:
         entry = build_surveillance_entry(item, glass_feed_meta, group_scores, tags)
         if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
             industry_entries.append(entry)
+
+    # 合并 WHO GLASS 同一报告的完整版与摘要版（如 2025 报告），避免重复展示
+    industry_entries = merge_glass_report_pairs(industry_entries)
 
     # ---- 2. 录入无 RSS 的权威源（静态知识库条目） ----
     print("\n[2/3] 录入静态权威源条目...")

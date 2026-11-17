@@ -333,7 +333,7 @@ function formatDate(iso?: string | null) {
       if (show) visible++;
     });
 
-    countEl.textContent = `共 ${visible} 条文献`;
+    countEl.textContent = `共 ${visible} 条记录`;
     emptyEl.classList.toggle('hidden', visible > 0);
   }
 
