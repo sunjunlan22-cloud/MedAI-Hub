@@ -39,8 +39,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-nmpa-imiasefo-2026",
@@ -60,7 +60,7 @@
       "创新药",
       "抗感染"
     ],
-    "summary": "国家药监局批准苏州信诺维医药自主研发的 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦，商品名福诺凯）上市，系全球首个针对三大碳青霉烯类耐药革兰阴性杆菌（CRO）具备广谱抗菌活性的 β-内酰胺类/β-内酰胺酶抑制剂。",
+    "summary": "国家药监局批准苏州信诺维医药自主研发的 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦，商品名福诺凯）上市，适应症为医院获得性细菌性肺炎和呼吸机相关性细菌性肺炎（HABP/VABP），系全球首个针对三大碳青霉烯类耐药革兰阴性杆菌（CRO）具备广谱抗菌活性的 β-内酰胺类/β-内酰胺酶抑制剂。",
     "impact": "为碳青霉烯类耐药革兰阴性菌（CRO）感染提供新的国内可及治疗选择，可能影响 CRE/CRAB 等耐药菌感染的治疗格局与医保准入。",
     "abstract": "国家药监局批准 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦）上市，用于医院获得性细菌性肺炎和呼吸机相关性细菌性肺炎（HABP/VABP）。\n\n原文入口：\n国家药监局批准注射用亚胺西福上市（2026-11-12）：https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/20261112142043188.html",
     "scores": {
@@ -85,8 +85,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-chinet-lefamulin-2026",
@@ -127,8 +127,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-chinet-2026-h1",
@@ -171,8 +171,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-chinet-2025-full",
@@ -216,8 +216,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-nhsa-2025-catalog",
@@ -258,8 +258,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-fungal-east-china-2025",
@@ -301,8 +301,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838516+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838516+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
   },
   {
     "id": "ind-fc2f0033a5",
@@ -321,9 +321,9 @@
       "MRSA",
       "耐药监测"
     ],
-    "summary": "监测年份 2023（摘要版 Table 1）与 2025 报告全文；本条目合并 GLASS 2025 报告完整版与摘要版，分别提供原文入口。",
+    "summary": "监测年份 2025；发布日期 2025-10-13。Antimicrobial resistance (AMR) is a growing threat to global health, undermining the effectiveness of life-saving treatments and placing populations at...",
     "impact": "来自WHO GLASS的耐药监测动态，关注革兰阴性菌及 CRE 等耐药菌的耐药变迁，建议结合官方报告原文与临床药敏数据综合判断。",
-    "abstract": "监测年份 2023（Table 1，p.16-18），全球耐药率（%）与趋势（2018-2023）：\n1. 碳青霉烯耐药鲍曼不动杆菌·亚胺培南·血流感染 54.3%（95% CrI 49.3-59.2），最高东地中海区 66.5%，趋势 +5.3%/年；\n2. 三代头孢菌素耐药大肠埃希菌·三代头孢·血流感染 44.8%（39.3-50.4），最高非洲区 70.7%；头孢噻肟·尿路感染 39.8%（33.9-46.0）；\n3. 碳青霉烯耐药大肠埃希菌·亚胺培南·血流感染 2.4%（1.8-3.3）、尿路感染 2.6%（2.0-3.5），趋势 +12.5%/年；\n4. 三代头孢菌素耐药肺炎克雷伯菌·头孢噻肟·血流感染 55.2%（48.5-61.7），最高非洲区 77.8%；尿路感染 45.5%（38.6-52.5）；\n5. 碳青霉烯耐药肺炎克雷伯菌·亚胺培南·血流感染 16.7%（13.9-19.9），最高东南亚区 41.2%，趋势 +15.3%/年；尿路感染 10.9%（8.7-13.6）；\n6. 耐甲氧西林金黄色葡萄球菌（MRSA）·甲氧西林·血流感染 27.1%（23.5-31.0），最高东地中海区 50.3%；\n7. 氟喹诺酮耐药非伤寒沙门菌·环丙沙星·血流感染 18.0%（13.9-22.9）；\n8. 氟喹诺酮耐药志贺菌·环丙沙星·胃肠道感染 29.7%（22.9-37.5）；\n9. 淋病奈瑟菌·环丙沙星 75.0%（70.9-78.8）、头孢曲松 0.3%（0.1-0.6）。\n\n原文入口：\n完整版：https://www.who.int/publications/i/item/9789240116337\n完整版 PDF：https://iris.who.int/server/api/core/bitstreams/8831cd08-44cc-4741-9e30-5b1293150bda/content\n摘要版：https://www.who.int/publications/i/item/B09585\n摘要版 PDF：https://iris.who.int/server/api/core/bitstreams/139d068a-1086-43f7-a47d-575d0118d034/content\n样本量 / 分母：尚未提取（摘要版 Table 1 仅提供全球耐药率百分比与 95% CrI；完整报告中的样本量/分母未提取）。",
+    "abstract": "监测年份 2023（Table 1，p.16-18），全球耐药率（%）与趋势（2018-2023）：\n1. 碳青霉烯耐药鲍曼不动杆菌·亚胺培南·血流感染 54.3%（95% CrI 49.3-59.2），最高东地中海区 66.5%，趋势 +5.3%/年；\n2. 三代头孢菌素耐药大肠埃希菌·三代头孢·血流感染 44.8%（39.3-50.4），最高非洲区 70.7%；头孢噻肟·尿路感染 39.8%（33.9-46.0）；\n3. 碳青霉烯耐药大肠埃希菌·亚胺培南·血流感染 2.4%（1.8-3.3）、尿路感染 2.6%（2.0-3.5），趋势 +12.5%/年；\n4. 三代头孢菌素耐药肺炎克雷伯菌·头孢噻肟·血流感染 55.2%（48.5-61.7），最高非洲区 77.8%；尿路感染 45.5%（38.6-52.5）；\n5. 碳青霉烯耐药肺炎克雷伯菌·亚胺培南·血流感染 16.7%（13.9-19.9），最高东南亚区 41.2%，趋势 +15.3%/年；尿路感染 10.9%（8.7-13.6）；\n6. 耐甲氧西林金黄色葡萄球菌（MRSA）·甲氧西林·血流感染 27.1%（23.5-31.0），最高东地中海区 50.3%；\n7. 氟喹诺酮耐药非伤寒沙门菌·环丙沙星·血流感染 18.0%（13.9-22.9）；\n8. 氟喹诺酮耐药志贺菌·环丙沙星·胃肠道感染 29.7%（22.9-37.5）；\n9. 淋病奈瑟菌·环丙沙星 75.0%（70.9-78.8）、头孢曲松 0.3%（0.1-0.6）。\n原文入口：\n完整版：https://www.who.int/publications/i/item/9789240116337\n完整版 PDF：https://iris.who.int/server/api/core/bitstreams/8831cd08-44cc-4741-9e30-5b1293150bda/content\n摘要版：https://www.who.int/publications/i/item/B09585\n摘要版 PDF：https://iris.who.int/server/api/core/bitstreams/139d068a-1086-43f7-a47d-575d0118d034/content\n样本量 / 分母：尚未提取（摘要版 Table 1 仅提供全球耐药率百分比与 95% CrI；完整报告中的样本量/分母未提取）。",
     "scores": {
       "policyImpact": 10,
       "marketImpact": 8,
@@ -346,8 +346,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.835570+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.835570+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.312337+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.312337+08:00",
     "sourceQuery": "WHO GLASS 监测报告",
     "pathogens": [
       "鲍曼不动杆菌",
@@ -401,8 +401,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.835877+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.835877+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.312823+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.312823+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -444,8 +444,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.821718+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.821718+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.026746+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.026746+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -484,8 +484,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.836201+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.836201+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.313288+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.313288+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -522,8 +522,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.836407+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.836407+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.313602+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.313602+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -560,8 +560,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.836720+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.836720+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.314050+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.314050+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -598,8 +598,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.836994+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.836994+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.314450+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.314450+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -641,8 +641,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.823165+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.823165+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.028892+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.028892+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -678,8 +678,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.721151+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.721151+08:00"
+    "ingestedAt": "2026-11-17T23:37:51.850277+08:00",
+    "lastCheckedAt": "2026-11-17T23:37:51.850277+08:00"
   },
   {
     "id": "ind-ed829a3d2a",
@@ -720,8 +720,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.823678+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.823678+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.029640+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.029640+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -757,8 +757,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.725782+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.725782+08:00"
+    "ingestedAt": "2026-11-17T23:37:51.856009+08:00",
+    "lastCheckedAt": "2026-11-17T23:37:51.856009+08:00"
   },
   {
     "id": "ind-c0fd23086e",
@@ -799,8 +799,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.825462+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.825462+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.031455+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.031455+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -842,8 +842,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.826649+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.826649+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.032990+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.032990+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -879,8 +879,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.729182+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.729182+08:00"
+    "ingestedAt": "2026-11-17T23:37:51.860645+08:00",
+    "lastCheckedAt": "2026-11-17T23:37:51.860645+08:00"
   },
   {
     "id": "ind-70984df8f7",
@@ -921,8 +921,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.827004+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.827004+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.033520+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.033520+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -959,8 +959,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.837265+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.837265+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.314873+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.314873+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -1002,8 +1002,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.827571+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.827571+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.034339+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.034339+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -1045,8 +1045,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.827911+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.827911+08:00",
+    "ingestedAt": "2026-11-17T23:38:16.034847+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:16.034847+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -1083,8 +1083,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.837535+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.837535+08:00",
+    "ingestedAt": "2026-11-17T23:38:21.315270+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.315270+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -1121,8 +1121,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838039+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838039+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.316262+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.316262+08:00"
   },
   {
     "id": "ind-33b4fda4e0",
@@ -1159,8 +1159,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838355+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838355+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.316768+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.316768+08:00"
   },
   {
     "id": "ind-8da7ed403d",
@@ -1200,7 +1200,7 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T20:06:42.838513+08:00",
-    "lastCheckedAt": "2026-11-17T20:06:42.838513+08:00"
+    "ingestedAt": "2026-11-17T23:38:21.317025+08:00",
+    "lastCheckedAt": "2026-11-17T23:38:21.317025+08:00"
   }
 ]
