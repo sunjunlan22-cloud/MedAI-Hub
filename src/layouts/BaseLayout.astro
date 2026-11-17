@@ -8,16 +8,21 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-// 七大一级导航（对应 PRD 2.1）
+// 六大一级导航（关于本站收进页脚）
 const nav = [
   { label: '首页', href: '/' },
-  { label: '行业资讯', href: '/industry' },
-  { label: '科研前沿', href: '/research' },
   { label: '抗感染指南', href: '/guides' },
+  { label: '科研前沿', href: '/research' },
+  { label: '行业资讯', href: '/industry' },
   { label: '临床工具', href: '/tools' },
-  { label: 'AI 工具', href: '/ai-tools' },
-  { label: '关于本站', href: '/about' },
+  { label: 'AI工具', href: '/ai-tools' },
 ];
+
+function isActive(href: string) {
+  const path = Astro.url.pathname;
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(href + '/');
+}
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
 ---
@@ -48,7 +53,12 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString(
                 <li>
                   <a
                     href={item.href}
-                    class="rounded-md px-2.5 py-1.5 text-sm text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-900"
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    class={`rounded-md px-2.5 py-1.5 text-sm transition hover:bg-neutral-100 hover:text-neutral-900 ${
+                      isActive(item.href)
+                        ? 'bg-blue-50 font-medium text-blue-700'
+                        : 'text-neutral-600'
+                    }`}
                   >
                     {item.label}
                   </a>
@@ -79,5 +89,14 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString(
     <main class="mx-auto max-w-6xl px-4 py-12">
       <slot />
     </main>
+
+    <footer class="border-t border-neutral-200 bg-neutral-50">
+      <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-neutral-500 md:flex-row md:items-center md:justify-between">
+        <p class="text-xs leading-relaxed">
+          本站内容仅供医学专业人士参考，不构成诊疗建议；AI 工具信息以各官网为准。
+        </p>
+        <a href="/about" class="text-neutral-500 hover:text-blue-600 hover:underline">关于本站</a>
+      </div>
+    </footer>
   </body>
 </html>
