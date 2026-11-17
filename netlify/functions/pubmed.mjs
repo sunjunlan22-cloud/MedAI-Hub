@@ -99,19 +99,26 @@ function allTags(xml, tag) {
 }
 
 function parseArticle(xml) {
-  const title = firstTag(xml, 'ArticleTitle') || firstTag(xml, 'VernacularTitle');
+  // 关键：剔除参考文献列表，只解析文章自身元数据。
+  // efetch 单篇 XML 在 <Article> 内包含 <ReferenceList>，其中每条参考文献
+  // 也有自己的 <ArticleId IdType="doi/pmc/pubmed">、<Year/Month/Day> 等，
+  // 若不加剔除，DOI/PMCID/日期会被参考文献覆盖（如 PMID 41291870 被解析出
+  // 参考文献的 DOI 10.1097/FTD... 与错误日期）。
+  const articleOnly = xml.replace(/<ReferenceList[\s\S]*?<\/ReferenceList>/i, '');
+
+  const title = firstTag(articleOnly, 'ArticleTitle') || firstTag(articleOnly, 'VernacularTitle');
   const abstract = (() => {
-    const abs = xml.match(/<Abstract[^>]*>([\s\S]*?)<\/Abstract>/i);
+    const abs = articleOnly.match(/<Abstract[^>]*>([\s\S]*?)<\/Abstract>/i);
     if (!abs) return '';
     const parts = allTags(abs[1], 'AbstractText');
     return parts.join(' ');
   })();
 
-  // 作者：LastName + Initials
+  // 作者：LastName + Initials（仅文章作者，不含参考文献）
   const authors = [];
   const authorRe = /<Author[^>]*>([\s\S]*?)<\/Author>/gi;
   let am;
-  while ((am = authorRe.exec(xml)) !== null) {
+  while ((am = authorRe.exec(articleOnly)) !== null) {
     const lastName = firstTag(am[1], 'LastName');
     const initials = firstTag(am[1], 'Initials');
     const collective = firstTag(am[1], 'CollectiveName');
@@ -119,32 +126,58 @@ function parseArticle(xml) {
     else if (lastName) authors.push(`${lastName} ${initials}`.trim());
   }
 
-  const journal = firstTag(xml, 'Title');
-  const journalISO = firstTag(xml, 'ISOAbbreviation');
-  const year = firstTag(xml, 'Year');
-  const month = firstTag(xml, 'Month');
-  const day = firstTag(xml, 'Day');
-  const pubDate = [year, month, day].filter(Boolean).join('-');
-  const volume = firstTag(xml, 'Volume');
-  const issue = firstTag(xml, 'Issue');
-  const pages = firstTag(xml, 'MedlinePgn');
+  const journal = firstTag(articleOnly, 'Title');
+  const journalISO = firstTag(articleOnly, 'ISOAbbreviation');
 
+  // 日期：优先电子出版日期（ArticleDate DateType="Electronic"），
+  // 否则回退到期刊卷期的印刷日期（JournalIssue/PubDate）。
+  let year = '';
+  let month = '';
+  let day = '';
+  const ad = articleOnly.match(/<ArticleDate[^>]*DateType="Electronic"[^>]*>([\s\S]*?)<\/ArticleDate>/i)
+    || articleOnly.match(/<ArticleDate[^>]*>([\s\S]*?)<\/ArticleDate>/i);
+  if (ad) {
+    year = firstTag(ad[1], 'Year');
+    month = firstTag(ad[1], 'Month');
+    day = firstTag(ad[1], 'Day');
+  }
+  if (!year || !month) {
+    const ji = articleOnly.match(/<JournalIssue[^>]*>([\s\S]*?)<\/JournalIssue>/i);
+    if (ji) {
+      year = year || firstTag(ji[1], 'Year');
+      month = month || firstTag(ji[1], 'Month');
+      day = day || firstTag(ji[1], 'Day');
+    }
+  }
+  const pubDate = [year, month, day].filter(Boolean).join('-');
+
+  const volume = firstTag(articleOnly, 'Volume');
+  const issue = firstTag(articleOnly, 'Issue');
+  const pages = firstTag(articleOnly, 'MedlinePgn');
+
+  // 文章自身标识：只取首次出现的值（article 的 ArticleIdList 在 ReferenceList 之前）
   const articleIds = {};
   const idRe = /<ArticleId\s+IdType="([^"]+)"[^>]*>([\s\S]*?)<\/ArticleId>/gi;
   let im;
-  while ((im = idRe.exec(xml)) !== null) {
-    articleIds[im[1].toLowerCase()] = stripTags(im[2]);
+  while ((im = idRe.exec(articleOnly)) !== null) {
+    const key = im[1].toLowerCase();
+    if (!articleIds[key]) articleIds[key] = stripTags(im[2]);
+  }
+  // ArticleId 缺 DOI 时回退到 ELocationID（EIdType="doi"）
+  if (!articleIds.doi) {
+    const el = articleOnly.match(/<ELocationID[^>]*EIdType="doi"[^>]*>([\s\S]*?)<\/ELocationID>/i);
+    if (el) articleIds.doi = stripTags(el[1]);
   }
 
-  const mesh = allTags(xml, 'DescriptorName');
-  const pubTypes = allTags(xml, 'PublicationType');
-  const grants = allTags(xml, 'GrantID');
+  const mesh = allTags(articleOnly, 'DescriptorName');
+  const pubTypes = allTags(articleOnly, 'PublicationType');
+  const grants = allTags(articleOnly, 'GrantID');
 
-  // 单位/机构：作者所属 Affiliation
-  const affiliations = allTags(xml, 'Affiliation');
+  // 单位/机构：作者所属 Affiliation（仅文章作者）
+  const affiliations = allTags(articleOnly, 'Affiliation');
 
   return {
-    pmid: firstTag(xml, 'PMID') || articleIds.pmid || '',
+    pmid: firstTag(articleOnly, 'PMID') || articleIds.pubmed || '',
     pmcid: articleIds.pmc || '',
     doi: articleIds.doi || '',
     title,

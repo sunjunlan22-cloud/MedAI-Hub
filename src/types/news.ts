@@ -85,4 +85,6 @@ export interface ResearchNews {
   diseases?: string[];                    // 疾病
   drugs?: string[];                       // 药物
   relatedRecords?: string[];              // 关联记录 ID
+  titleZh?: string;                       // 中文标题（忠实翻译）
+  abstractZh?: string;                    // 简短中文摘要（忠实翻译）
 }

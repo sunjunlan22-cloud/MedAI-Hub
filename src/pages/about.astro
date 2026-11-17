@@ -22,13 +22,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section>
       <h2>内容来源</h2>
       <ul>
-        <li><strong>行业资讯</strong>：自动采集 WHO GLASS（全球耐药监测报告）、EMA（抗感染药品上市许可）、FDA（openFDA 批准/召回）、CIDRAP、GARDP 等公开机构的公告、报告与政策；按抗感染相关性过滤后入库。</li>
+        <li><strong>行业资讯</strong>：自动采集 WHO GLASS（全球耐药监测报告）、EMA（抗感染药品上市许可）、FDA（openFDA 批准/召回）、CIDRAP、GARDP 等公开机构的公告、报告与政策；另人工补录国内来源（CHINET 中国细菌耐药监测网、国家药监局 NMPA、国家医保局、国内真菌监测报告），按抗感染相关性过滤后入库。</li>
         <li><strong>科研前沿</strong>：通过 PubMed（NCBI E-utilities）、ClinicalTrials.gov、WHO ICTRP（含 ChiCTR 等注册中心）公开接口采集的已发表论文题录与临床试验注册信息，来源为原发表期刊与数据库。</li>
         <li><strong>抗感染指南</strong>：人工整理的国内外指南与专家共识摘要，正文保留原始出处与原文链接。</li>
         <li><strong>临床工具</strong>：本地运行的医学计算器与核对表，公式与阈值尽量标注出处。</li>
       </ul>
       <p class="mt-3">
-        国内来源（国家药监局 NMPA/CDE、国家及省级医保局、卫健委、CHINET 中国细菌耐药监测网、国内真菌监测网、专业学会与期刊）中，部分站点存在页面反爬或需登录授权，暂未实现稳定自动采集；相关内容以人工方式补录维护，无法自动接入的来源已在采集脚本中注明原因与人工维护方式。
+        国内来源中，CHINET 中国细菌耐药监测网（官网报告为 PPTX/PDF、下载需 JS 动态请求）、国家药监局 NMPA/CDE（瑞数 JS 反爬）、国家医保局与卫健委（无统一 RSS）等站点暂无法稳定自动采集，相关内容以「人工核实 + 定期补录」方式维护（每条保留真实标题、发布日期、来源、中文摘要与官方链接，同一报告完整版与摘要版合并为一条、分别提供原文入口）；无法自动接入的来源已在采集脚本中注明原因与人工维护方式。
       </p>
     </section>
 

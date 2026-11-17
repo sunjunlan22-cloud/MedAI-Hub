@@ -2,10 +2,37 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import researchData from '../data/auto/research.json';
 import synonymsData from '../data/manual/search-synonyms.json';
+import zhData from '../data/manual/research-zh.json';
 import type { ResearchNews } from '../types/news';
 import { formatDateZh } from '../lib/date';
 
 const concepts = (synonymsData as any).concepts ?? [];
+
+// 中文翻译索引：key = pmid:xxx / trial:NCTxxx / id:xxx
+type ZhEntry = { key: string; titleZh?: string; abstractZh?: string };
+const zhMap = new Map<string, ZhEntry>();
+for (const e of zhData as ZhEntry[]) {
+  if (e?.key) zhMap.set(e.key, e);
+}
+
+function zhKeyOf(n: ResearchNews): string {
+  if (n.pmid) return `pmid:${n.pmid}`;
+  if (n.trialId) return `trial:${n.trialId}`;
+  return `id:${n.id}`;
+}
+
+function titleOf(n: ResearchNews): string {
+  return n.titleZh ?? zhMap.get(zhKeyOf(n))?.titleZh ?? n.title;
+}
+function abstractOf(n: ResearchNews): string {
+  return n.abstractZh ?? zhMap.get(zhKeyOf(n))?.abstractZh ?? n.abstract ?? '';
+}
+
+// 记录类型：已发表文献 vs 临床试验注册（resource 除外）
+function isTrial(n: ResearchNews): boolean {
+  const sid = (n as any).sourceId ?? '';
+  return sid === 'clinicaltrials' || sid === 'chictr' || sid === 'euctr' || sid === 'ctis';
+}
 
 // 机构主页/资源导航不作为有发表日期的研究（contentType=resource 不入科研列表）
 const news = (researchData as ResearchNews[])
@@ -15,6 +42,9 @@ const news = (researchData as ResearchNews[])
     const tb = b.publishTime ? new Date(b.publishTime).getTime() : 0;
     return tb - ta;
   });
+
+const paperCount = news.filter((n) => !isTrial(n)).length;
+const trialCount = news.filter((n) => isTrial(n)).length;
 
 const studyTypes = [...new Set(news.map((n) => n.studyType))];
 
@@ -72,6 +102,11 @@ function formatDate(iso?: string | null) {
     <p class="mt-2 text-neutral-600">
       追踪医学领域重要研究进展，关注临床试验、系统评价、指南共识及高质量原始研究，帮助医生和科研人员快速了解最新证据。
     </p>
+    <div class="mt-3 flex flex-wrap items-center gap-2 text-sm">
+      <span class="font-medium text-neutral-700">研究记录 · 共 {news.length} 条</span>
+      <span class="rounded bg-purple-50 px-2 py-0.5 font-medium text-purple-700">已发表文献 {paperCount}</span>
+      <span class="rounded bg-violet-50 px-2 py-0.5 font-medium text-violet-700">临床试验注册 {trialCount}</span>
+    </div>
   </header>
 
   <!-- 顶部搜索框 -->
@@ -131,9 +166,13 @@ function formatDate(iso?: string | null) {
           class="news-card rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md"
           data-type={item.studyType}
           data-tags={item.tags.join(',')}
-          data-search={`${item.title} ${item.abstract ?? ''} ${item.pmid ?? ''} ${item.tags.join(' ')} ${item.sourceName}`.toLowerCase()}
+          data-search={`${titleOf(item)} ${abstractOf(item)} ${item.title} ${item.abstract ?? ''} ${item.pmid ?? ''} ${item.trialId ?? ''} ${item.tags.join(' ')} ${item.sourceName}`.toLowerCase()}
         >
           <div class="mb-3 flex flex-wrap items-center gap-2 text-xs">
+            {/* 记录类型：已发表文献 vs 临床试验注册 */}
+            <span class={`rounded px-2 py-0.5 font-semibold ${isTrial(item) ? 'bg-violet-50 text-violet-700' : 'bg-purple-50 text-purple-700'}`}>
+              {isTrial(item) ? '临床试验注册' : '已发表文献'}
+            </span>
             {/* 证据等级（突出，仅在有值时展示） */}
             {item.evidenceLevel && (
               <span class={`rounded border px-2 py-0.5 font-semibold ${evidenceClass(item.evidenceLevel)}`}>
@@ -163,7 +202,7 @@ function formatDate(iso?: string | null) {
               </span>
             )}
             <span class="ml-auto text-neutral-400">
-              {item.sourceName} · {formatDate(item.publishTime)}
+              {item.sourceName} · {isTrial(item) ? '更新' : '发表'} {formatDate(item.publishTime)}
             </span>
           </div>
 
@@ -172,15 +211,15 @@ function formatDate(iso?: string | null) {
             href={`/research/${item.id}`}
             class="block text-lg font-medium text-neutral-900 hover:text-blue-600 hover:underline"
           >
-            {item.title}
+            {titleOf(item)}
           </a>
 
-          {/* 原文摘要（优先）或核心发现（有真实结果时） */}
-          {item.abstract ? (
+          {/* 中文摘要（优先）或原文摘要 */}
+          {abstractOf(item) ? (
             <div class="mt-3 rounded-lg border-l-4 border-blue-400 bg-blue-50/50 p-3">
               <p class="text-sm leading-relaxed text-neutral-800 line-clamp-2">
                 <span class="mr-1 font-semibold text-blue-700">摘要：</span>
-                {item.abstract}
+                {abstractOf(item)}
               </p>
             </div>
           ) : item.coreFindings ? (

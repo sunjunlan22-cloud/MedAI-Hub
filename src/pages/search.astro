@@ -5,7 +5,26 @@ import industryData from '../data/auto/industry.json';
 import researchData from '../data/auto/research.json';
 import aiToolsData from '../data/manual/ai-tools.json';
 import synonymsData from '../data/manual/search-synonyms.json';
+import zhData from '../data/manual/research-zh.json';
 import type { IndustryNews, ResearchNews } from '../types/news';
+
+// 中文翻译索引（与 research 页一致）
+type ZhEntry = { key: string; titleZh?: string; abstractZh?: string };
+const zhMap = new Map<string, ZhEntry>();
+for (const e of zhData as ZhEntry[]) {
+  if (e?.key) zhMap.set(e.key, e);
+}
+function zhKeyOf(n: ResearchNews): string {
+  if (n.pmid) return `pmid:${n.pmid}`;
+  if (n.trialId) return `trial:${n.trialId}`;
+  return `id:${n.id}`;
+}
+function zhTitle(n: ResearchNews): string {
+  return n.titleZh ?? zhMap.get(zhKeyOf(n))?.titleZh ?? n.title;
+}
+function zhAbstract(n: ResearchNews): string {
+  return n.abstractZh ?? zhMap.get(zhKeyOf(n))?.abstractZh ?? n.abstract ?? '';
+}
 
 // ============================================================
 // 统一站内检索索引（构建期归一化，客户端过滤）
@@ -52,14 +71,14 @@ for (const n of researchData as ResearchNews[]) {
     id: `research:${n.id}`,
     section: 'research',
     sectionLabel: '科研前沿',
-    title: n.title,
-    text: [n.title, n.abstract ?? '', n.tags.join(' '), n.sourceName, n.pmid ?? ''].join(' ').toLowerCase(),
+    title: zhTitle(n),
+    text: [zhTitle(n), zhAbstract(n), n.title, n.abstract ?? '', n.tags.join(' '), n.sourceName, n.pmid ?? ''].join(' ').toLowerCase(),
     href: `/research/${n.id}`,
     source: n.sourceName,
     year: yearOf(n.publishTime),
     litType: n.studyType,
     litTypeLabel: studyTypeLabel[n.studyType] ?? n.studyType,
-    abstract: n.abstract ?? '',
+    abstract: zhAbstract(n),
     pmid: n.pmid ?? '',
     doi: '',
     isExternal: false,

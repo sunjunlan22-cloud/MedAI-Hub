@@ -1,8 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import researchData from '../../data/auto/research.json';
+import zhData from '../../data/manual/research-zh.json';
 import type { ResearchNews } from '../../types/news';
 import { formatDateTimeZh } from '../../lib/date';
+
+type ZhEntry = { key: string; titleZh?: string; abstractZh?: string };
+const zhMap = new Map<string, ZhEntry>();
+for (const e of zhData as ZhEntry[]) {
+  if (e?.key) zhMap.set(e.key, e);
+}
+function zhKeyOf(n: ResearchNews): string {
+  if (n.pmid) return `pmid:${n.pmid}`;
+  if (n.trialId) return `trial:${n.trialId}`;
+  return `id:${n.id}`;
+}
+function zhTitle(n: ResearchNews): string {
+  return n.titleZh ?? zhMap.get(zhKeyOf(n))?.titleZh ?? n.title;
+}
+function zhAbstract(n: ResearchNews): string {
+  return n.abstractZh ?? zhMap.get(zhKeyOf(n))?.abstractZh ?? '';
+}
 
 export async function getStaticPaths() {
   return (researchData as ResearchNews[])
@@ -88,8 +106,14 @@ const publicationStatusLabel: Record<string, string> = {
       )}
     </div>
 
-    <!-- 标题 -->
-    <h1 class="text-2xl font-semibold leading-tight">{item.title}</h1>
+    <!-- 标题（优先中文，附英文原文） -->
+    <h1 class="text-2xl font-semibold leading-tight">{zhTitle(item)}</h1>
+    {zhTitle(item) !== item.title && (
+      <p class="mt-2 text-sm text-neutral-500">
+        <span class="mr-1 font-medium text-neutral-400">原文标题（英文）：</span>
+        {item.title}
+      </p>
+    )}
 
     <!-- 来源与时间 -->
     <div class="mt-3 text-sm text-neutral-500">
@@ -127,10 +151,18 @@ const publicationStatusLabel: Record<string, string> = {
       </section>
     )}
 
+    <!-- 中文摘要（翻译，仅在有中文摘要时展示） -->
+    {zhAbstract(item) && (
+      <section class="mt-6">
+        <h2 class="mb-2 text-lg font-semibold">中文摘要（翻译）</h2>
+        <p class="whitespace-pre-line leading-relaxed text-neutral-700">{zhAbstract(item)}</p>
+      </section>
+    )}
+
     <!-- 原文摘要 -->
     {item.abstract && (
       <section class="mt-6">
-        <h2 class="mb-2 text-lg font-semibold">原文摘要</h2>
+        <h2 class="mb-2 text-lg font-semibold">原文摘要（英文）</h2>
         <p class="whitespace-pre-line leading-relaxed text-neutral-700">{item.abstract}</p>
       </section>
     )}

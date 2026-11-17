@@ -66,6 +66,19 @@ function extractPdfUrl(abstract?: string): string | null {
 const pdfUrl = extractPdfUrl(item.abstract);
 const abstractText = item.abstract?.replace(/官方 PDF:\s*https?:\/\/\S+\s*/g, '').trim() ?? '';
 
+// 将摘要中的 http(s) 链接转为可点击超链接（用于完整版/摘要版等多个原文入口）
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function linkify(text: string): string {
+  const escaped = escapeHtml(text);
+  return escaped.replace(
+    /(https?:\/\/[^\s<]+)/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer" class="break-all text-blue-600 hover:underline">$1</a>'
+  );
+}
+const abstractHtml = linkify(abstractText);
+
 function formatDate(iso?: string | null) {
   return formatDateTimeZh(iso);
 }
@@ -144,7 +157,7 @@ const axes = [
         )}
         {abstractText ? (
           <div class="rounded-lg border border-neutral-200 bg-neutral-50 p-4">
-            <p class="whitespace-pre-line text-sm leading-relaxed text-neutral-700">{abstractText}</p>
+            <p class="whitespace-pre-line text-sm leading-relaxed text-neutral-700" set:html={abstractHtml} />
           </div>
         ) : (
           <p class="text-sm text-neutral-500">暂无结构化监测数据。</p>

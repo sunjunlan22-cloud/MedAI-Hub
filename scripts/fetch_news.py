@@ -384,6 +384,175 @@ CURATED_SOURCES = [
 ]
 
 # ============================================================
+# 国内人工补录资讯（受限来源，无法稳定自动采集）
+#
+# CHINET 官网（chinets.com）监测报告为 PPTX/PDF，下载走 JS 动态 POST 且需 token，
+# 无稳定可解析的列表页；NMPA 官网有瑞数 JS 反爬、医保局/卫健委无统一 RSS。
+# 这些来源采用「人工核实 + 定期补录」方式维护：每条含真实标题、发布日期、
+# 来源、中文摘要与官方链接；同一报告的完整版与摘要版合并为一条，分别提供原文入口。
+# ============================================================
+MANUAL_INDUSTRY_NEWS = [
+    {
+        "id": "ind-chinet-2026-h1",
+        "title": "CHINET 2026 上半年细菌耐药监测结果",
+        "eventTime": "2026-08-25",
+        "publishTime": "2026-08-25T00:00:00+08:00",
+        "sourceName": "CHINET 中国细菌耐药监测网",
+        "sourceUrl": "https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果20261109.pptx",
+        "category": "耐药监测",
+        "contentType": "surveillance",
+        "tags": ["CHINET", "耐药监测", "CRE", "CRKP", "CRAB", "MRSA", "抗感染"],
+        "summary": "CHINET 发布 2026 年上半年（1-6 月）细菌耐药监测结果，汇总全国成员单位临床分离菌的药敏数据与重点耐药菌检出率及变迁趋势。",
+        "impact": "国内最权威的细菌耐药监测数据来源，覆盖 CRAB、CRE/CRKP、CRPA、MRSA 等重点耐药菌；建议临床结合本中心药敏数据与指南综合判断经验性抗菌方案。",
+        "abstract": "CHINET 2026 上半年细菌耐药监测结果（复旦大学附属华山医院抗生素研究所牵头，覆盖全国三甲医院临床分离菌药敏数据）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果20261109.pptx\n摘要版（PPTX）：https://www.chinets.com/Content/File/CHINET2026上半年细菌耐药监测结果2026-8-25.pptx",
+        "scores": {"policyImpact": 9, "marketImpact": 8, "breakthrough": 4, "competitiveImpact": 7, "timelinessAuthority": 10, "totalScore": 38},
+        "totalScore": 38,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "database",
+        "sourceId": "chinet",
+        "language": "zh",
+        "geographicScope": "china",
+    },
+    {
+        "id": "ind-chinet-2025-full",
+        "title": "CHINET 2025 年全年细菌耐药监测结果",
+        "eventTime": "2026-03-24",
+        "publishTime": "2026-03-24T00:00:00+08:00",
+        "sourceName": "CHINET 中国细菌耐药监测网",
+        "sourceUrl": "https://www.chinets.com/Content/File/CHINET2025年细菌耐药监测结果.pptx",
+        "category": "耐药监测",
+        "contentType": "surveillance",
+        "tags": ["CHINET", "耐药监测", "CRE", "CRKP", "CRAB", "CRPA", "MRSA", "抗感染"],
+        "summary": "CHINET 发布 2025 年全年（1-12 月）细菌耐药监测结果，汇总全年碳青霉烯类耐药肠杆菌目（CRE）、碳青霉烯耐药鲍曼不动杆菌（CRAB）、铜绿假单胞菌（CRPA）等重点耐药菌的检出率与耐药变迁。",
+        "impact": "国内年度细菌耐药基线数据，是制定抗感染经验治疗策略与抗菌药物管理的重要依据；建议结合完整版与摘要版对照查阅。",
+        "abstract": "CHINET 2025 年全年细菌耐药监测结果（覆盖全国成员单位全年临床分离菌药敏数据，含 CRE/CRAB/CRPA/MRSA 等耐药菌变迁）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/CHINET2025年细菌耐药监测结果.pptx\n摘要版（PPTX）：https://www.chinets.com/Content/File/CHINET2025年细菌耐药监测结果2026-03-24.pptx",
+        "scores": {"policyImpact": 9, "marketImpact": 8, "breakthrough": 4, "competitiveImpact": 7, "timelinessAuthority": 10, "totalScore": 38},
+        "totalScore": 38,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "database",
+        "sourceId": "chinet",
+        "language": "zh",
+        "geographicScope": "china",
+    },
+    {
+        "id": "ind-chinet-lefamulin-2026",
+        "title": "来法莫林对呼吸道常见病原菌体外活性的监测报告（2026 年度阶段报告）",
+        "eventTime": "2026-10-29",
+        "publishTime": "2026-10-29T00:00:00+08:00",
+        "sourceName": "CHINET 中国细菌耐药监测网",
+        "sourceUrl": "https://www.chinets.com/Content/File/来法莫林对呼吸道常见病原菌体外活性的监测报告（2026年度阶段报告）-20261027.pptx",
+        "category": "耐药监测",
+        "contentType": "surveillance",
+        "tags": ["来法莫林", "呼吸道病原菌", "药敏监测", "CHINET", "抗感染"],
+        "summary": "复旦大学附属华山医院抗生素研究所发布来法莫林对呼吸道常见病原菌体外活性的监测报告（2026 年度阶段报告），评估该新药对肺炎链球菌、金黄色葡萄球菌等呼吸道病原菌的体外抗菌活性。",
+        "impact": "针对新型噁唑烷酮类抗菌药物来法莫林的国内体外活性监测，为耐药革兰阳性菌感染（含 MRSA、VRE）的治疗选择提供本土数据支撑。",
+        "abstract": "来法莫林对呼吸道常见病原菌体外活性的监测报告（2026 年度阶段报告，国家卫健委抗生素临床药理重点实验室、CHINET 全体成员单位）。\n\n原文入口：\n完整版（PPTX）：https://www.chinets.com/Content/File/来法莫林对呼吸道常见病原菌体外活性的监测报告（2026年度阶段报告）-20261027.pptx",
+        "scores": {"policyImpact": 8, "marketImpact": 7, "breakthrough": 6, "competitiveImpact": 7, "timelinessAuthority": 9, "totalScore": 37},
+        "totalScore": 37,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "database",
+        "sourceId": "chinet",
+        "language": "zh",
+        "geographicScope": "china",
+    },
+    {
+        "id": "ind-nmpa-imiasefo-2026",
+        "title": "国家药监局批准 1 类创新药注射用亚胺西福（福诺凯）上市",
+        "eventTime": "2026-11-12",
+        "publishTime": "2026-11-12T00:00:00+08:00",
+        "sourceName": "国家药品监督管理局（NMPA）",
+        "sourceUrl": "https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/index.html",
+        "category": "政策动态",
+        "contentType": "approval",
+        "tags": ["NMPA", "亚胺西福", "福诺凯", "碳青霉烯耐药", "CRO", "创新药", "抗感染"],
+        "summary": "国家药监局批准苏州信诺维医药自主研发的 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦，商品名福诺凯）上市，系全球首个针对三大碳青霉烯类耐药革兰阴性杆菌（CRO）具备广谱抗菌活性的 β-内酰胺类/β-内酰胺酶抑制剂。",
+        "impact": "为碳青霉烯类耐药革兰阴性菌（CRO）感染提供新的国内可及治疗选择，可能影响 CRE/CRAB 等耐药菌感染的治疗格局与医保准入。",
+        "abstract": "国家药监局批准 1 类创新药注射用亚胺西福（亚胺培南西司他丁钠福诺巴坦）上市，用于碳青霉烯类耐药革兰阴性杆菌（CRO）相关感染。\n\n原文入口：\nNMPA 药品审评审批「进展成效」：https://www.nmpa.gov.cn/directory/web/nmpa/zhuanti/zt2023/ypgzhlfzh/shypqxgg/ggjzcx/index.html",
+        "scores": {"policyImpact": 9, "marketImpact": 8, "breakthrough": 10, "competitiveImpact": 9, "timelinessAuthority": 10, "totalScore": 46},
+        "totalScore": 46,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "regulatory",
+        "sourceId": "nmpa-manual",
+        "language": "zh",
+        "geographicScope": "china",
+        "approvalStatus": "approved",
+        "marketAccessType": "nmpa",
+    },
+    {
+        "id": "ind-nhsa-2026-catalog",
+        "title": "2026 年国家医保药品目录发布（新增 107 种药品）",
+        "eventTime": "2026-11-14",
+        "publishTime": "2026-11-14T00:00:00+08:00",
+        "sourceName": "国家医疗保障局（NHSA）",
+        "sourceUrl": "https://news.cctv.cn/2026/11/15/ARTIZWTXBK1jxopDHfqD6JC2261115.shtml",
+        "category": "政策动态",
+        "contentType": "policy",
+        "tags": ["医保目录", "医保", "创新药", "抗感染", "市场准入"],
+        "summary": "2026 年国家医保药品目录与商保创新药目录发布：共 107 种药品进入医保目录（其中 51 个为 1 类创新药，数量创历史新高）、12 种进入商保创新药目录，参保人用药保障进一步扩容。",
+        "impact": "创新药（含抗感染新药）纳入医保后支付可及性显著提升，将直接影响相关品种的市场放量与临床可及性。",
+        "abstract": "2026 年国家基本医保药品目录及商保创新药目录发布，新增 107 种药品（51 个 1 类创新药）、12 种进入商保创新药目录。\n\n原文入口：\n央视网/新华社：https://news.cctv.cn/2026/11/15/ARTIZWTXBK1jxopDHfqD6JC2261115.shtml",
+        "scores": {"policyImpact": 10, "marketImpact": 9, "breakthrough": 5, "competitiveImpact": 8, "timelinessAuthority": 10, "totalScore": 42},
+        "totalScore": 42,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "regulatory",
+        "sourceId": "nhsa-manual",
+        "language": "zh",
+        "geographicScope": "china",
+        "policyStatus": "published",
+    },
+    {
+        "id": "ind-nhsa-2025-catalog",
+        "title": "2025 年医保药品目录公布（新增 114 种，2026-01-01 执行）",
+        "eventTime": "2025-12-07",
+        "publishTime": "2025-12-07T00:00:00+08:00",
+        "sourceName": "国家医疗保障局（NHSA）",
+        "sourceUrl": "https://www.nhsa.gov.cn/art/2026/1/7/art_14_19254.html",
+        "category": "政策动态",
+        "contentType": "policy",
+        "tags": ["医保目录", "医保", "抗感染", "市场准入"],
+        "summary": "国家医保局公布 2025 年医保药品目录，共新增 114 种药品、调出 29 种，部分药品医保支付范围调整，新版目录自 2026 年 1 月 1 日起执行。",
+        "impact": "医保目录年度调整影响抗感染等治疗领域的药品可及性与医疗机构用药结构，是医药市场准入的关键节点。",
+        "abstract": "2025 年医保药品目录共新增 114 种药品、调出 29 种，自 2026 年 1 月 1 日起执行。\n\n原文入口：\n国家医保局：https://www.nhsa.gov.cn/art/2026/1/7/art_14_19254.html",
+        "scores": {"policyImpact": 10, "marketImpact": 9, "breakthrough": 4, "competitiveImpact": 8, "timelinessAuthority": 9, "totalScore": 40},
+        "totalScore": 40,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "regulatory",
+        "sourceId": "nhsa-manual",
+        "language": "zh",
+        "geographicScope": "china",
+        "policyStatus": "effective",
+    },
+    {
+        "id": "ind-fungal-east-china-2025",
+        "title": "2025 年中国华东地区真菌耐药监测报告",
+        "eventTime": "2025-12-01",
+        "publishTime": "2025-12-01T00:00:00+08:00",
+        "sourceName": "华东地区真菌耐药监测网",
+        "sourceUrl": "https://www.qk.sjtu.edu.cn/jdcp/fileup/1671-2870/PDF/1782538430779-980849658.pdf",
+        "category": "真菌与耐药",
+        "contentType": "surveillance",
+        "tags": ["真菌监测", "念珠菌", "白念珠菌", "耳念珠菌", "耐药监测", "抗真菌"],
+        "summary": "2025 年中国华东地区真菌耐药监测报告显示：临床分离酵母菌以白念珠菌（38.51%）、热带念珠菌（18.89%）、近平滑念珠菌（16.61%）、光滑念珠菌（15.20%）、克柔念珠菌（1.75%）为主。",
+        "impact": "国内侵袭性真菌病流行病学与耐药变迁的本土数据，为经验性抗真菌治疗与真菌耐药监测提供区域基线参考。",
+        "abstract": "2025 年中国华东地区真菌耐药监测报告（酵母菌菌种分布与抗真菌药物敏感性数据）。\n\n原文入口：\nPDF：https://www.qk.sjtu.edu.cn/jdcp/fileup/1671-2870/PDF/1782538430779-980849658.pdf",
+        "scores": {"policyImpact": 7, "marketImpact": 6, "breakthrough": 5, "competitiveImpact": 6, "timelinessAuthority": 8, "totalScore": 32},
+        "totalScore": 32,
+        "isCluster": False,
+        "factType": "fact",
+        "sourceType": "database",
+        "sourceId": "fungal-surveillance-manual",
+        "language": "zh",
+        "geographicScope": "china",
+    },
+]
+
+# ============================================================
 # 高价值关键词组（用于相关性打分与标签提取）
 # ============================================================
 KEYWORD_GROUPS = {
@@ -3048,6 +3217,21 @@ def main(argv: list[str] | None = None) -> None:
             entry["totalScore"] = entry["scores"]["totalScore"]
             if entry["totalScore"] >= TOTAL_SCORE_THRESHOLD:
                 industry_entries.append(apply_schema_fields(entry, src, {}, "news"))
+
+    # ---- 2b. 录入国内人工补录资讯（受限来源，稳定 id，每次运行重放） ----
+    now_iso = datetime.now(TZ_CN).isoformat()
+    for m in MANUAL_INDUSTRY_NEWS:
+        entry = dict(m)
+        entry.setdefault("recordStatus", "active")
+        entry.setdefault("verificationStatus", "pending")
+        entry["reviewStatus"] = "manualCurated"  # 人工补录，区别于自动采集
+        entry.setdefault("licenseStatus", "unknown")
+        if not isinstance(entry.get("licensePermissions"), list):
+            entry["licensePermissions"] = []
+        entry["ingestedAt"] = now_iso
+        entry["lastCheckedAt"] = now_iso
+        industry_entries.append(entry)
+        successful_task_keys.add(entry["sourceId"])
 
     # ---- 3. 去重、排序、写出 ----
     print("\n[3/3] 去重排序并写出...")

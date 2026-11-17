@@ -3,8 +3,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import industryData from '../data/auto/industry.json';
 import researchData from '../data/auto/research.json';
+import zhData from '../data/manual/research-zh.json';
 import type { IndustryNews, ResearchNews } from '../types/news';
 import { formatDateZh } from '../lib/date';
+
+// 中文翻译索引（与 research 页一致）
+type ZhEntry = { key: string; titleZh?: string; abstractZh?: string };
+const zhMap = new Map<string, ZhEntry>();
+for (const e of zhData as ZhEntry[]) {
+  if (e?.key) zhMap.set(e.key, e);
+}
+function zhKeyOf(n: ResearchNews): string {
+  if (n.pmid) return `pmid:${n.pmid}`;
+  if (n.trialId) return `trial:${n.trialId}`;
+  return `id:${n.id}`;
+}
+function researchTitle(n: ResearchNews): string {
+  return n.titleZh ?? zhMap.get(zhKeyOf(n))?.titleZh ?? n.title;
+}
+function researchAbstract(n: ResearchNews): string {
+  return n.abstractZh ?? zhMap.get(zhKeyOf(n))?.abstractZh ?? n.abstract ?? '';
+}
 
 // —— 三大内容分区（临床工具 / AI 工具仅作为顶部导航入口，不进首页内容区）——
 const sectionDescriptions = {
@@ -110,9 +129,9 @@ const categoryBadgeClass: Record<string, string> = {
                 <span>{formatDate(item.publishTime)}</span>
               </div>
               <a href={`/research/${item.id}`} class="line-clamp-2 text-sm font-medium text-neutral-900 hover:text-blue-600">
-                {item.title}
+                {researchTitle(item)}
               </a>
-              <p class="mt-1.5 line-clamp-2 text-xs text-neutral-500">{item.abstract ?? ''}</p>
+              <p class="mt-1.5 line-clamp-2 text-xs text-neutral-500">{researchAbstract(item)}</p>
             </li>
           ))
         }
