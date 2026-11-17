@@ -8,6 +8,8 @@
 [build.environment]
   NODE_VERSION = "20"
   PNPM_VERSION = "12.18.0"
+  # 国内部署（Netlify）的站点地址，供 astro.config.mjs 的 site 生成正确的 canonical/绝对链接
+  SITE_URL = "https://medai-hub.netlify.app"
 
 [functions]
   directory = "netlify/functions"
