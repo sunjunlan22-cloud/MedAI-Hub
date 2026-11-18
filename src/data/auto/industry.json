@@ -39,8 +39,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-nmpa-imiasefo-2026",
@@ -85,8 +85,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-chinet-lefamulin-2026",
@@ -127,8 +127,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-chinet-2026-h1",
@@ -171,8 +171,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-chinet-2025-full",
@@ -216,8 +216,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-nhsa-2025-catalog",
@@ -258,8 +258,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-fungal-east-china-2025",
@@ -301,8 +301,8 @@
     "reviewStatus": "manualCurated",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317029+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317029+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480829+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480829+08:00"
   },
   {
     "id": "ind-fc2f0033a5",
@@ -346,8 +346,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.312337+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.312337+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.476040+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.476040+08:00",
     "sourceQuery": "WHO GLASS 监测报告",
     "pathogens": [
       "鲍曼不动杆菌",
@@ -401,8 +401,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.312823+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.312823+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.476489+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.476489+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -444,8 +444,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.026746+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.026746+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.610951+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.610951+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -484,8 +484,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.313288+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.313288+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.476981+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.476981+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -522,8 +522,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.313602+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.313602+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.477300+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.477300+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -560,8 +560,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.314050+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.314050+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.477778+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.477778+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -598,8 +598,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.314450+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.314450+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.478194+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.478194+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -641,8 +641,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.028892+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.028892+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.613105+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.613105+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -678,8 +678,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:37:51.850277+08:00",
-    "lastCheckedAt": "2026-11-17T23:37:51.850277+08:00"
+    "ingestedAt": "2026-11-18T08:41:04.618082+08:00",
+    "lastCheckedAt": "2026-11-18T08:41:04.618082+08:00"
   },
   {
     "id": "ind-ed829a3d2a",
@@ -720,8 +720,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.029640+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.029640+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.613867+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.613867+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -757,8 +757,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:37:51.856009+08:00",
-    "lastCheckedAt": "2026-11-17T23:37:51.856009+08:00"
+    "ingestedAt": "2026-11-18T08:41:04.623655+08:00",
+    "lastCheckedAt": "2026-11-18T08:41:04.623655+08:00"
   },
   {
     "id": "ind-c0fd23086e",
@@ -799,8 +799,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.031455+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.031455+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.615694+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.615694+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -842,8 +842,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.032990+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.032990+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.617171+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.617171+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -879,8 +879,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:37:51.860645+08:00",
-    "lastCheckedAt": "2026-11-17T23:37:51.860645+08:00"
+    "ingestedAt": "2026-11-18T08:41:04.628248+08:00",
+    "lastCheckedAt": "2026-11-18T08:41:04.628248+08:00"
   },
   {
     "id": "ind-70984df8f7",
@@ -921,8 +921,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.033520+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.033520+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.617739+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.617739+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -959,8 +959,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.314873+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.314873+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.478605+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.478605+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -1002,8 +1002,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.034339+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.034339+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.618575+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.618575+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -1045,8 +1045,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:16.034847+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:16.034847+08:00",
+    "ingestedAt": "2026-11-18T08:42:05.619102+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:05.619102+08:00",
     "sourceQuery": "EMA 药品上市许可"
   },
   {
@@ -1083,8 +1083,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.315270+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.315270+08:00",
+    "ingestedAt": "2026-11-18T08:42:08.479028+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.479028+08:00",
     "sourceQuery": "WHO GLASS 监测报告"
   },
   {
@@ -1121,8 +1121,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.316262+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.316262+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480021+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480021+08:00"
   },
   {
     "id": "ind-33b4fda4e0",
@@ -1159,8 +1159,8 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.316768+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.316768+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480542+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480542+08:00"
   },
   {
     "id": "ind-8da7ed403d",
@@ -1200,7 +1200,7 @@
     "reviewStatus": "autoProcessed",
     "licenseStatus": "unknown",
     "licensePermissions": [],
-    "ingestedAt": "2026-11-17T23:38:21.317025+08:00",
-    "lastCheckedAt": "2026-11-17T23:38:21.317025+08:00"
+    "ingestedAt": "2026-11-18T08:42:08.480824+08:00",
+    "lastCheckedAt": "2026-11-18T08:42:08.480824+08:00"
   }
 ]
