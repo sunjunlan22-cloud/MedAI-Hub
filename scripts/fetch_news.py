@@ -1948,6 +1948,11 @@ def merge_preserving_manual(path: Path, new_entries: list[dict], successful_task
             old_val = old.get(field, default)
             if old_val != default:
                 new_entry[field] = old_val
+        # 系统采集时间戳保持稳定：ingestedAt（首次入库）/lastCheckedAt（最近核实）
+        # 不随每次重放刷新，避免「无内容变化仍产生 diff」导致无意义提交与部署。
+        for ts_field in ("ingestedAt", "lastCheckedAt"):
+            if old.get(ts_field):
+                new_entry[ts_field] = old[ts_field]
         # 其他人工补充字段：旧数据中存在且不在自动字段集合 → 保留旧值
         for k, v in old.items():
             if k in AUTO_FIELDS or k in MANUAL_FIELDS:
