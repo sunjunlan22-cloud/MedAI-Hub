@@ -38,10 +38,20 @@ const latestGuides = allGuides
   .sort((a, b) => b.data.year - a.data.year)
   .slice(0, 3);
 
-// —— 科研前沿最新 3 条（机构主页/资源导航不入科研列表）——
+// —— 科研前沿最新 3 条（机构主页/资源导航不入科研列表；排除「other」占位记录；
+//    优先展示已有准确中文标题与中文摘要、具人体临床相关性的记录）——
 const researchNews = (researchData as ResearchNews[])
-  .filter((n) => (n as any).contentType !== 'resource')
+  .filter((n) => (n as any).contentType !== 'resource' && n.studyType !== 'other')
   .sort((a, b) => {
+    const zhScore = (n: ResearchNews) => {
+      const k = zhKeyOf(n);
+      const hasTitle = !!(n.titleZh || zhMap.get(k)?.titleZh);
+      const hasAbs = !!(n.abstractZh || zhMap.get(k)?.abstractZh);
+      return (hasTitle ? 1 : 0) + (hasAbs ? 1 : 0);
+    };
+    const za = zhScore(a);
+    const zb = zhScore(b);
+    if (zb !== za) return zb - za;
     const ta = a.publishTime ? new Date(a.publishTime).getTime() : 0;
     const tb = b.publishTime ? new Date(b.publishTime).getTime() : 0;
     return tb - ta;
@@ -58,12 +68,13 @@ function formatDate(iso?: string | null) {
   return formatDateZh(iso);
 }
 
-const categoryBadgeClass: Record<string, string> = {
-  '真菌与耐药': 'bg-pink-50 text-pink-700',
-  'AMR': 'bg-red-50 text-red-700',
-  '感染影像': 'bg-cyan-50 text-cyan-700',
-  'AI临床': 'bg-violet-50 text-violet-700',
-  '耐药监测': 'bg-orange-50 text-orange-700',
+// 行业资讯单一主分类（内容类型标签，与列表/详情页一致）
+const industryTypeLabel: Record<string, string> = {
+  policy: '政策动态',
+  approval: '药品审批',
+  surveillance: '耐药监测',
+  news: '行业动态',
+  resource: '资源',
 };
 ---
 
@@ -80,6 +91,23 @@ const categoryBadgeClass: Record<string, string> = {
       <a href="/research" class="rounded-lg border border-neutral-300 bg-white px-5 py-2.5 text-sm font-medium text-neutral-700 transition hover:border-blue-400 hover:text-blue-600">找文献</a>
       <a href="/industry" class="rounded-lg border border-neutral-300 bg-white px-5 py-2.5 text-sm font-medium text-neutral-700 transition hover:border-blue-400 hover:text-blue-600">看资讯</a>
     </div>
+
+    <!-- 首页全站搜索（默认搜索全站，跳转统一搜索页） -->
+    <form action="/search" method="get" role="search" class="mx-auto mt-6 max-w-xl">
+      <div class="relative">
+        <svg class="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input
+          type="search"
+          name="q"
+          placeholder="全站搜索：指南、文献、资讯、病原体、药物、PMID / DOI…"
+          aria-label="全站搜索"
+          class="w-full rounded-xl border border-neutral-300 bg-white py-3 pl-10 pr-4 text-base focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+        />
+      </div>
+    </form>
   </section>
 
   <!-- 第一排：左指南、右科研（电脑双栏；手机单列） -->
@@ -157,7 +185,7 @@ const categoryBadgeClass: Record<string, string> = {
               {!isLast && <span class="absolute left-1.5 top-7 bottom-0 w-px bg-neutral-200"></span>}
               <div class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition hover:shadow-md">
                 <div class="flex flex-wrap items-center gap-2 text-xs text-neutral-400">
-                  <span class={`rounded px-1.5 py-0.5 ${categoryBadgeClass[item.category] ?? 'bg-blue-50 text-blue-700'}`}>{item.category}</span>
+                  <span class="rounded bg-blue-50 px-1.5 py-0.5 text-blue-700">{industryTypeLabel[(item as any).contentType ?? ''] ?? '资讯'}</span>
                   <span>{item.sourceName}</span>
                   <span>{formatDate(item.publishTime)}</span>
                 </div>

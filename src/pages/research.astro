@@ -104,12 +104,16 @@ function formatDate(iso?: string | null) {
     </p>
     <div class="mt-3 flex flex-wrap items-center gap-2 text-sm">
       <span class="font-medium text-neutral-700">研究记录 · 共 {news.length} 条</span>
-      <span class="rounded bg-purple-50 px-2 py-0.5 font-medium text-purple-700">已发表文献 {paperCount}</span>
-      <span class="rounded bg-violet-50 px-2 py-0.5 font-medium text-violet-700">临床试验注册 {trialCount}</span>
+      <!-- 首层可点击：全部 / 已发表文献 / 临床试验注册 -->
+      <div class="inline-flex flex-wrap gap-1 rounded-lg border border-neutral-200 bg-neutral-50 p-1">
+        <button type="button" data-record-type="all" class="record-type-tab rounded-md px-3 py-1 text-sm font-medium bg-white text-blue-700 shadow-sm">全部</button>
+        <button type="button" data-record-type="paper" class="record-type-tab rounded-md px-3 py-1 text-sm font-medium text-neutral-600 hover:text-neutral-900">已发表文献 {paperCount}</button>
+        <button type="button" data-record-type="trial" class="record-type-tab rounded-md px-3 py-1 text-sm font-medium text-neutral-600 hover:text-neutral-900">临床试验注册 {trialCount}</button>
+      </div>
     </div>
   </header>
 
-  <!-- 顶部搜索框 -->
+  <!-- 顶部搜索框（默认搜索当前栏目：科研前沿） -->
   <div class="mb-5">
     <div class="relative">
       <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -119,21 +123,18 @@ function formatDate(iso?: string | null) {
       <input
         id="research-search"
         type="search"
-        placeholder="搜索病原体或关键字，如：曲霉、TDM、CRAB…"
+        placeholder="搜索当前栏目（科研前沿）：病原体、疾病、药物、PMID、DOI…"
         class="w-full rounded-xl border border-neutral-300 bg-white py-2.5 pl-10 pr-4 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
       />
     </div>
   </div>
 
-  <!-- 证据类型快速筛选（单行） -->
-  <div class="mb-6 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
-    <div class="mb-2 flex items-center justify-between">
-      <span class="text-xs font-semibold uppercase tracking-wide text-neutral-500">证据类型</span>
-      <button id="research-reset" type="button" class="text-xs text-blue-600 hover:text-blue-700 hover:underline">
-        清除筛选
-      </button>
-    </div>
-    <div class="flex flex-wrap gap-2">
+  <!-- 更多筛选（研究类型） -->
+  <details class="mb-6 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+    <summary class="cursor-pointer select-none text-sm font-semibold text-neutral-700 hover:text-neutral-900">
+      更多筛选 · 研究类型
+    </summary>
+    <div class="mt-3 flex flex-wrap items-center gap-2">
       {
         studyTypes.map((t) => (
           <button
@@ -145,8 +146,11 @@ function formatDate(iso?: string | null) {
           </button>
         ))
       }
+      <button id="research-reset" type="button" class="ml-1 text-xs text-blue-600 hover:text-blue-700 hover:underline">
+        清除筛选
+      </button>
     </div>
-  </div>
+  </details>
 
   <!-- 结果计数 -->
   <p id="research-count" class="mb-4 text-sm text-neutral-500"></p>
@@ -165,6 +169,7 @@ function formatDate(iso?: string | null) {
         <li
           class="news-card rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition hover:shadow-md"
           data-type={item.studyType}
+          data-record-type={isTrial(item) ? 'trial' : 'paper'}
           data-tags={item.tags.join(',')}
           data-search={`${titleOf(item)} ${abstractOf(item)} ${item.title} ${item.abstract ?? ''} ${item.pmid ?? ''} ${item.trialId ?? ''} ${item.tags.join(' ')} ${item.sourceName}`.toLowerCase()}
         >
@@ -285,6 +290,7 @@ function formatDate(iso?: string | null) {
   const cards = Array.from(document.querySelectorAll<HTMLElement>('.news-card'));
   const typeTags = document.querySelectorAll<HTMLElement>('.type-tag');
   const tagBtns = document.querySelectorAll<HTMLElement>('.tag-btn');
+  const recordTypeTabs = document.querySelectorAll<HTMLElement>('.record-type-tab');
   const searchInput = document.getElementById('research-search') as HTMLInputElement | null;
   const resetBtn = document.getElementById('research-reset');
   const countEl = document.getElementById('research-count')!;
@@ -292,6 +298,7 @@ function formatDate(iso?: string | null) {
 
   const activeTypes = new Set<string>();
   const activeTags = new Set<string>();
+  let activeRecordType = 'all';
   let query = '';
 
   // 中英文/缩写术语归一化：命中同义词概念时，用其全部规范术语参与匹配
@@ -318,9 +325,11 @@ function formatDate(iso?: string | null) {
     const terms = expandQuery(query);
     cards.forEach((card: HTMLElement) => {
       const type = card.dataset.type!;
+      const recordType = card.dataset['recordType'] ?? 'paper';
       const tags = card.dataset.tags!.split(',');
       const searchText = card.dataset.search ?? '';
 
+      const matchRecordType = activeRecordType === 'all' || activeRecordType === recordType;
       const matchType = activeTypes.size === 0 || activeTypes.has(type);
       const matchTags =
         activeTags.size === 0 ||
@@ -328,13 +337,26 @@ function formatDate(iso?: string | null) {
       const matchSearch =
         terms.size === 0 || Array.from(terms).some((t) => searchText.includes(t));
 
-      const show = matchType && matchTags && matchSearch;
+      const show = matchRecordType && matchType && matchTags && matchSearch;
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
 
     countEl.textContent = `共 ${visible} 条记录`;
     emptyEl.classList.toggle('hidden', visible > 0);
+  }
+
+  function toggleRecordType(btn: HTMLElement) {
+    activeRecordType = btn.dataset.recordType || 'all';
+    recordTypeTabs.forEach((t) => {
+      const active = t === btn;
+      t.classList.toggle('bg-white', active);
+      t.classList.toggle('text-blue-700', active);
+      t.classList.toggle('shadow-sm', active);
+      t.classList.toggle('text-neutral-600', !active);
+      t.classList.toggle('hover:text-neutral-900', !active);
+    });
+    applyFilters();
   }
 
   function toggleType(btn: HTMLElement) {
@@ -367,6 +389,7 @@ function formatDate(iso?: string | null) {
     applyFilters();
   }
 
+  recordTypeTabs.forEach((btn) => btn.addEventListener('click', () => toggleRecordType(btn)));
   typeTags.forEach((btn) => btn.addEventListener('click', () => toggleType(btn)));
   tagBtns.forEach((btn) => btn.addEventListener('click', () => toggleTag(btn)));
 
@@ -379,7 +402,16 @@ function formatDate(iso?: string | null) {
     activeTypes.clear();
     activeTags.clear();
     query = '';
+    activeRecordType = 'all';
     if (searchInput) searchInput.value = '';
+    recordTypeTabs.forEach((t) => {
+      const active = t.dataset.recordType === 'all';
+      t.classList.toggle('bg-white', active);
+      t.classList.toggle('text-blue-700', active);
+      t.classList.toggle('shadow-sm', active);
+      t.classList.toggle('text-neutral-600', !active);
+      t.classList.toggle('hover:text-neutral-900', !active);
+    });
     typeTags.forEach((b) => {
       b.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
       b.classList.add('border-neutral-300', 'bg-white', 'text-neutral-600');

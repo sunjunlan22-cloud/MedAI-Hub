@@ -208,9 +208,17 @@ const publicationStatusLabel: Record<string, string> = {
       <section class="mt-8">
         <h2 class="mb-2 text-lg font-semibold">关联记录</h2>
         <ul class="space-y-1 text-sm text-neutral-700">
-          {item.relatedRecords!.map((rid) => (
-            <li class="rounded bg-neutral-50 px-3 py-1">{rid}</li>
-          ))}
+          {item.relatedRecords!.map((rid) => {
+            if (rid.startsWith('guide:')) {
+              const slug = rid.slice('guide:'.length);
+              return <li class="rounded bg-neutral-50 px-3 py-1"><a href={`/guides/${slug}`} class="text-blue-600 hover:underline">专家共识 / 指南：{slug}</a></li>;
+            }
+            if (rid.startsWith('research:')) {
+              const rid2 = rid.slice('research:'.length);
+              return <li class="rounded bg-neutral-50 px-3 py-1"><a href={`/research/${rid2}`} class="text-blue-600 hover:underline">研究记录：{rid2}</a></li>;
+            }
+            return <li class="rounded bg-neutral-50 px-3 py-1">{rid}</li>;
+          })}
         </ul>
       </section>
     )}

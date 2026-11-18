@@ -389,6 +389,15 @@
       "source": "临床常用缩写",
       "ambiguous": false,
       "note": ""
+    },
+    {
+      "id": "copd",
+      "label": "COPD / 慢阻肺 = 慢性阻塞性肺疾病（chronic obstructive pulmonary disease）",
+      "queries": ["COPD", "慢阻肺", "慢性阻塞性肺疾病", "chronic obstructive pulmonary disease", "AECOPD"],
+      "expansions": ["COPD", "慢阻肺", "慢性阻塞性肺疾病", "chronic obstructive pulmonary disease", "AECOPD"],
+      "source": "疾病中英文命名对照（GOLD 慢性阻塞性肺疾病全球倡议）",
+      "ambiguous": false,
+      "note": ""
     }
   ]
 }

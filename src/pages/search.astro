@@ -111,20 +111,25 @@ const guideDocs = await getCollection('guides');
 for (const g of guideDocs) {
   if (g.data.draft) continue;
   const litType = g.data.docType?.[0] ?? '指南';
+  // 索引指南正文（raw markdown），使正文中的药物、疾病、PMID、DOI 可被检索
+  const bodyText = (g.body ?? '').replace(/[#*_`>\[\]()|-]/g, ' ').toLowerCase();
+  // 从正文/题名提取 PMID 与 DOI（用于命中片段与展示）
+  const pmidMatch = (g.data.title + ' ' + (g.body ?? '')).match(/PMID[：:]\s*(\d+)/i);
+  const doiMatch = (g.data.title + ' ' + (g.body ?? '')).match(/10\.\d{4,9}\/[-._;()/:A-Za-z0-9]+/i);
   docs.push({
     id: `guide:${g.id}`,
     section: 'guide',
     sectionLabel: '抗感染指南',
     title: g.data.title,
-    text: [g.data.title, g.data.organization, g.data.description, g.data.pathogens?.join(' ') ?? '', g.data.tags?.join(' ') ?? '', g.data.docType?.join(' ') ?? ''].join(' ').toLowerCase(),
+    text: [g.data.title, g.data.organization, g.data.description, g.data.pathogens?.join(' ') ?? '', g.data.tags?.join(' ') ?? '', g.data.docType?.join(' ') ?? '', bodyText].join(' ').toLowerCase(),
     href: `/guides/${g.id}`,
     source: g.data.organization,
     year: g.data.year || 0,
     litType,
     litTypeLabel: litType,
     abstract: g.data.description || '',
-    pmid: '',
-    doi: '',
+    pmid: pmidMatch ? pmidMatch[1] : '',
+    doi: doiMatch ? doiMatch[0] : '',
     isExternal: false,
   });
 }
@@ -367,16 +372,45 @@ const meta = { litTypes: [...litTypeMap.entries()], sources: sourceList };
 
   let activeSynonymExpansions: string[] = [];
 
+  // 命中片段：从归一化正文中截取首个命中术语前后的上下文，并高亮所有命中术语
+  function makeSnippet(text: string, terms: string[]): string {
+    if (!terms.length) return '';
+    const lower = text.toLowerCase();
+    const positions: number[] = [];
+    for (const t of terms) {
+      if (!t) continue;
+      let idx = lower.indexOf(t);
+      while (idx !== -1) { positions.push(idx); idx = lower.indexOf(t, idx + t.length); }
+    }
+    if (positions.length === 0) return '';
+    const first = Math.min(...positions);
+    const start = Math.max(0, first - 60);
+    const end = Math.min(lower.length, first + 120);
+    let snip = lower.slice(start, end);
+    if (start > 0) snip = '…' + snip;
+    if (end < lower.length) snip = snip + '…';
+    // 先转义纯文本，再高亮命中术语（避免转义 mark 标签）
+    snip = escapeHtml(snip);
+    const uniq = [...new Set(terms.filter(Boolean))].sort((a, b) => b.length - a.length);
+    for (const t of uniq) {
+      const re = new RegExp(escapeHtml(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      snip = snip.replace(re, (m) => `<mark class="rounded bg-yellow-100 px-0.5">${m}</mark>`);
+    }
+    return snip;
+  }
+
   function renderStation(results: any[]) {
     stationList.innerHTML = '';
     stationEmpty.classList.toggle('hidden', results.length > 0);
     stationCount.textContent = results.length ? `${results.length} 条` : '';
     const shown = results.slice(0, 60);
+    const terms = [q.trim().toLowerCase(), ...activeSynonymExpansions].filter(Boolean);
     for (const d of shown) {
       const li = document.createElement('li');
       li.className = 'rounded-xl border border-neutral-200 bg-white p-4 shadow-sm';
       const badge = sectionBadge[d.section] || 'bg-neutral-100 text-neutral-600';
       const metaBits = [d.sectionLabel, d.source, d.year || ''].filter(Boolean).join(' · ');
+      const snippet = q.trim() ? makeSnippet(d.text, terms) : '';
       li.innerHTML = `
         <div class="mb-1 flex flex-wrap items-center gap-2 text-xs">
           <span class="rounded px-2 py-0.5 font-medium ${badge}">${d.sectionLabel}</span>
@@ -384,8 +418,8 @@ const meta = { litTypes: [...litTypeMap.entries()], sources: sourceList };
           <span class="text-neutral-400">${escapeHtml(metaBits)}</span>
         </div>
         <a href="${d.href}" class="text-base font-medium text-neutral-900 hover:text-blue-600 hover:underline">${escapeHtml(d.title)}</a>
-        ${d.abstract ? `<p class="mt-1.5 line-clamp-2 text-sm text-neutral-600">${escapeHtml(d.abstract)}</p>` : ''}
-        <div class="mt-1 text-xs text-neutral-400">来源：${escapeHtml(d.source)}${d.pmid ? ' · PMID: ' + d.pmid : ''}</div>
+        ${snippet ? `<p class="mt-1.5 text-sm text-neutral-600">${snippet}</p>` : (d.abstract ? `<p class="mt-1.5 line-clamp-2 text-sm text-neutral-600">${escapeHtml(d.abstract)}</p>` : '')}
+        <div class="mt-1 text-xs text-neutral-400">来源：${escapeHtml(d.source)}${d.pmid ? ' · PMID: ' + d.pmid : ''}${d.doi ? ' · DOI: ' + escapeHtml(d.doi) : ''}</div>
       `;
       stationList.appendChild(li);
     }

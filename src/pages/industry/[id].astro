@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ScoreBadge from '../../components/ScoreBadge.astro';
 import industryData from '../../data/auto/industry.json';
 import type { IndustryNews } from '../../types/news';
 import { formatDateTimeZh } from '../../lib/date';
@@ -82,14 +81,6 @@ const abstractHtml = linkify(abstractText);
 function formatDate(iso?: string | null) {
   return formatDateTimeZh(iso);
 }
-
-const axes = [
-  { label: '政策/医保影响度', value: item.scores.policyImpact },
-  { label: '市场/销售额波及面', value: item.scores.marketImpact },
-  { label: '产品/管线突破性', value: item.scores.breakthrough },
-  { label: '企业/竞争格局影响', value: item.scores.competitiveImpact },
-  { label: '时效性与权威可信度', value: item.scores.timelinessAuthority },
-];
 ---
 
 <BaseLayout title={item.title} description={item.summary}>
@@ -99,12 +90,11 @@ const axes = [
       ← 返回行业资讯列表
     </a>
 
-    <!-- 元信息 -->
+    <!-- 元信息（单一主分类：内容类型标签） -->
     <div class="mb-4 flex flex-wrap items-center gap-2 text-xs">
       {ct && (
         <span class={`rounded border px-2 py-0.5 ${ct.class}`}>{ct.text}</span>
       )}
-      <span class="rounded bg-blue-50 px-2 py-0.5 font-medium text-blue-700">{item.category}</span>
       <span class={`rounded px-2 py-0.5 ${ft.class}`}>{ft.text}</span>
       {item.isCluster && (
         <span class="rounded bg-emerald-50 px-2 py-0.5 text-emerald-700">多源聚合</span>
@@ -225,13 +215,6 @@ const axes = [
     <section class="mt-6">
       <h2 class="mb-2 text-lg font-semibold">行业影响评估</h2>
       <p class="leading-relaxed text-neutral-700">{item.impact}</p>
-    </section>
-
-    <!-- 五轴评分 -->
-    <section class="mt-8">
-      <h2 class="mb-3 text-lg font-semibold">五轴评分</h2>
-      <ScoreBadge totalScore={item.totalScore} axes={axes} />
-      <p class="mt-2 text-xs text-neutral-400">满分 50 分，准入线 35 分（双 Agent 审核通过）</p>
     </section>
 
     <!-- 标签 -->

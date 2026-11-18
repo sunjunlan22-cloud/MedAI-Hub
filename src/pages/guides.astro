@@ -70,12 +70,12 @@ const guides = (await getCollection('guides', ({ data }) => !data.draft))
     </p>
   </header>
 
-  <!-- 搜索框 -->
+  <!-- 搜索框（默认搜索当前栏目：抗感染指南） -->
   <div class="mb-4">
     <input
       id="guides-search"
       type="search"
-      placeholder="搜索标题、摘要、组织、病原体..."
+      placeholder="搜索当前栏目（抗感染指南）：标题、摘要、组织、病原体…"
       class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
     />
   </div>

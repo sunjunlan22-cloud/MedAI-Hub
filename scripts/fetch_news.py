@@ -198,6 +198,11 @@ PUBMED_QUERIES = [
         "term": '(therapeutic drug monitoring OR TDM) AND (voriconazole OR isavuconazole OR polymyxin OR colistin OR tigecycline OR eravacycline OR sulbactam-durlobactam)',
         "authority": 9,
     },
+    {
+        "name": "PubMed (COPD 曲霉)",
+        "term": '(chronic obstructive pulmonary disease OR COPD) AND (Aspergillus OR aspergillosis OR invasive pulmonary aspergillosis)',
+        "authority": 9,
+    },
 ]
 
 # ClinicalTrials.gov 通过 API v2 抓取抗感染相关临床试验注册信息
@@ -549,6 +554,42 @@ MANUAL_INDUSTRY_NEWS = [
         "sourceId": "fungal-surveillance-manual",
         "language": "zh",
         "geographicScope": "china",
+    },
+]
+
+# ============================================================
+# 人工精选科研文献（重要综述/共识原文，稳定 id，每次运行重放）
+# 与 MANUAL_INDUSTRY_NEWS 同理：独立于 PubMed「最新 N 篇」窗口，
+# 即使自动采集窗口滑出或查询词未覆盖，经核实的重点文献仍可检索。
+# 中文题名/摘要写入 research-zh.json（key=pmid:XXX），此处仅存原文结构化字段。
+# ============================================================
+MANUAL_RESEARCH_NEWS = [
+    {
+        "id": "res-lancet-copd-aspergillus-2026",
+        "title": "COPD and Aspergillus—a complex interaction of global health importance.",
+        "sourceName": "Lancet Infect Dis",
+        "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/42612667/",
+        "studyType": "review",
+        "publishStatus": "published",
+        "publishTime": "2026-08-18",
+        "coreFindings": "",
+        "limitations": "",
+        "inspiration": "",
+        "evidenceLevel": "原文未评估",
+        "evidenceQuality": "原文未评估",
+        "publicationStatus": "published",
+        "isPreprint": False,
+        "tags": ["曲霉", "COPD", "慢性肺曲霉病", "侵袭性肺曲霉病", "综述"],
+        "contentType": "research",
+        "pmid": "42612667",
+        "externalId": "42612667",
+        "doi": "10.1016/S1473-3099(26)00360-9",
+        "authors": ["Denning DW", "Vestbo J"],
+        "sourceType": "database",
+        "sourceId": "pubmed-manual",
+        "language": "en",
+        "geographicScope": "global",
+        "relatedRecords": ["guide:copd-ipa-consensus-2026"],
     },
 ]
 
@@ -3289,6 +3330,20 @@ def main(argv: list[str] | None = None) -> None:
         entry["ingestedAt"] = now_iso
         entry["lastCheckedAt"] = now_iso
         industry_entries.append(entry)
+        successful_task_keys.add(entry["sourceId"])
+
+    # ---- 2c. 录入人工精选科研文献（重要综述/共识，稳定 id，每次运行重放） ----
+    for m in MANUAL_RESEARCH_NEWS:
+        entry = dict(m)
+        entry.setdefault("recordStatus", "active")
+        entry.setdefault("verificationStatus", "pending")
+        entry["reviewStatus"] = "manualCurated"  # 人工精选，独立于自动采集窗口
+        entry.setdefault("licenseStatus", "unknown")
+        if not isinstance(entry.get("licensePermissions"), list):
+            entry["licensePermissions"] = []
+        entry["ingestedAt"] = now_iso
+        entry["lastCheckedAt"] = now_iso
+        research_entries.append(entry)
         successful_task_keys.add(entry["sourceId"])
 
     # ---- 3. 去重、排序、写出 ----

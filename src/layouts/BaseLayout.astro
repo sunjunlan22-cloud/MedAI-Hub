@@ -16,6 +16,7 @@ const nav = [
   { label: '行业资讯', href: '/industry' },
   { label: '临床工具', href: '/tools' },
   { label: 'AI工具', href: '/ai-tools' },
+  { label: '搜索', href: '/search' },
 ];
 
 function isActive(href: string) {
@@ -66,22 +67,6 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString(
               ))
             }
           </ul>
-          <!-- 核心搜索框（统一结果页 /search） -->
-          <form action="/search" method="get" role="search" class="w-full md:w-56">
-            <div class="relative">
-              <svg class="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
-              <input
-                type="search"
-                name="q"
-                placeholder="搜索文献、指南、资讯、病原体…"
-                aria-label="全站搜索"
-                class="w-full rounded-lg border border-neutral-300 bg-white py-1.5 pl-8 pr-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
-              />
-            </div>
-          </form>
         </div>
       </div>
     </header>
