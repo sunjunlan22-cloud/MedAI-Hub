@@ -1,0 +1,48 @@
+name: Deploy to Netlify
+
+# 国内生产环境（medai-hub.netlify.app）部署。
+# 说明：此前 Netlify 依赖其自身的 Git 集成自动构建，但该集成已停止触发
+# （生产停留在 586df28）。本工作流改为在 GitHub Actions 内显式构建并发布到
+# Netlify，使部署可复算、可查日志。需在仓库 Secrets 配置：
+#   NETLIFY_AUTH_TOKEN —— Netlify Personal Access Token
+#   NETLIFY_SITE_ID    —— 目标站点 ID（Site settings > Site details > API ID）
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.18.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3
+        with:
+          publish-dir: ./dist
+          functions-dir: ./netlify/functions
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-commit-comment: false
+          enable-pull-request-comment: false
+          deploy-message: "deploy ${{ github.sha }}"
+          overwrites-pull-request-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 10

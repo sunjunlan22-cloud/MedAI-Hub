@@ -1,0 +1,171 @@
+{
+  "$schema": "./domestic-sources.schema.json",
+  "updatedAt": "2026-11-18",
+  "journals": [
+    {
+      "id": "journal-zhongzheng-yixue",
+      "name": "中华重症医学电子杂志",
+      "host": "中华医学会（重症医学分会）",
+      "url": "https://icu.cma-cmc.com.cn/",
+      "access": "官网目录页（期刊官网）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "中华医学会系列期刊，重症医学领域；官网提供目录/题录，全文遵循原站授权。"
+    },
+    {
+      "id": "journal-zhonghua-crzz",
+      "name": "中华传染病杂志",
+      "host": "中华医学会",
+      "url": "https://zhcrbzz.yiigle.com/",
+      "access": "官网目录页（yiigle 平台）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "感染病领域核心期刊，官方题录入口为 yiigle 平台目录页。"
+    },
+    {
+      "id": "journal-zhonghua-jhhhx",
+      "name": "中华结核和呼吸杂志",
+      "host": "中华医学会",
+      "url": "https://zhjhhhxzz.yiigle.com/",
+      "access": "官网目录页（yiigle 平台）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "呼吸与结核领域核心期刊。"
+    },
+    {
+      "id": "journal-cjic",
+      "name": "中国感染与化疗杂志",
+      "host": "复旦大学附属华山医院",
+      "url": "http://www.cjic.com.cn/",
+      "access": "官网目录页",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "感染与化疗领域专业期刊，官网提供题录。"
+    },
+    {
+      "id": "journal-zhonghua-wzbjjy",
+      "name": "中华危重病急救医学",
+      "host": "中华医学会、天津市第一中心医院、天津市天津医院（主管：国家卫健委）",
+      "url": "https://zhwzbjjyx.yiigle.com/",
+      "access": "官网目录页（yiigle 平台）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "原《中国危重病急救医学》，2013 年更名；月刊，ISSN 2095-4352，重症医学领域核心期刊。"
+    },
+    {
+      "id": "journal-zhonghua-lcgrb",
+      "name": "中华临床感染病杂志（中英文）",
+      "host": "中华医学会（承办：浙江大学、浙江大学医学院附属第一医院）",
+      "url": "https://zhlcgrbzz.yiigle.com/",
+      "access": "官网目录页（yiigle 平台）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "主管：中国科协；双月刊；英文简称 Chin J Clin Infect Dis，临床感染病领域。"
+    },
+    {
+      "id": "journal-zhonghua-yygrx",
+      "name": "中华医院感染学杂志",
+      "host": "解放军总医院医学创新研究部、第一医学中心（主管：解放军总医院）",
+      "url": "https://zhyygrxzz.xml-journal.net/",
+      "access": "官网目录页（xml-journal 平台）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "ISSN 1005-4529，医院感染防控领域旗舰期刊；官方目录页提供题录。"
+    },
+    {
+      "id": "journal-zggrkz",
+      "name": "中国感染控制杂志",
+      "host": "中南大学、中南大学湘雅医院（主管：教育部）",
+      "url": "https://www.zggrkz.com/",
+      "access": "官网目录页（zggrkz.com）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "感染控制领域核心期刊，CSCD 来源期刊；官网提供过刊题录。"
+    },
+    {
+      "id": "journal-zgzjj",
+      "name": "中国真菌学杂志",
+      "host": "原上海长征医院（主管：海军军医大学；2023 年军队期刊改革后主办/主管单位变更）",
+      "url": "https://zjxz.cbpt.cnki.net/",
+      "access": "官网目录页（知网 CBPT 期刊集群）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "医学真菌学专业期刊，双月刊；官方平台为知网 CBPT，变更后的主办/主管单位待补录。"
+    },
+    {
+      "id": "journal-zhonghua-jyyx",
+      "name": "中华检验医学杂志",
+      "host": "中华医学会（主管：中国科协）",
+      "url": "https://www.medlab.org.cn/",
+      "access": "官网目录页（medlab.org.cn）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "月刊，英文简称 Chin J Lab Med；仅收录抗感染/病原诊断相关内容。"
+    },
+    {
+      "id": "journal-zhonghua-xyx",
+      "name": "中华血液学杂志",
+      "host": "中华医学会（承办：中国医学科学院血液学研究所）",
+      "url": "https://www.hematoline.com/",
+      "access": "官网目录页（hematoline.com）",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "血液学领域核心期刊；仅收录血液病感染/粒缺发热相关内容。"
+    }
+  ],
+  "officialSources": [
+    {
+      "id": "official-nhsa-wechat-matrix",
+      "name": "国家医保局「全国医保系统微信矩阵」",
+      "host": "国家医疗保障局",
+      "url": "https://www.nhsa.gov.cn/art/2025/3/19/art_52_16034.html",
+      "access": "官网文章页",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "医保政策权威入口，行业资讯「政策」类。"
+    },
+    {
+      "id": "official-nmpa",
+      "name": "国家药监局（NMPA）",
+      "host": "国家药品监督管理局",
+      "url": "https://www.nmpa.gov.cn/",
+      "access": "官网栏目页（瑞数 JS 反爬，需人工补录）",
+      "status": "已核实（受限）",
+      "verifiedAt": "2026-11-18",
+      "note": "药品审批/监管权威来源；官网动态反爬，自动采集受限，以人工核实+定期补录维护。"
+    },
+    {
+      "id": "official-chinacdc",
+      "name": "中国疾控中心（CDC）",
+      "host": "中国疾病预防控制中心",
+      "url": "https://www.chinacdc.cn/",
+      "access": "官网 + 官方微信",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "公共卫生/传染病监测权威来源。"
+    },
+    {
+      "id": "official-cma",
+      "name": "中华医学会",
+      "host": "中华医学会",
+      "url": "https://www.china-cma.org/",
+      "access": "官网 + 分会发布渠道",
+      "status": "已核实",
+      "verifiedAt": "2026-11-18",
+      "note": "各专科分会（重症、呼吸、感染、检验、血液、临床药学）指南/共识发布渠道。"
+    }
+  ],
+  "wechatAccounts": [
+    { "id": "wx-zhongzhengyiluntuan", "name": "重症议论团", "wechatId": "", "host": "", "status": "待核实", "note": "重症医学；准确名称/微信号/运营主体待核实。" },
+    { "id": "wx-qinghezhongzheng", "name": "青禾重症", "wechatId": "", "host": "", "status": "待核实", "note": "重症医学；待核实。" },
+    { "id": "wx-zhumengxi", "name": "逐梦呼吸", "wechatId": "", "host": "", "status": "待核实", "note": "呼吸病学；待核实。" },
+    { "id": "wx-zhongyiefp", "name": "中毅efp", "wechatId": "", "host": "", "status": "待核实", "note": "EFP（侵袭性真菌病/感染）相关；待核实。" },
+    { "id": "wx-gjyyj", "name": "国家医保局", "wechatId": "", "host": "国家医疗保障局", "status": "已核实主体", "note": "医保官方公众号；政策类。" },
+    { "id": "wx-huashangr", "name": "华山感染", "wechatId": "", "host": "复旦大学附属华山医院感染科", "status": "已核实主体", "note": "感染病专业解读；代表公众号。" },
+    { "id": "wx-lcyypj", "name": "临床用药评价", "wechatId": "", "host": "", "status": "待核实", "note": "合理用药/药敏；待核实。" },
+    { "id": "wx-ganranyixian", "name": "感染医线", "wechatId": "", "host": "", "status": "待核实", "note": "感染病；待核实。" },
+    { "id": "wx-zhongzhengxuexi", "name": "重症学习", "wechatId": "", "host": "", "status": "待核实", "note": "重症医学；待核实。" },
+    { "id": "wx-huxijie", "name": "呼吸届", "wechatId": "", "host": "", "status": "待核实", "note": "呼吸病学；待核实。" },
+    { "id": "wx-yixuejie", "name": "医学界", "wechatId": "", "host": "", "status": "待核实", "note": "综合医学媒体；仅收录抗感染相关原创解读。" }
+  ]
+}
